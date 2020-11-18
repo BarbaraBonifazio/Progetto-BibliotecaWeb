@@ -33,7 +33,7 @@
 		
 					<%-- <c:if
 						test="${sessionScope.utente.ruoli.equals('Amministratore')}"> --%>
-						<a class="dropdown-item" href="gestioneUtentiServlet.jsp">Gestisci Utenti</a>
+						<a class="dropdown-item" href="PrepareGestioneUtentiServlet">Gestione Utenti</a>
 					<%-- </c:if> --%>
 				</div></li>
 

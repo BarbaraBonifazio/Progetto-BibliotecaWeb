@@ -1,4 +1,4 @@
-package it.bibliotecaweb.servlets;
+package it.bibliotecaweb.servlet;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
