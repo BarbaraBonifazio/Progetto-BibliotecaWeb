@@ -37,6 +37,11 @@ public class Libro {
 	public Libro() {
 	}
 	
+	public Libro(String titolo, String trama) {
+		this.titolo = titolo;
+		this.trama = trama;
+	}
+	
 	public Libro(String titolo, String trama, Genere genere) {
 		this.titolo = titolo;
 		this.trama = trama;

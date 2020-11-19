@@ -10,10 +10,10 @@
 	</button>
 
 	<div class="collapse navbar-collapse" id="navbarsExampleDefault">
-	<c:forEach items="${sessionScope.utente.ruoli}"
-						var="ruoli">	
+<%-- 	<c:forEach items="${sessionScope.utente}"
+						var="ruoli"> --%>	
 		<ul class="navbar-nav mr-auto">
-			<li class="nav-item active"><a class="nav-link" href="home.jsp">Home
+			<li class="nav-item active"><a class="nav-link" href="${pageContext.request.contextPath}/home.jsp">Home
 					<span class="sr-only">(current)</span>
 			</a></li>
 			<!-- <li class="nav-item"><a class="nav-link" href="#">Link</a></li>
@@ -25,16 +25,11 @@
 				class="nav-link dropdown-toggle" href="#" id="dropdown01"
 				data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cerca</a>
 				<div class="dropdown-menu" aria-labelledby="dropdown01">
-					<a class="dropdown-item" href="home.jsp">Home</a> <a
-						class="dropdown-item" href="searchLibroServlet">Ricerca Libro</a> 
+					 <a	class="dropdown-item" href="searchLibroServlet">Ricerca Libro</a> 
 						<a class="dropdown-item" href="searchAutoreServlet">Ricerca Autore</a>
-						
-		
-		
-					<%-- <c:if
-						test="${sessionScope.utente.ruoli.equals('Amministratore')}"> --%>
+					<c:if test="${sessionScope.ruoli.codice == ADMIN_ROLE}">
 						<a class="dropdown-item" href="PrepareGestioneUtentiServlet">Gestione Utenti</a>
-					<%-- </c:if> --%>
+					</c:if>
 				</div></li>
 
 			<li class="nav-item active"><a class="nav-link" href="#">
@@ -43,21 +38,13 @@
 			</a></li>
 
 		</ul>
-		<%-- <c:if
-			test="${sessionScope.utente.ruoli != 'null'}"> --%>
+		<%-- <c:if test="${sessionScope.ruoli.codice == ADMIN_ROLE && sessionScope.ruoli.codice == CLASSIC_ROLE && sessionScope.ruoli.codice == GUEST_ROLE}"> --%>
 			<ul class="navbar-nav mr-1">
 				<li class="nav-item active"><a class="nav-link active"
 					href="LogoutServlet"> Logout </a></li>
 			</ul>
 		<%-- </c:if> --%>
-
-		<%-- <c:if test="${sessionScope.utente.ruoli == 'null'}">
-			<ul class="navbar-nav mr-1">
-				<li class="nav-item active"><a class="nav-link active"
-					href="${pageContext.request.contextPath}/index.jsp"> Login </a></li>
-			</ul>
-		</c:if> --%>
-		</c:forEach>
+		
 		<!-- <form class="form-inline my-2 my-lg-0">
 			 <input
 				class="form-control mr-sm-2" type="text" placeholder="Search"

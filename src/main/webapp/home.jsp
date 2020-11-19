@@ -1,5 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!doctype html>
 <html lang="it">
 <head>
@@ -43,22 +42,25 @@ body {
 
 				<p>
 					<a class="btn btn-primary btn-lg"
-						href="PrepareFindLibriServlet"
+						href="${pageContext.request.contextPath}/libro/PrepareFindLibriServlet"
 						role="button">Ricerca Libri &raquo;</a>
 				</p>
 
 				<p>
 					<a class="btn btn-primary btn-lg"
-						href="PrepareFindAutoriServlet"
+						href="${pageContext.request.contextPath}/autore/PrepareFindAutoriServlet"
 						role="button">Ricerca Autori  &raquo;</a>
 				</p>
 				
-				<p>
-					<a class="btn btn-primary btn-lg"
-						href="PrepareGestioneUtentiServlet"
-						role="button">Gestione Utenti  &raquo;</a>
-				</p>
-
+				
+					<p>
+					<c:if test="${sessionScope.ruoli.codice == ADMIN_ROLE}">
+						<a class="btn btn-primary btn-lg"
+							href="${pageContext.request.contextPath}/utente/PrepareFindUtentiServlet"
+							role="button">Gestione Utenti  &raquo;</a>
+					</c:if>
+					</p>
+				
 			</div>
 		</div>
 

@@ -24,6 +24,8 @@ public interface UtenteService {
 
 	boolean rimuoviRuolo(Utente utenteEsistente, Ruolo ruoloEsistente) throws Exception;
 
-	Utente trovaDaUsernameEPassword(Utente utente) throws Exception;
+	public Utente trovaDaUsernameEPassword(Utente utente) throws Exception;
+
+	public Set<Utente> trovaUtente(Utente utente) throws Exception;
 
 }

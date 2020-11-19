@@ -35,8 +35,8 @@ public class BibliotecaWebTest {
 			//Pablo NERUDA = 12 luglio 1904
 			Autore autore = new Autore("Federico", "Garcia Lorca", LocalDate.of(1936, 8, 18+1));
 
-			Libro libro1 = new Libro("Aspettiamo cinque anni", "Il Giovane protagonista ama la Fidanzata, " 
-					+ " ma vuole sposarla dopo cinque anni, senza motivare la sua scelta.", Genere.OPERA_TEATRALE);
+//			Libro libro1 = new Libro("Aspettiamo cinque anni", "Il Giovane protagonista ama la Fidanzata, " 
+//					+ " ma vuole sposarla dopo cinque anni, senza motivare la sua scelta.", Genere.OPERA_TEATRALE); //cambiato costruttore !!
 			
 			//verifico l'insert con i relativi controlli di AUTORE --- VERIFICA OK 
 //			Set<Libro> listaLibri = new HashSet<>();
@@ -79,11 +79,11 @@ public class BibliotecaWebTest {
 //			System.out.println(utenteDaDB1);
 			
 			//test metodo "trovaLibro" (findByExample)
-			Libro l1 = new Libro(null, null, Genere.OPERA_TEATRALE); //ricerca libro per genere > OK
-			Libro l2 = new Libro("Aspettiamo", null, null); //ricerca libro per titolo - OK
-			Libro l3 = new Libro(null, null, null, autoreDaDb1); //ricerca libro per autore > OK
-			Libro l4 = new Libro(null, "Il Giovane protagonista ama la fidanzata", null); //ricerca libro per trama - OK
-			Libro l5 = new Libro(); //ricerca libro vuoto - restituisce tutta la lista di libri
+//			Libro l1 = new Libro(null, null, Genere.OPERA_TEATRALE); //ricerca libro per genere > OK
+//			Libro l2 = new Libro("Aspettiamo", null, null); //ricerca libro per titolo - OK
+//			Libro l3 = new Libro(null, null, null, autoreDaDb1); //ricerca libro per autore > OK
+//			Libro l4 = new Libro(null, "Il Giovane protagonista ama la fidanzata", null); //ricerca libro per trama - OK
+//			Libro l5 = new Libro(); //ricerca libro vuoto - restituisce tutta la lista di libri
 //			Set<Libro> l6= libroServiceInstance.trovaLibro(l2);
 //			System.out.println(l6);
 			

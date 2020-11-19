@@ -19,7 +19,7 @@ public class RuoloDAOImpl implements RuoloDAO {
 
 	@Override
 	public Set<Ruolo> set() throws Exception {
-		return entityManager.createQuery("from Autore", Ruolo.class).getResultList().stream()
+		return entityManager.createQuery("From Ruolo r", Ruolo.class).getResultList().stream()
 				.collect(Collectors.toSet());
 	}
 

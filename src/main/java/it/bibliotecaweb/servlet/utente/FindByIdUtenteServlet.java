@@ -12,7 +12,7 @@ import it.bibliotecaweb.model.utente.Utente;
 import it.bibliotecaweb.service.MyServiceFactory;
 import it.bibliotecaweb.service.utente.UtenteService;
 
-@WebServlet("/FindByIdUtenteServlet")
+@WebServlet("/utente/FindByIdUtenteServlet")
 public class FindByIdUtenteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

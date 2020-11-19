@@ -6,7 +6,7 @@
 <!doctype html>
 <html lang="it">
 <head>
-<jsp:include page="header.jsp" />
+<jsp:include page="../header.jsp" />
 <title>Visualizza utente</title>
 
 <!-- style per le pagine diverse dalla index -->
@@ -17,55 +17,53 @@
 
 
 <body>
-	<jsp:include page="navbar.jsp" />
+	<jsp:include page="../navbar.jsp" />
 
 	<main role="main" class="container">
 
 		<div class='card'>
 			<div class='card-header'>Visualizza dettaglio Utente</div>
-
-			<Input type="hidden" name="articoloPerShow" id="articoloPerShow"
-				class="form-control" value="${requestScope.utentePerShow.id}">
+				
+				<c:forEach items="${requestScope.utente}"
+									var="utente">
 			<div class='card-body'>
 				<dl class="row">
 
 
 					<dt class="col-sm-3 text-right">Id Utente:</dt>
-					<dd class="col-sm-9">${utentePerShow.id}</dd>
+					<dd class="col-sm-9">${utente.id}</dd>
 				</dl>
 
 				<dl class="row">
 					<dt class="col-sm-3 text-right">Nome:</dt>
-					<dd class="col-sm-9">${utentePerShow.nome}</dd>
+					<dd class="col-sm-9">${utente.nome}</dd>
 				</dl>
 
 				<dl class="row">
 					<dt class="col-sm-3 text-right">Cognome:</dt>
-					<dd class="col-sm-9">${utentePerShow.cognome}</dd>
+					<dd class="col-sm-9">${utente.cognome}</dd>
 				</dl>
 
 				<dl class="row">
 					<dt class="col-sm-3 text-right">Username:</dt>
-					<dd class="col-sm-9">${utentePerShow.username}</dd>
+					<dd class="col-sm-9">${utente.username}</dd>
+				</dl>	
+				
+				<dl class="row">
+					<dt class="col-sm-3 text-right">Stato:</dt>
+					<dd class="col-sm-9">${utente.stato}</dd>
 				</dl>
 				
-				<p class="col-sm-3 text-right">
-				<button class="btn btn-outline-secondary" type="button" data-toggle="collapse" data-target="#collapseExample" 
-				aria-expanded="false" aria-controls="collapseExample">
-				    Password
-				  </button>
-				</p>
-				<div class="collapse" id="collapseExample">
-				  <div class="card card-body my-2 my-sm-0" style='width: 90px padding: 20px' align="center">
-				    ${utentePerShow.password}
-				  </div>
-				</div>		
+				<dl class="row">
+					<dt class="col-sm-3 text-right">Ruolo:</dt>
+					<dd class="col-sm-9">${utente.ruolo}</dd>
+				</dl>
 
-
+			
 			</div>
-
+		</c:forEach>
 			<div class='card-footer'>
-				<a href="${pageContext.request.contextPath}/PrepareGestioneUtentiServlet"
+				<a href="${pageContext.request.contextPath}/utenti/PrepareFindUtentiServlet"
 					class='btn btn-outline-secondary' style='width: 90px'> <i
 					class='fa fa-chevron-left'></i> Indietro
 				</a>
@@ -76,7 +74,7 @@
 
 		<!-- end main container -->
 	</main>
-	<jsp:include page="footer.jsp" />
+	<jsp:include page="../footer.jsp" />
 
 </body>
 </html>

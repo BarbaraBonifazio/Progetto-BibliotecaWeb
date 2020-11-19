@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import it.bibliotecaweb.model.utente.StatoUtente;
 import it.bibliotecaweb.model.utente.Utente;
 import it.bibliotecaweb.service.MyServiceFactory;
 import it.bibliotecaweb.service.utente.UtenteService;
@@ -41,16 +42,16 @@ public class LoginServlet extends HttpServlet {
 			Utente utente = new Utente(usernameInputParam, passwordInputParam);
 			utente = utenteService.trovaDaUsernameEPassword(utente);
 				 
-			if (utente != null) {
+			if (utente != null && utente.getStato() == StatoUtente.ATTIVO) {
+				
 				HttpSession session = request.getSession();
 				session.setAttribute("utente", utente);
 				request.getRequestDispatcher("home.jsp").forward(request, response);
 				return;
 				
-			} else {
-				request.setAttribute("errorMessage", "Attenzione! Le tue credenziali non sono valide!");
-				request.getRequestDispatcher("index.jsp").forward(request, response);
-				return;
+				} else {
+					request.setAttribute("errorMessage", "Attenzione! Le tue credenziali non sono valide!");
+					request.getRequestDispatcher("index.jsp").forward(request, response);
 			}
 
 			} catch (Exception e) {
