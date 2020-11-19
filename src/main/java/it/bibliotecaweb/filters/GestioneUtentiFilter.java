@@ -40,26 +40,13 @@ public class GestioneUtentiFilter implements Filter {
 		HttpServletResponse httpServletResponse = (HttpServletResponse) response; 
 		
 		Utente utente = (Utente)httpServletRequest.getSession().getAttribute("utente");
-		
-		//String percorso = httpServletRequest.getRequestURI(); //per filtri di verifica sulle altre servlet di libro e autore
-		
-		//if(percorso.contains(restodelpercorsofuoricontesto)){ //entri dentro e cicli i ruoli per verifica 
-		
+
 		for(Ruolo r:utente.getRuoli()) {
 			if(Codice.ADMIN_ROLE == r.getCodice()) { //se è un admin, entra e continua
 				chain.doFilter(request, response);
-			}
-//		for(Ruolo r:utente.getRuoli()) {
-//			if(Codice.GUEST_ROLE == r.getCodice()) {
-//				httpServletResponse.sendRedirect(contesto); 
-//			}
-//		}
-		}
-		
+			} else {
 			httpServletResponse.sendRedirect(contesto); //altrimenti ritorna al contesto 
+			}
+		}	
 	}
-
-	
-	
-
 }

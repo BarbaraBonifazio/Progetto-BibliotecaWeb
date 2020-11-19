@@ -20,7 +20,7 @@ public class UtenteDAOImpl implements UtenteDAO {
 
 	@Override
 	public Set<Utente> set() throws Exception {
-		return entityManager.createQuery("from Utente", Utente.class).getResultList().stream()
+		return entityManager.createQuery("From Utente u", Utente.class).getResultList().stream()
 				.collect(Collectors.toSet());
 	}
 
@@ -88,7 +88,7 @@ public class UtenteDAOImpl implements UtenteDAO {
 
 	@Override
 	public Set<Utente> findUtente(Utente utente) throws Exception {
-		String query1 = "FROM Utente u JOIN FETCH u.ruoli WHERE 1=1 ";
+		String query1 = "FROM Utente u JOIN FETCH u.ruoli r WHERE 1=1 ";
 		if (utente.getNome() != null) {
 			query1 = query1 + " AND u.nome like :nome ";
 		}
@@ -101,8 +101,8 @@ public class UtenteDAOImpl implements UtenteDAO {
 		if (utente.getStato() != null) {
 			query1 = query1 + " AND u.stato = :stato";
 		}
-		if (utente.getRuoli() != null) {
-			query1 = query1 + " AND u.ruoli = :ruoli";
+		if (utente.getRuoli() != null && !utente.getRuoli().isEmpty()) {
+			query1 = query1 + " AND r in (:ruoli)";
 		}
 
 		TypedQuery<Utente> query2 = entityManager.createQuery(query1, Utente.class);
@@ -118,10 +118,10 @@ public class UtenteDAOImpl implements UtenteDAO {
 		if (utente.getStato() != null) {
 			query2.setParameter("stato", utente.getStato());
 		}
-		if (utente.getRuoli() != null) {
+		if (utente.getRuoli() != null && !utente.getRuoli().isEmpty()) {
 			query2.setParameter("ruoli", utente.getRuoli());
 		}
-		if (utente.equals(null)) {
+		if(utente.equals(null)) {
 			this.set().toString();
 		}
 		return query2.getResultList().stream().collect(Collectors.toSet());

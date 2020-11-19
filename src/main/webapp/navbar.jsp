@@ -25,10 +25,10 @@
 				class="nav-link dropdown-toggle" href="#" id="dropdown01"
 				data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cerca</a>
 				<div class="dropdown-menu" aria-labelledby="dropdown01">
-					 <a	class="dropdown-item" href="searchLibroServlet">Ricerca Libro</a> 
-						<a class="dropdown-item" href="searchAutoreServlet">Ricerca Autore</a>
+					 <a	class="dropdown-item" href="${pageContext.request.contextPath}/libro/PrepareFindLibriServlet">Ricerca Libro</a> 
+						<a class="dropdown-item" href="${pageContext.request.contextPath}/autore/PrepareFindAutoriServlet">Ricerca Autore</a>
 					<c:if test="${sessionScope.ruoli.codice == ADMIN_ROLE}">
-						<a class="dropdown-item" href="PrepareGestioneUtentiServlet">Gestione Utenti</a>
+						<a class="dropdown-item" href="${pageContext.request.contextPath}/utente/PrepareFindUtentiServlet">Gestione Utenti</a>
 					</c:if>
 				</div></li>
 

@@ -8,7 +8,7 @@
 <html lang="it">
 <head>
 <jsp:include page="../header.jsp" />
-<title>Search Utenti</title>
+<title>Search Autori</title>
 
 <!-- style per le pagine diverse dalla index -->
 <link href="${pageContext.request.contextPath}/assets/css/global.css" rel="stylesheet">
@@ -40,74 +40,40 @@
 
 		<div class='card'>
 			<div class='card-header'>
-				<h5>Cerca Utente</h5>
+				<h5>Cerca Autori</h5>
 				<a class="text-right"
 					href="${pageContext.request.contextPath}/home.jsp"
 					class='btn btn-outline-secondary' style='width: 80px'> <i
-					class='fa fa-chevron-left'></i> Back
+					class='fa fa-chevron-left'></i> Indietro
 				</a>
 			</div>
 			<div class='card-body'>
 
 
-				<form method="get"
-					action="${pageContext.request.contextPath}/utente/ExecuteFindUtentiServlet"
+				<form method="post"
+					action="${pageContext.request.contextPath}/autore/ExecuteFindAutoreServlet"
 					name="myForm" onsubmit="return validateForm()" novalidate>
 
-
 					<div class="form-group col-md-6">
-						<label>Nome</label> <input type="text" name="nome" id="nomeUtente"
-							class="form-control"
+						<label>Nome</label> <input type="text" name="nome"
+							id="nomeAutore" class="form-control"
 							placeholder="Inserire almeno i primi tre caratteri">
-
 					</div>
 
 					<div class="form-group col-md-6">
 						<label>Cognome</label> <input type="text" name="cognome"
-							id="cognomeUtente" class="form-control"
+							id="cognomeAutore" class="form-control"
 							placeholder="Inserire almeno i primi tre caratteri">
-
 					</div>
-
-					<div class="form-group col-md-6">
-						<label>Username</label> <input type="text" name="username"
-							id="unameUtente" class="form-control"
-							placeholder="Inserire username">
-
+					
+					<div class="it-datepicker-wrapper">
+					  <div class="form-group col-md-6">
+					  <label for="date1">Data di nascita</label>
+					    <input class="form-control it-date-datepicker" id="dataNascitaAutore" 
+					    type="text" placeholder="inserisci la data in formato aaaa/mm/gg">
+					    
+					  </div>
 					</div>
-
-					<div class="form-group col-md-6">
-						<label>Stato</label> <select id="statoUtente" name="stato"
-							class="form-control">
-							<option value="${stato.EMPTY}">- Seleziona Stato -</option>
-							<c:forEach items="${listaStati}" var="stato">
-								<c:if test="${stato != 'EMPTY'}">
-									<option value="${stato}">${stato}</option>
-								</c:if>
-							</c:forEach>
-						</select>
-					</div>
-
-
-
-					 <div class="form-group col-md-6">
-						<label>Ruoli</label>
-
-						
-						<div class="form-check">
-							
-								<!-- Default unchecked -->
-						<div class="custom-control custom-checkbox">
-						<c:forEach items="${requestScope.listRuoliAttribute}" var="ruolo">
-						    <input type="checkbox" class="form-check-input" value="${ruolo.id}" name="ruolo" id="ruolo">
-						    <label class="form-check-label" for="defaultUnchecked"><c:out
-										value="${ruolo.codice}" /></label><br>
-						    </c:forEach>
-						</div> 
-						
-	
-						</div>
-					</div> 
 
 					<button type="submit" name="submit" value="submit" id="submit"
 						class="btn btn-primary">Cerca</button>
@@ -116,7 +82,7 @@
 
 
 				<script>
-				
+				/* qui farò le verifiche javascript per quanto riguarda tutti i campi di questa jsp */
 				function validateForm() {
 					  var x = document.forms["myForm"]["prezzo"].value;
 

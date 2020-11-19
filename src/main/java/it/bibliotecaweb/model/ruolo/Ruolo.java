@@ -57,7 +57,7 @@ public class Ruolo {
 
 	@Override
 	public String toString() {
-		return "[id=" + id + ", descrizione=" + descrizione + ", codice=" + codice +"]";
+		return "Descrizione: " + descrizione + ", codice: " + codice;
 	}
 
 	@Override

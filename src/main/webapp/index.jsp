@@ -39,7 +39,7 @@
 	  </style>
 	  
 	  <!-- Custom styles for this template -->
-	  <link href="./assets/css/signin.css" rel="stylesheet">
+	  <link href="${pageContext.request.contextPath}/assets/css/signin.css" rel="stylesheet">
 	</head>
 	<body class="text-center">
 		
@@ -58,9 +58,9 @@
 		  <label for="inputPassword" class="sr-only">Password</label>
 		  <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
 		  <div class="checkbox mb-3">
-		    <label>
+		    <!-- <label>
 		      <input type="checkbox" value="remember-me"> Ricorda credenziali
-		    </label>
+		    </label> -->
 		  </div>
 		  <button class="btn btn-lg btn-primary btn-block" type="submit">Accedi</button>
 		  <p class="mt-5 mb-3 text-muted">&copy; 2017-2020</p>

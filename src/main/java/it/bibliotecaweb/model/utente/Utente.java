@@ -36,11 +36,11 @@ public class Utente {
 	private String password;
 	
 	@Enumerated(EnumType.STRING)
-	private StatoUtente stato = StatoUtente.ATTIVO;
+	private StatoUtente stato;
 	
 	@ManyToMany
 	@JoinTable(name = "utente_ruolo", joinColumns = @JoinColumn(name = "utente_id", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "ruolo_id", referencedColumnName = "ID"))
-	private Set<Ruolo> ruoli = new HashSet<>();
+	private Set<Ruolo> ruoli = new HashSet<Ruolo>();
 
 	public Utente() {
 	}
@@ -57,10 +57,11 @@ public class Utente {
 		this.password = password;
 	}
 	
-	public Utente(String nome, String cognome, String username) {
+	public Utente(String nome, String cognome, String username, Set<Ruolo> ruoli) {
 		this.nome = nome;
 		this.cognome = cognome;
 		this.username = username;
+		this.ruoli = ruoli;
 	}
 
 	public Long getId() {
@@ -122,19 +123,65 @@ public class Utente {
 	@Override
 	public String toString() {
 		return "Utente [id = " + id + ", nome = " + nome
-				+ ", cognome = " + cognome + ", username = " + username + " ]";
+				+ ", cognome = " + cognome + ", username = " + username + ", stato = " + stato + " ]";
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Utente other = (Utente) obj;
+		if (cognome == null) {
+			if (other.cognome != null)
+				return false;
+		} else if (!cognome.equals(other.cognome))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
+		if (ruoli == null) {
+			if (other.ruoli != null)
+				return false;
+		} else if (!ruoli.equals(other.ruoli))
+			return false;
+		if (stato != other.stato)
+			return false;
+		if (username == null) {
+			if (other.username != null)
+				return false;
+		} else if (!username.equals(other.username))
+			return false;
+		return true;
 	}
 	
-	@Override 
-	public boolean equals(Object object) {
-		if(object instanceof Utente) {	//controllo che l'oggetto passato in input sia un'istanza di Utente prima di poter fare il cast
-			Utente utente = (Utente)  object; //faccio il cast di o a all'oggetto Utente, assegnandolo a un oggetto Utente di appoggio 
-			return username.equals(utente.getUsername()); //effettuo il confronto sull'attributo username
-			//ritorno true se il confronto del valore a cui punta lo "username" della classe Utente 
-			//coincide con il valore a cui punta lo "username" del nuovo oggetto Utente di appoggio (che ha assunto il valore dell'oggetto passato in input)
-		}
-		else {
-			return this.equals(object); //altrimenti ritorno false in quanto il valore di "username" di object non coincide con quello dell'istanza
-		}
-	}
+//	@Override 
+//	public boolean equals(Object object) {
+//		if(object instanceof Utente) {	//controllo che l'oggetto passato in input sia un'istanza di Utente prima di poter fare il cast
+//			Utente utente = (Utente)  object; //faccio il cast di o a all'oggetto Utente, assegnandolo a un oggetto Utente di appoggio 
+//			return username.equals(utente.getUsername()); //effettuo il confronto sull'attributo username
+//			//ritorno true se il confronto del valore a cui punta lo "username" della classe Utente 
+//			//coincide con il valore a cui punta lo "username" del nuovo oggetto Utente di appoggio (che ha assunto il valore dell'oggetto passato in input)
+//		}
+//		else {
+//			return this.equals(object); //altrimenti ritorno false in quanto il valore di "username" di object non coincide con quello dell'istanza
+//		}
+//	}
+	
+	
 }

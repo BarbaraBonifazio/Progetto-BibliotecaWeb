@@ -43,13 +43,13 @@ public class ExecuteFindLibroServlet extends HttpServlet {
 		
 		try {
 			
-//			if(genereInputParam != "EMPTY") {
-//				libroNew.setGenere(Genere.valueOf(genereInputParam));
-//			}
-			
 			if (!autoreInputParam.isEmpty()) {
 				AutoreService serviceAutore = MyServiceFactory.getAutoreServiceInstance();
 				libroNew.setAutore(serviceAutore.trova(Long.parseLong(autoreInputParam)));
+			}
+			
+			if (!genereInputParam.isEmpty() && genereInputParam != null) {
+				libroNew.setGenere(Genere.valueOf(genereInputParam));
 			}
 			
 			Set<Libro> listaLibri = new HashSet<>();

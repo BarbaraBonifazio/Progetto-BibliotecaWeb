@@ -66,16 +66,13 @@
 							placeholder="Inserire username">
 					</div>
 
-					<Input type="hidden" name="genere" id="genereLibro"
-						class="form-control" value="${requestScope.listaGeneri}">
-
 					<div class="form-group col-md-6">
 						<label>Genere</label> <select id="genereLibro" name="genere"
 							class="form-control">
-							<option value="">- Seleziona Genere -</option>
+							<option value="${stato.EMPTY}">- Seleziona Genere -</option>
 							<c:forEach items="${listaGeneri}" var="genere">
 								<c:if test="${genere != 'EMPTY'}">
-									<option>${genere}</option>
+									<option value="${genere}">${genere}</option>
 								</c:if>
 							</c:forEach>
 						</select>
@@ -88,7 +85,7 @@
 							<c:forEach items="${listaAutori}" var="autore">
 							<c:if test="${stato != 'EMPTY'}">
 									<option value="${autore.id}">
-									${autore.nome}${autore.cognome}</option>
+									${autore.nome} ${autore.cognome}</option>
 							</c:if>
 							</c:forEach>
 						</select>

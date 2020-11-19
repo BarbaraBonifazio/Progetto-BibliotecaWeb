@@ -10,7 +10,7 @@
 <title>Visualizza utente</title>
 
 <!-- style per le pagine diverse dalla index -->
-<link href="./assets/css/global.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/assets/css/global.css" rel="stylesheet">
 
 </head>
 
@@ -24,46 +24,65 @@
 		<div class='card'>
 			<div class='card-header'>Visualizza dettaglio Utente</div>
 				
-				<c:forEach items="${requestScope.utente}"
-									var="utente">
+				
+				<Input type="hidden" name="utente"
+			id="utente" class="form-control"
+			value="${requestScope.utentePerShow}">
+			
 			<div class='card-body'>
 				<dl class="row">
 
 
 					<dt class="col-sm-3 text-right">Id Utente:</dt>
-					<dd class="col-sm-9">${utente.id}</dd>
+					<dd class="col-sm-9">${utentePerShow.id}</dd>
 				</dl>
 
 				<dl class="row">
 					<dt class="col-sm-3 text-right">Nome:</dt>
-					<dd class="col-sm-9">${utente.nome}</dd>
+					<dd class="col-sm-9">${utentePerShow.nome}</dd>
 				</dl>
 
 				<dl class="row">
 					<dt class="col-sm-3 text-right">Cognome:</dt>
-					<dd class="col-sm-9">${utente.cognome}</dd>
+					<dd class="col-sm-9">${utentePerShow.cognome}</dd>
 				</dl>
 
 				<dl class="row">
 					<dt class="col-sm-3 text-right">Username:</dt>
-					<dd class="col-sm-9">${utente.username}</dd>
+					<dd class="col-sm-9">${utentePerShow.username}</dd>
 				</dl>	
 				
 				<dl class="row">
 					<dt class="col-sm-3 text-right">Stato:</dt>
-					<dd class="col-sm-9">${utente.stato}</dd>
+					<dd class="col-sm-9">${utentePerShow.stato}</dd>
 				</dl>
 				
-				<dl class="row">
+				<%-- <dl class="row">
 					<dt class="col-sm-3 text-right">Ruolo:</dt>
-					<dd class="col-sm-9">${utente.ruolo}</dd>
-				</dl>
+					<dd class="col-sm-9">${utentePerShow.ruoli}</dd>
+				</dl> --%>
 
+
+			 <%-- <Input type="hidden" name="nome"
+			id="utente" class="form-control"
+			value="${requestScope.nome}">
+			<Input type="hidden" name="cognome"
+			id="utente" class="form-control"
+			value="${requestScope.cognome}">
+			<Input type="hidden" name="username"
+			id="utente" class="form-control"
+			value="${requestScope.username}">
+			<Input type="hidden" name="stato"
+			id="utente" class="form-control"
+			value="${requestScope.stato}">
+ --%> 
 			
 			</div>
-		</c:forEach>
+		
 			<div class='card-footer'>
-				<a href="${pageContext.request.contextPath}/utenti/PrepareFindUtentiServlet"
+				<a href="${pageContext.request.contextPath}/utente/ExecuteFindUtentiServlet?nome=${requestScope.nomeUtenteRicercatoInput}
+				&cognome=${requestScope.cognomeUtenteRicercatoInput}&username=${requestScope.usernameUtenteRicercatoInput}&
+				stato=${requestScope.statoUtenteRicercatoInput}&ruoli=${requestScope.ruoliPerTornareAllaRicercaEffettuata}"
 					class='btn btn-outline-secondary' style='width: 90px'> <i
 					class='fa fa-chevron-left'></i> Indietro
 				</a>

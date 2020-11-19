@@ -10,7 +10,7 @@
 <title>Lista Articoli</title>
 
 <!-- style per le pagine diverse dalla index -->
-<link href="./assets/css/global.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/assets/css/global.css" rel="stylesheet">
 
 </head>
 <body>
@@ -43,9 +43,7 @@
 				<span aria-hidden="true">&times;</span>
 			</button>
 		</div>
-		<Input type="hidden" name="listaCategorieAttribute"
-			id="listaCategorieAttribute" class="form-control"
-			value="${requestScope.listaCategorieAttribute}">
+		
 		<div class='card'>
 			<div class='card-header'>
 				<h5>Lista dei libri</h5>
@@ -53,8 +51,12 @@
 			<div class='card-body'>
 				<%-- <c:if
 					test="${sessionScope.utente.ruolo != 'guest'}">  controllo da fare tramite filtro--%>
+					<div>
 					<a class="btn btn-primary "
-						href="${pageContext.request.contextPath}/libro/PrepareInsertLibroServlet">Aggiungi Libro</a>
+						href="${pageContext.request.contextPath}/libro/PrepareInsertLibroServlet">Aggiungi Libro
+						</a>
+					</div>
+					
 				<%-- </c:if> --%>
 				<div class='table-responsive'>
 					<table class='table table-striped '>
