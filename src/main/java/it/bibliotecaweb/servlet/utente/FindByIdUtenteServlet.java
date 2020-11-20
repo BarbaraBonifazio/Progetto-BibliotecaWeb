@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import it.bibliotecaweb.model.utente.Utente;
 import it.bibliotecaweb.service.MyServiceFactory;
-import it.bibliotecaweb.service.ruolo.RuoloService;
 import it.bibliotecaweb.service.utente.UtenteService;
 
 @WebServlet("/utente/FindByIdUtenteServlet")
@@ -35,8 +34,6 @@ public class FindByIdUtenteServlet extends HttpServlet {
 		String statoPerTornareAllaRicercaEffettuata = request.getParameter("statoPerTornareAllaRicercaEffettuata");
 		String ruoliPerTornareAllaRicercaEffettuata = request.getParameter("ruoliPerTornareAllaRicercaEffettuata");
 		
-		
-		
 		// Valido eventuale parametro passato da url
 		if (idDellUtentePerDettaglio == null) {
 			request.setAttribute("errorMessage", "Attenzione il valore inserito non è valido!");
@@ -57,7 +54,6 @@ public class FindByIdUtenteServlet extends HttpServlet {
 			request.setAttribute("statoUtenteRicercatoInput", statoPerTornareAllaRicercaEffettuata);
 			request.setAttribute("ruoliPerTornareAllaRicercaEffettuata", ruoliPerTornareAllaRicercaEffettuata);
 			
-			
 			request.setAttribute("utentePerShow", result);
 
 			// Verifico reale esistenza del parametro nel DB
@@ -71,14 +67,11 @@ public class FindByIdUtenteServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		request.getRequestDispatcher("showUtente.jsp").forward(request, response);
-
 	}
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		doGet(request, response);
 	}
 

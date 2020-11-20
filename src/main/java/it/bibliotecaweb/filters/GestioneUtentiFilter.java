@@ -45,6 +45,9 @@ public class GestioneUtentiFilter implements Filter {
 			if(Codice.ADMIN_ROLE == r.getCodice()) { //se è un admin, entra e continua
 				chain.doFilter(request, response);
 			} else {
+//			httpServletRequest.setAttribute("errorMessage", "Attenzione non hai i permessi per accedere a questa pagina!");
+//			httpServletRequest.getRequestDispatcher(contesto);
+//				 response.sendRedirect("Admin_And_User_Login_Form.jsp?invalid=true");
 			httpServletResponse.sendRedirect(contesto); //altrimenti ritorna al contesto 
 			}
 		}	

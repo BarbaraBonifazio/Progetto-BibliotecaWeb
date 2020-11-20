@@ -51,8 +51,7 @@
 
 
 				<form method="get"
-					action="${pageContext.request.contextPath}/utente/ExecuteFindUtentiServlet"
-					name="myForm" onsubmit="return validateForm()" novalidate>
+					action="${pageContext.request.contextPath}/utente/ExecuteFindUtentiServlet" novalidate>
 
 
 					<div class="form-group col-md-6">
@@ -91,50 +90,23 @@
 
 
 					 <div class="form-group col-md-6">
-						<label>Ruoli</label>
-
-						
-						<div class="form-check">
-							
+						<label>Ruoli</label> <!-- Effettuando la ricerca solo per ruolo, non verrà restituita la lista filtrata dopo un insert/update/delete. Solo tramite select -->
+					 	<div class="form-check">	
 								<!-- Default unchecked -->
-						<div class="custom-control custom-checkbox">
-						<c:forEach items="${requestScope.listRuoliAttribute}" var="ruolo">
-						    <input type="checkbox" class="form-check-input" value="${ruolo.id}" name="ruolo" id="ruolo">
-						    <label class="form-check-label" for="defaultUnchecked"><c:out
-										value="${ruolo.codice}" /></label><br>
-						    </c:forEach>
+							<div class="custom-control custom-checkbox">
+							<c:forEach items="${requestScope.listRuoliAttribute}" var="ruolo">
+							    <input type="checkbox" class="form-check-input" value="${ruolo.id}" name="ruolo" id="ruolo">
+							    <label class="form-check-label" for="defaultUnchecked"><c:out
+											value="${ruolo.codice}" /></label><br>
+							    </c:forEach>
+							</div> 
 						</div> 
-						
-	
-						</div>
 					</div> 
 
 					<button type="submit" name="submit" value="submit" id="submit"
 						class="btn btn-primary">Cerca</button>
 
 				</form>
-
-
-				<script>
-				
-				function validateForm() {
-					  var x = document.forms["myForm"]["prezzo"].value;
-
-					  if (x < 0) {
-					    alert("Il prezzo non può essere un numero negativo!");
-					    return false;
-					  }
-					  
-					  else if (isNaN(document.forms["myForm"]["prezzo"].value)) {
-						  
-						    alert("Il campo Prezzo deve essere un numero!");
-						    return false;
-					  }  
-					} 
-	
-				</script>
-
-
 
 				<!-- end card-body -->
 			</div>

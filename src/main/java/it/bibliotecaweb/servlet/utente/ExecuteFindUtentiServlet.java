@@ -48,7 +48,7 @@ public class ExecuteFindUtentiServlet extends HttpServlet {
 		try {
 			
 			Set<Ruolo> listaRuoli = new HashSet<>();
-			for(String s : ruoliInput) {
+			for(String s : ruoliInput) { //for(int i = 0; i < ruoliInput.length; i ++) >>> ruoliInput[i]
 				Long idRuolo = Long.parseLong(s);
 				RuoloService serviceRuolo = MyServiceFactory.getRuoloServiceInstance();
 				Ruolo ruoloNew = serviceRuolo.trova(idRuolo);
@@ -67,7 +67,7 @@ public class ExecuteFindUtentiServlet extends HttpServlet {
 			request.setAttribute("cognomePerTornareAllaRicercaEffettuata", cognomeInputParam);
 			request.setAttribute("usernamePerTornareAllaRicercaEffettuata", usernameInputParam);
 			request.setAttribute("statoPerTornareAllaRicercaEffettuata", statoInputParam);
-			request.setAttribute("ruoliPerTornareAllaRicercaEffettuata", ruoliInput);
+//			request.setAttribute("ruoliPerTornareAllaRicercaEffettuata", utenteNew.getRuoli()); //Da aggiustare. Non mi passa questi parametri in pagina
 			
 			request.setAttribute("utentiPerResultsList", listaUtenti);
 

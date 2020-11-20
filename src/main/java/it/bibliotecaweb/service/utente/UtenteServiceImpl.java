@@ -66,6 +66,7 @@ public class UtenteServiceImpl implements UtenteService {
 			utenteDAO.setEntityManager(entityManager);
 			if (utenteInstance.getRuoli().size() > 0) {
 				// eseguo quello che realmente devo fare
+				utenteInstance.setStato(StatoUtente.ATTIVO);
 				result = utenteDAO.update(utenteInstance);
 				entityManager.getTransaction().commit();
 			}
@@ -88,6 +89,7 @@ public class UtenteServiceImpl implements UtenteService {
 
 			// uso l'injection per il dao
 			utenteDAO.setEntityManager(entityManager);
+			utenteInstance.setStato(StatoUtente.ATTIVO);
 			if (utenteInstance.getRuoli().size() > 0) {
 				
 				// eseguo quello che realmente devo fare

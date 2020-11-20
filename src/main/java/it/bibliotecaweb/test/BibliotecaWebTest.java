@@ -64,7 +64,7 @@ public class BibliotecaWebTest {
 //			for(Libro l1:l)
 //			System.out.println(l1);
 			
-			Utente utente = new Utente("Barbara", "Bonifazio", "Barbara92", "111");
+//			Utente utente = new Utente("Barbara", "Bonifazio", "Barbara92", "111");
 			Ruolo ruolo1 = new Ruolo("Amministratore", Codice.ADMIN_ROLE);
 			Ruolo ruolo2 = new Ruolo("Utente", Codice.CLASSIC_ROLE);
 			Ruolo ruolo3 = new Ruolo("Ospite", Codice.GUEST_ROLE);

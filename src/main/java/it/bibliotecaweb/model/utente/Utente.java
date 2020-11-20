@@ -45,11 +45,18 @@ public class Utente {
 	public Utente() {
 	}
 	
-	public Utente(String nome, String cognome, String username, String password) {
+	public Utente(String nome, String cognome, String username, String password, Set<Ruolo> ruoli) {
 		this.nome = nome;
 		this.cognome = cognome;
 		this.username = username;
 		this.password = password;
+		this.ruoli = ruoli;
+	}
+	
+	public Utente(String nome, String cognome, String username) {
+		this.nome = nome;
+		this.cognome = cognome;
+		this.username = username;
 	}
 	
 	public Utente(String username, String password) {

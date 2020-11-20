@@ -55,8 +55,14 @@
 					test="${sessionScope.utente.ruolo != 'guest'}">  controllo da fare tramite filtro--%>
 					<div>
 					<a class="btn btn-primary "
-						href="${pageContext.request.contextPath}/utente/PrepareInsertUtenteServlet">Aggiungi Utente
-						</a>
+						href="${pageContext.request.contextPath}/utente/PrepareInsertUtenteServlet?nomePerTornareAllaRicercaEffettuata=
+						${requestScope.nomePerTornareAllaRicercaEffettuata}&
+						
+						cognomePerTornareAllaRicercaEffettuata=${requestScope.cognomePerTornareAllaRicercaEffettuata}&
+						usernamePerTornareAllaRicercaEffettuata=${requestScope.usernamePerTornareAllaRicercaEffettuata}&
+						statoPerTornareAllaRicercaEffettuata=${requestScope.statoPerTornareAllaRicercaEffettuata}
+						<%-- &ruoliPerTornareAllaRicercaEffettuata=${requestScope.ruoliPerTornareAllaRicercaEffettuata} --%>
+						">Aggiungi Utente </a>
 					</div>
 					
 				<%-- </c:if> --%>
@@ -91,18 +97,30 @@
 												nomePerTornareAllaRicercaEffettuata=${requestScope.nomePerTornareAllaRicercaEffettuata}&
 												cognomePerTornareAllaRicercaEffettuata=${requestScope.cognomePerTornareAllaRicercaEffettuata}&
 												usernamePerTornareAllaRicercaEffettuata=${requestScope.usernamePerTornareAllaRicercaEffettuata}&
-												statoPerTornareAllaRicercaEffettuata=${requestScope.statoPerTornareAllaRicercaEffettuata}&
-												ruoliPerTornareAllaRicercaEffettuata=${requestScope.ruoliPerTornareAllaRicercaEffettuata}
+												statoPerTornareAllaRicercaEffettuata=${requestScope.statoPerTornareAllaRicercaEffettuata}
+												<%-- &ruoliPerTornareAllaRicercaEffettuata=${requestScope.ruoliPerTornareAllaRicercaEffettuata} --%>
 												">Visualizza</a>
 										<%-- <c:if
 											test="${sessionScope.utente.ruolo != 'guest'}"> CONTROLLI DI VISIBILITA DA FARE SUI FILTRI!> --%>
-											<a class="btn  btn-sm btn-outline-primary"
-												href="${pageContext.request.contextPath}
-														/utente/PrepareUpdateUtenteServlet?idDaInviareAExecuteUpdate=${utente.id}">Modifica</a>
+										<a class="btn  btn-sm btn-outline-primary"
+											href="${pageContext.request.contextPath}
+												/utente/PrepareUpdateUtenteServlet?idDaInviareAExecuteUpdate=${utente.id}&
+												nomePerTornareAllaRicercaEffettuata=${requestScope.nomePerTornareAllaRicercaEffettuata}&
+												cognomePerTornareAllaRicercaEffettuata=${requestScope.cognomePerTornareAllaRicercaEffettuata}&
+												usernamePerTornareAllaRicercaEffettuata=${requestScope.usernamePerTornareAllaRicercaEffettuata}&
+												statoPerTornareAllaRicercaEffettuata=${requestScope.statoPerTornareAllaRicercaEffettuata}
+												<%-- &ruoliPerTornareAllaRicercaEffettuata=${requestScope.ruoliPerTornareAllaRicercaEffettuata} --%>
+												">Modifica</a>
 										<%-- </c:if> <c:if test="${sessionScope.utente.ruolo == 'admin'}"> --%>
-											<a class="btn btn-outline-danger btn-sm"
-												href="${pageContext.request.contextPath}
-														/utente/ConfirmDeleteUtenteServlet?idDaInviareAExecuteDelete=${libro.id}">Disattiva</a>
+										<a class="btn btn-outline-danger btn-sm"
+											href="${pageContext.request.contextPath}
+												/utente/ConfirmDeleteUtenteServlet?idDaInviareAExecuteDelete=${libro.id}
+												nomePerTornareAllaRicercaEffettuata=${requestScope.nomePerTornareAllaRicercaEffettuata}&
+												cognomePerTornareAllaRicercaEffettuata=${requestScope.cognomePerTornareAllaRicercaEffettuata}&
+												usernamePerTornareAllaRicercaEffettuata=${requestScope.usernamePerTornareAllaRicercaEffettuata}&
+												statoPerTornareAllaRicercaEffettuata=${requestScope.statoPerTornareAllaRicercaEffettuata}
+												<%-- &ruoliPerTornareAllaRicercaEffettuata=${requestScope.ruoliPerTornareAllaRicercaEffettuata} --%>
+												">Disattiva</a>
 										<%-- </c:if> --%></td>
 								</tr>
 							</c:forEach>
