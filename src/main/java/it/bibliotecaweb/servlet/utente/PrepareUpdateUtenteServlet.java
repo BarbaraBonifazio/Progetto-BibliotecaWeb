@@ -1,12 +1,17 @@
 package it.bibliotecaweb.servlet.utente;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import it.bibliotecaweb.model.utente.StatoUtente;
 import it.bibliotecaweb.model.utente.Utente;
 import it.bibliotecaweb.service.MyServiceFactory;
 import it.bibliotecaweb.service.utente.UtenteService;
@@ -35,6 +40,10 @@ public class PrepareUpdateUtenteServlet extends HttpServlet {
 		
 		try {
 			request.setAttribute("listRuoliAttribute", MyServiceFactory.getRuoloServiceInstance().setAll());
+			//lista di enum per lo stato dell'utente 
+			List<String> listaStati = Stream.of(StatoUtente.values()).map(Enum::name).collect(Collectors.toList());
+			request.setAttribute("listaStati", listaStati);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

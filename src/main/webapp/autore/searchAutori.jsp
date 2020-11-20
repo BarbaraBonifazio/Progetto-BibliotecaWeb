@@ -69,7 +69,7 @@
 					<div class="it-datepicker-wrapper">
 					  <div class="form-group col-md-6">
 					  <label for="date1">Data di nascita</label>
-					    <input class="form-control it-date-datepicker" id="dataNascitaAutore" 
+					    <input class="form-control it-date-datepicker" name="data" id="dataNascitaAutore" 
 					    type="text" placeholder="inserisci la data in formato aaaa/mm/gg">
 					    
 					  </div>
@@ -84,18 +84,12 @@
 				<script>
 				/* qui farò le verifiche javascript per quanto riguarda tutti i campi di questa jsp */
 				function validateForm() {
-					  var x = document.forms["myForm"]["prezzo"].value;
+					  var x = document.forms["myForm"]["data"].value;
 
-					  if (x < 0) {
-					    alert("Il prezzo non può essere un numero negativo!");
+					  if (x is NaD) {
+					    alert("La data non ha una corretta formattazione!!");
 					    return false;
 					  }
-					  
-					  else if (isNaN(document.forms["myForm"]["prezzo"].value)) {
-						  
-						    alert("Il campo Prezzo deve essere un numero!");
-						    return false;
-					  }  
 					} 
 	
 				</script>

@@ -89,7 +89,7 @@
 
 
 
-					 <div class="form-group col-md-6">
+					<%--  <div class="form-group col-md-6">
 						<label>Ruoli</label> <!-- Effettuando la ricerca solo per ruolo, non verrà restituita la lista filtrata dopo un insert/update/delete. Solo tramite select -->
 					 	<div class="form-check">	
 								<!-- Default unchecked -->
@@ -101,7 +101,7 @@
 							    </c:forEach>
 							</div> 
 						</div> 
-					</div> 
+					</div>  --%>
 
 					<button type="submit" name="submit" value="submit" id="submit"
 						class="btn btn-primary">Cerca</button>

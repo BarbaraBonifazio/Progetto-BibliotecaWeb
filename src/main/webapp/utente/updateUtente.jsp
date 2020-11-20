@@ -80,12 +80,24 @@
 								value="${requestScope.utentePerUpdate.username}">
 						</div>
 						
-						<div class="form-group col-md-6">
+						<%-- <div class="form-group col-md-6">
 							<label>Password <span class="text-danger">*</span></label> <input
 								type="text" class="form-control" name="password" id="passwordUtente"
 								placeholder="${requestScope.utentePerUpdate.password}" required
 								value="${requestScope.utentePerUpdate.password}">
-						</div>
+						</div> --%>
+
+						<div class="form-group col-md-6">
+							<label>Stato</label> <select id="statoUtente" name="stato"
+								class="form-control">
+								<option value="${stato.EMPTY}">- Seleziona Stato -</option>
+								<c:forEach items="${listaStati}" var="stato">
+									<c:if test="${stato != 'EMPTY'}">
+										<option value="${stato}">${stato}</option>
+									</c:if>
+							</c:forEach>
+						</select>
+					</div>
 
 						<div class="form-group col md-4">
 							<label for="exampleFormControlSelect1">Ruoli</label>
@@ -121,6 +133,7 @@
 							<%-- <Input type="hidden" name="ruoliUtentePerRicerca"
 							id="ruoliUtenteDaPassare" class="form-control"
 							value="${requestScope.ruoliPerTornareAllaRicercaEffettuata}">  --%>
+
 
 					<button type="submit" name="submit" value="submit" id="submit"
 						class="btn btn-primary">Conferma</button>

@@ -47,7 +47,7 @@ private String contesto;
 		
 		String percorso = httpServletRequest.getRequestURI(); //assegno alla stringa "percorso" il valore dell'URL passato dal protocollo
 														//Mi ritorna una stringa contenente la parte dell'URL dal procollo fino alla stringa
-		if(percorso.equals("/bibliotecaweb/") || percorso.equals("/bibliotecaweb/LoginServlet") || percorso.equals("/biblioteca/LogoutServlet")) { //entra qui se il filtro atterra su queste due servlet
+		if(percorso.equals("/bibliotecaweb/") || percorso.equals("/bibliotecaweb/LoginServlet") || percorso.equals("/bibliotecaweb/LogoutServlet")) { //entra qui se il filtro atterra su queste due servlet
 			chain.doFilter(request, response); //ignora queste servlet e non filtrarle 
 		} else {
 			if(httpServletRequest.getSession().getAttribute("utente") == null) { //prendi l'attributo di sessione "utente"

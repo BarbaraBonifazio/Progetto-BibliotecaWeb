@@ -44,7 +44,6 @@ public class ExecuteFindUtentiServlet extends HttpServlet {
 		String username = (usernameInputParam.isEmpty()) ? null : usernameInputParam;
 		UtenteService serviceUtente = MyServiceFactory.getUtenteServiceInstance();
 		
-		 
 		try {
 			
 			Set<Ruolo> listaRuoli = new HashSet<>();

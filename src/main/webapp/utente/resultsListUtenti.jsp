@@ -114,13 +114,13 @@
 										<%-- </c:if> <c:if test="${sessionScope.utente.ruolo == 'admin'}"> --%>
 										<a class="btn btn-outline-danger btn-sm"
 											href="${pageContext.request.contextPath}
-												/utente/ConfirmDeleteUtenteServlet?idDaInviareAExecuteDelete=${libro.id}
+												/utente/ConfirmDeleteUtenteServlet?idDaInviareAExecuteDelete=${utente.id}&
 												nomePerTornareAllaRicercaEffettuata=${requestScope.nomePerTornareAllaRicercaEffettuata}&
 												cognomePerTornareAllaRicercaEffettuata=${requestScope.cognomePerTornareAllaRicercaEffettuata}&
 												usernamePerTornareAllaRicercaEffettuata=${requestScope.usernamePerTornareAllaRicercaEffettuata}&
 												statoPerTornareAllaRicercaEffettuata=${requestScope.statoPerTornareAllaRicercaEffettuata}
 												<%-- &ruoliPerTornareAllaRicercaEffettuata=${requestScope.ruoliPerTornareAllaRicercaEffettuata} --%>
-												">Disattiva</a>
+												">Elimina</a>
 										<%-- </c:if> --%></td>
 								</tr>
 							</c:forEach>
