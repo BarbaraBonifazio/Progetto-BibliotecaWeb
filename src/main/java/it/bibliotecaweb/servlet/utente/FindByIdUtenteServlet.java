@@ -39,15 +39,13 @@ public class FindByIdUtenteServlet extends HttpServlet {
 
 		UtenteService service = MyServiceFactory.getUtenteServiceInstance();
 
-		Utente result;
-		
-			result = service.trova(Long.parseLong(idDellUtentePerDettaglio));
+		Utente utenteDaDB = service.trova(Long.parseLong(idDellUtentePerDettaglio));
 			//passo l'utente da DB alla jsp
-			request.setAttribute("utentePerShow", result);
+			request.setAttribute("utentePerShow", utenteDaDB);
 
 			
 			// Verifico reale esistenza del parametro passato da URL nel DB
-			if (result == null) {
+			if (utenteDaDB == null) {
 				request.setAttribute("errorMessage", "Attenzione il valore inserito non esiste!");
 				request.getRequestDispatcher("listUtenti.jsp").forward(request, response);
 				return;

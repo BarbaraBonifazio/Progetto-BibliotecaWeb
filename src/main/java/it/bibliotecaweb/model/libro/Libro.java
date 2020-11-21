@@ -100,8 +100,7 @@ public class Libro {
 
 	@Override
 	public String toString() {
-		return "Libro [ Titolo = " + titolo + ", trama = " + trama + ", genere = " + genere + ", autore = "
-				+ autore.getCognome() + "]";
+		return "Libro [ Titolo = " + titolo + ", trama = " + trama + ", genere = " + genere + "]";
 	}
 
 	@Override

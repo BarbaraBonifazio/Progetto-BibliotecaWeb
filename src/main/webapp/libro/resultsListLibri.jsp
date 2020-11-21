@@ -78,9 +78,11 @@
 									<td>${libro.trama}</td>
 									<td>${libro.genere}</td>
 									<td>${libro.autore.nome} ${libro.autore.cognome}</td>
+									
+									
 									<td><a class="btn  btn-sm btn-outline-secondary"
 										href="${pageContext.request.contextPath}
-												/libro/FindByIdLibroServlet?idParamPerDettaglioLibro=${libro.id}">Visualizza</a>
+												/libro/FindByIdLibroServlet?idParamPerDettaglioLibro=${libro.id}&idAutore=${libro.autore.id}">Visualizza</a>
 										<%-- <c:if
 											test="${sessionScope.utente.ruolo != 'guest'}"> CONTROLLI DI VISIBILITA DA FARE SUI FILTRI!> --%>
 											<a class="btn  btn-sm btn-outline-primary"

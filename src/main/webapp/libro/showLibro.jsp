@@ -10,7 +10,7 @@
 <title>Visualizza Libri</title>
 
 <!-- style per le pagine diverse dalla index -->
-<link href="./assets/css/global.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/assets/css/global.css" rel="stylesheet">
 
 </head>
 
@@ -27,37 +27,36 @@
 			<Input type="hidden" name="utentiPerShow" id="articoloPerShow"
 				class="form-control" value="${requestScope.libroPerShow}">
 				
-				<c:forEach items="${requestScope.libro}"
-									var="libro">
+			
 			<div class='card-body'>
 				<dl class="row">
 
 
 					<dt class="col-sm-3 text-right">Id Libro:</dt>
-					<dd class="col-sm-9">${libro.id}</dd>
+					<dd class="col-sm-9">${libroPerShow.id}</dd>
 				</dl>
 
 				<dl class="row">
 					<dt class="col-sm-3 text-right">Titolo:</dt>
-					<dd class="col-sm-9">${libro.titolo}</dd>
+					<dd class="col-sm-9">${libroPerShow.titolo}</dd>
 				</dl>
 
 				<dl class="row">
 					<dt class="col-sm-3 text-right">Trama:</dt>
-					<dd class="col-sm-9">${libro.trama}</dd>
+					<dd class="col-sm-9">${libroPerShow.trama}</dd>
 				</dl>
 
 				<dl class="row">
 					<dt class="col-sm-3 text-right">Genere:</dt>
-					<dd class="col-sm-9">${libro.genere}</dd>
+					<dd class="col-sm-9">${libroPerShow.genere}</dd>
 				</dl>	
 				
 				<dl class="row">
 					<dt class="col-sm-3 text-right">Autore:</dt>
-					<dd class="col-sm-9">${libro.stato}</dd>
+					<dd class="col-sm-9">${libroPerShow.autore.nome} ${libroPerShow.autore.cognome}</dd>
 				</dl>
  			</div>
-		</c:forEach>
+	
 		
 			<%--<div class='card-footer'>
 				<a href="${pageContext.request.contextPath}/libro/PrepareFindLibroServlet"
