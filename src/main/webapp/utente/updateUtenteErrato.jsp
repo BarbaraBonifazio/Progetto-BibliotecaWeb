@@ -25,16 +25,18 @@
 			</button>
 		</div>
 
-		
+		<c:forEach items="${requestScope.errorMessage}" var="errore">
 		<div
-			class="alert alert-danger alert-dismissible fade show ${errorMessage==null?'d-none': ''}"
+			class="alert alert-danger alert-dismissible fade show ${errore==null?'d-none': ''}"
 			role="alert">
-			${errorMessage}
+			${errore}
 			<button type="button" class="close" data-dismiss="alert"
 				aria-label="Close">
 				<span aria-hidden="true">&times;</span>
 			</button>
 		</div>
+		</c:forEach>
+	
 
 				<h6 class="card-title">
 					I campi con <span class="text-danger">*</span> sono obbligatori
@@ -52,14 +54,14 @@
 							<label>Nome <span class="text-danger">*</span></label> <input
 								type="text" name="nome" id="nomeUtente" class="form-control"
 								placeholder="${requestScope.utentePerUpdate.nome}" 
-								value="${requestScope.utentePerUpdate.nome}">
+								value="${utentePerInsertErrore.nome}">
 						</div>
 
 						<div class="form-group col-md-6">
 							<label>Cognome <span class="text-danger">*</span></label> <input
 								type="text" name="cognome" id="cognomeUtente"
 								class="form-control" placeholder="${requestScope.utentePerUpdate.cognome}"
-								value="${requestScope.utentePerUpdate.cognome}">
+								value="${utentePerInsertErrore.cognome}">
 						</div>
 					</div>
 
@@ -68,7 +70,7 @@
 							<label>Username <span class="text-danger">*</span></label> <input
 								type="text" class="form-control" name="username" id="usernameUtente"
 								placeholder="${requestScope.utentePerUpdate.username}" 
-								value="${requestScope.utentePerUpdate.username}">
+								value="${utentePerInsertErrore.username}">
 						</div>
 						
 						<%-- <div class="form-group col-md-6">
@@ -77,11 +79,17 @@
 								placeholder="${requestScope.utentePerUpdate.password}" required
 								value="${requestScope.utentePerUpdate.password}">
 						</div> --%>
+						
+						<div class="form-row">
+						<Input type="hidden" name="idUtentePerUpdate"
+							id="idUtente" class="form-control"
+							value="${requestScope.utentePerUpdate.stato}">
+							</div>
 
 						<div class="form-group col-md-6">
 							<label>Stato</label> <select id="statoUtente" name="stato"
 								class="form-control">
-								<option value="${stato.EMPTY}"> - Selezionare Nuovo Stato - </option>
+								<option value="${stato.EMPTY}">- Selezionare Nuovo Stato -</option>
 								<c:forEach items="${listaStati}" var="stato">
 									<c:if test="${stato != 'EMPTY'}">
 										<option value="${stato}">${stato}</option>
@@ -95,7 +103,7 @@
 							<c:forEach items="${requestScope.listRuoliAttribute}" var="ruolo">
 								<div class="form-check">
 									<input class="form-check-input" type="checkbox" value="${ruolo.id}" id="idRuolo" name="ruolo"
-										<c:forEach items="${utente.ruoli}" var="ruoloUtente">
+										<c:forEach items="${utentePerInsertErrore.ruoli}" var="ruoloUtente">
 											${ruoloUtente.id eq ruolo.id ? 'checked' : ''} 
 										</c:forEach>
 									>
@@ -124,7 +132,6 @@
 							<%-- <Input type="hidden" name="ruoliUtentePerRicerca"
 							id="ruoliUtenteDaPassare" class="form-control"
 							value="${requestScope.ruoliPerTornareAllaRicercaEffettuata}">  --%>
-
 
 					<button type="submit" name="submit" value="submit" id="submit"
 						class="btn btn-primary">Conferma</button>

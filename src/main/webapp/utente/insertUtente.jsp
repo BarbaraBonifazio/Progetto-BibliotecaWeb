@@ -23,25 +23,30 @@
 				<span aria-hidden="true">&times;</span>
 			</button>
 		</div>
-
+		
+		<%-- <c:forEach items="${errorMessage}"> --%>
+		<c:forEach items="${requestScope.errorMessage}" var="errore">
 		<div
-			class="alert alert-danger alert-dismissible fade show ${errorMessage==null?'d-none': ''}"
+			class="alert alert-danger alert-dismissible fade show ${errore==null?'d-none': ''}"
 			role="alert">
-			${errorMessage}
+			${errore}
 			<button type="button" class="close" data-dismiss="alert"
 				aria-label="Close">
 				<span aria-hidden="true">&times;</span>
 			</button>
 		</div>
+		</c:forEach>
+       <%--  </c:forEach> --%>
 
-		<%-- <div class='card'>
+	<div class='card'>
 			<div class='card-header'>
 				<h5>Inserisci nuovo Utente</h5>
-				<a class="text-right" href="${pageContext.request.contextPath}/ListUtentiServlet"
+				<%-- <a class="text-right" href="${pageContext.request.contextPath}/ListUtentiServlet"
 					class='btn btn-outline-secondary' style='width: 80px'> <i
 					class='fa fa-chevron-left'></i> Back
-				</a>
-			</div> --%>
+				</a> --%>
+			</div> 
+			</div>
 			<div class='card-body'>
 
 				<h6 class="card-title">
@@ -52,18 +57,20 @@
 					action="${pageContext.request.contextPath}/utente/ExecuteInsertUtenteServlet" 
 								class="needs-validation" novalidate>
 
+
 					<div class="form-row">
 						<div class="form-group col-md-6">
 							<label>Nome <span class="text-danger">*</span></label> <input
 								type="text" name="nome" id="nomeUtente" class="form-control"
-								placeholder="Inserire nome" required>
+								placeholder="Inserire nome" value="${utentePerInsertErrore.nome}">
 						</div>
 
 						<div class="form-group col-md-6">
 							<label>Cognome <span class="text-danger">*</span></label> <input
 								type="text" name="cognome" id="cognomeUtente"
 								class="form-control" placeholder="Inserire cognome"
-								required>
+								value="${utentePerInsertErrore.cognome}">
+								
 						</div>
 					</div>
 
@@ -71,17 +78,18 @@
 						<div class="form-group col-md-6">
 							<label>Username <span class="text-danger">*</span></label> <input
 								type="text" class="form-control" name="username" id="usernameUtente"
-								placeholder="Inserire username" required>
+								placeholder="Inserire username" 
+								value="${utentePerInsertErrore.username}">
 						</div>
 
 						<div class="form-group col-md-6">
 							<label>Password <span class="text-danger">*</span></label> <input
 								type="text" class="form-control" name="password" id="passwordUtente"
-								placeholder="Inserire password" required>
+								placeholder="Inserire password" value="${utentePerInsertErrore.password}">
 						</div>
 					</div>
 					
-					<div class="form-group col-md-6">
+					<%-- <div class="form-group col-md-6">
 						<label>Ruoli</label>
 						<div class="form-check">
 								<!-- Default unchecked -->
@@ -93,7 +101,23 @@
 						    </c:forEach>
 						</div> 
 						</div>
-					</div> 
+					</div>  --%>
+					
+					<div class="form-group col md-4">
+							<label for="exampleFormControlSelect1">Ruoli</label>
+							<c:forEach items="${requestScope.listRuoliAttribute}" var="ruolo">
+								<div class="form-check">
+									<input class="form-check-input" type="checkbox" value="${ruolo.id}" id="idRuolo" name="ruolo"
+										<c:forEach items="${utentePerInsertErrore.ruoli}" var="ruoloUtente">
+											${ruoloUtente.id eq ruolo.id ? 'checked' : ''} 
+										</c:forEach>
+									>
+									<label class="form-check-label" for="defaultCheck1">
+										${ruolo.codice} </label>
+								</div>
+							</c:forEach>
+	 
+						</div>
 
 						<Input type="hidden" name="nomeUtentePerRicerca"
 						id="nomeUtenteDaPassare" class="form-control"
@@ -117,6 +141,7 @@
 
 					<button type="submit" name="submit" value="submit" id="submit"
 						class="btn btn-primary">Conferma</button>
+					
 				</form>
 
 

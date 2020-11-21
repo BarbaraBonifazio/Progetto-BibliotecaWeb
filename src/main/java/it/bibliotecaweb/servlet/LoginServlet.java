@@ -19,6 +19,10 @@ import it.bibliotecaweb.service.utente.UtenteService;
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+private boolean isAdmin;
+private boolean isClassicUser;
+private boolean isGuest;
+	
 	public LoginServlet() {
 		super();
 
@@ -42,7 +46,14 @@ public class LoginServlet extends HttpServlet {
 			Utente utente = new Utente(usernameInputParam, passwordInputParam);
 			utente = utenteService.trovaDaUsernameEPassword(utente);
 				 
+			
+			
 			if (utente != null && utente.getStato() == StatoUtente.ATTIVO) {
+				
+				//boolean isAdmin
+				//boolean isUser
+				//boolean isGuest
+				//inserisci valori booleani in base al ruolo dell'utente in sessione
 				
 				HttpSession session = request.getSession();
 				session.setAttribute("utente", utente);

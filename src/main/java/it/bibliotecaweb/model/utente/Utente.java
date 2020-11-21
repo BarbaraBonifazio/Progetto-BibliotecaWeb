@@ -45,6 +45,10 @@ public class Utente {
 	public Utente() {
 	}
 	
+	public Utente(String nome) {
+		this.nome = nome;
+	}
+	
 	public Utente(String nome, String cognome, String username, String password, Set<Ruolo> ruoli) {
 		this.nome = nome;
 		this.cognome = cognome;

@@ -40,16 +40,20 @@ public class GestioneUtentiFilter implements Filter {
 		HttpServletResponse httpServletResponse = (HttpServletResponse) response; 
 		
 		Utente utente = (Utente)httpServletRequest.getSession().getAttribute("utente");
-
-		for(Ruolo r:utente.getRuoli()) {
-			if(Codice.ADMIN_ROLE == r.getCodice()) { //se è un admin, entra e continua
-				chain.doFilter(request, response);
-			} else {
-//			httpServletRequest.setAttribute("errorMessage", "Attenzione non hai i permessi per accedere a questa pagina!");
-//			httpServletRequest.getRequestDispatcher(contesto);
-//				 response.sendRedirect("Admin_And_User_Login_Form.jsp?invalid=true");
-			httpServletResponse.sendRedirect(contesto); //altrimenti ritorna al contesto 
+		if (httpServletRequest.getSession().getAttribute("utente") == null // prendi l'attributo di sessione "utente" e dimmi se è presente
+				|| httpServletRequest.getSession() == null) { //prendi l'attributo "sessione" e dimmi se è presente
+			httpServletResponse.sendRedirect(contesto); // se sono null, rimandalo chi tenta di accedere alla login
+		} else {
+			for(Ruolo r:utente.getRuoli()) {
+				if(Codice.ADMIN_ROLE == r.getCodice()) { //se è un admin, entra e continua
+					chain.doFilter(request, response);
+				} else {
+	//			httpServletRequest.setAttribute("errorMessage", "Attenzione non hai i permessi per accedere a questa pagina!");
+	//			httpServletRequest.getRequestDispatcher(contesto);
+	//				 response.sendRedirect("Admin_And_User_Login_Form.jsp?invalid=true");
+				httpServletResponse.sendRedirect(contesto); //altrimenti ritorna al contesto 
+				}
 			}
-		}	
+		 }
 	}
 }

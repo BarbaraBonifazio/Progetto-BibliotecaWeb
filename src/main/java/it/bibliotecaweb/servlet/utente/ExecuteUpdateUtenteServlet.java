@@ -1,8 +1,12 @@
 package it.bibliotecaweb.servlet.utente;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -39,6 +43,10 @@ public class ExecuteUpdateUtenteServlet extends HttpServlet {
 		String usernameInputParam = request.getParameter("username");
 		String statoInputParam = request.getParameter("stato");
 		String[] ruoliInputParam = request.getParameterValues("ruolo");
+		if(ruoliInputParam == null) {
+			ruoliInputParam = new String[0];
+		}
+		
 		
 
 		UtenteService serviceUtente = MyServiceFactory.getUtenteServiceInstance();
@@ -50,7 +58,53 @@ public class ExecuteUpdateUtenteServlet extends HttpServlet {
 			ruoloNew.setId(idRuolo);
 			listaRuoli.add(ruoloNew);
 		}
+		
 		try {
+			
+			//controllo backend sulla presenza di dati inseriti 
+			if (nomeInputParam.isEmpty() || cognomeInputParam.isEmpty() 
+					|| usernameInputParam.isEmpty() || statoInputParam.isEmpty() && statoInputParam != null
+					|| ruoliInputParam.length == 0) {
+
+				List<String> errorMessage = new ArrayList<>();
+				if(nomeInputParam.isEmpty()){
+					String errore1 = "Attenzione il campo nome è vuoto!";
+					errorMessage.add(errore1);
+				}
+				if(cognomeInputParam.isEmpty()) {
+					String errore2 = "Attenzione il campo cognome è vuoto!";
+					errorMessage.add(errore2);
+				}
+				if(usernameInputParam.isEmpty()) {
+					String errore3 = "Attenzione il campo username è vuoto!";
+					errorMessage.add(errore3);
+				}
+				if(statoInputParam.isEmpty() && statoInputParam != null) {
+					String errore4 = "Attenzione non risulta selezionato alcuno stato!";
+					errorMessage.add(errore4);
+				}
+				if(ruoliInputParam.length == 0) {
+					String errore5 = "Attenzione non risulta selezionato alcun ruolo!";
+					errorMessage.add(errore5);
+				}
+				
+				Utente utenteErrato = new Utente(nomeInputParam, cognomeInputParam, usernameInputParam, listaRuoli);
+				request.setAttribute("utentePerInsertErrore", utenteErrato);
+				request.setAttribute("errorMessage", errorMessage);
+				//parametri da passare alla jsp updateUtenteErrato per effettuare l'update dello stesso utente 
+				Utente utenteInstance = serviceUtente.trova(Long.parseLong(idInputParam));
+				request.setAttribute("utentePerUpdate", utenteInstance);
+				//lista dei ruoli
+				request.setAttribute("listRuoliAttribute", MyServiceFactory.getRuoloServiceInstance().setAll());
+				//lista di enum per lo stato dell'utente 
+				List<String> listaStati = Stream.of(StatoUtente.values()).map(Enum::name).collect(Collectors.toList());
+				request.setAttribute("listaStati", listaStati);
+				request.getRequestDispatcher("updateUtenteErrato.jsp").forward(request, response);
+				return;
+			}
+			
+			
+			
 			Utente utenteDaDb  =  serviceUtente.trova(Long.parseLong(idInputParam));
 			utenteDaDb.setNome(nomeInputParam);
 			utenteDaDb.setCognome(cognomeInputParam);

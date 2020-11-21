@@ -1,7 +1,9 @@
 package it.bibliotecaweb.servlet.utente;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.ServletException;
@@ -37,8 +39,10 @@ public class ExecuteInsertUtenteServlet extends HttpServlet {
 		String usernameInputParam = request.getParameter("username");
 		String passwordInputParam = request.getParameter("password");
 		String[] ruoliInputParam = request.getParameterValues("ruolo");
+		if(ruoliInputParam == null) {
+			ruoliInputParam = new String[0];
+		}
 		
-
 		UtenteService serviceUtente = MyServiceFactory.getUtenteServiceInstance();
 		Set<Ruolo> listaRuoli = new HashSet<Ruolo>();
 		
@@ -49,8 +53,48 @@ public class ExecuteInsertUtenteServlet extends HttpServlet {
 			listaRuoli.add(ruoloNew);
 		}
 		
-		Utente utente = new Utente(nomeInputParam, cognomeInputParam, usernameInputParam, passwordInputParam, listaRuoli);
 		try {
+			
+			//controllo backend sulla presenza di dati inseriti 
+		if (nomeInputParam.isEmpty() || cognomeInputParam.isEmpty() 
+				|| usernameInputParam.isEmpty() || passwordInputParam.isEmpty()
+				|| ruoliInputParam.length == 0) {
+
+			List<String> errorMessage = new ArrayList<>();
+			if(nomeInputParam.isEmpty()){
+				String errore1 = "Attenzione il campo nome è vuoto!";
+				errorMessage.add(errore1);
+			}
+			if(cognomeInputParam.isEmpty()) {
+				String errore2 = "Attenzione il campo cognome è vuoto!";
+				errorMessage.add(errore2);
+			}
+			if(usernameInputParam.isEmpty()) {
+				String errore3 = "Attenzione il campo username è vuoto!";
+				errorMessage.add(errore3);
+			}
+			if(passwordInputParam.isEmpty()) {
+				String errore4 = "Attenzione il campo password è vuoto!";
+				errorMessage.add(errore4);
+			}
+			if(ruoliInputParam.length == 0) {
+				String errore5 = "Attenzione non risulta selezionato alcun ruolo!";
+				errorMessage.add(errore5);
+			}
+			
+			Utente utenteErrato = new Utente(nomeInputParam, cognomeInputParam, usernameInputParam, passwordInputParam, listaRuoli);
+			request.setAttribute("utentePerInsertErrore", utenteErrato);
+			request.setAttribute("errorMessage", errorMessage);
+			request.setAttribute("listRuoliAttribute", MyServiceFactory.getRuoloServiceInstance().setAll());
+			request.getRequestDispatcher("insertUtente.jsp").forward(request, response);
+			return;
+		}
+		
+		
+		
+		Utente utente = new Utente(nomeInputParam, cognomeInputParam, usernameInputParam, passwordInputParam, listaRuoli);
+		
+		
 			serviceUtente.inserisciNuovo(utente);
 			request.setAttribute("successMessage", "Operazione effettuata con successo");
 		

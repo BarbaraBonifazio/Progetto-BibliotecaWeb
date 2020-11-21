@@ -35,6 +35,7 @@ public class PrepareUpdateUtenteServlet extends HttpServlet {
 			request.setAttribute("errorMessage", "Attenzione il valore inserito non è valido!");
 			request.getRequestDispatcher("home.jsp").forward(request, response);
 			return;
+		
 		}
 		// --fine validazione parametro da url--
 		
