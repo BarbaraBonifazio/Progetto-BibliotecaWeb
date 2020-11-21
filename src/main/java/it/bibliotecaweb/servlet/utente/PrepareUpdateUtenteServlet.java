@@ -29,7 +29,7 @@ public class PrepareUpdateUtenteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String idUtenteDaModificareInput = request.getParameter("idDaInviareAExecuteUpdate");
-		
+
 		// Valido eventuale parametro passato da url
 		if (idUtenteDaModificareInput.isEmpty() || idUtenteDaModificareInput == null) {
 			request.setAttribute("errorMessage", "Attenzione il valore inserito non è valido!");
@@ -50,17 +50,18 @@ public class PrepareUpdateUtenteServlet extends HttpServlet {
 		}
 		
 		UtenteService serviceUtente = MyServiceFactory.getUtenteServiceInstance();
-
 		try {
 			//parametri da passare alla jsp per effettuare l'update dell'utente 
 			Utente utenteInstance = serviceUtente.trova(Long.parseLong(idUtenteDaModificareInput));
+			
+
 			request.setAttribute("utentePerUpdate", utenteInstance);
 			request.setAttribute("listRuoliAttribute", MyServiceFactory.getRuoloServiceInstance().setAll());
 			
 			// Verifico reale esistenza del parametro nel DB
 			if (utenteInstance == null) {
 				request.setAttribute("errorMessage", "Attenzione il valore inserito non esiste!");
-				request.getRequestDispatcher("resultsListCategorie.jsp").forward(request, response);
+				request.getRequestDispatcher("home.jsp").forward(request, response);
 				return;
 			}
 			// --fine verifica parametro DB

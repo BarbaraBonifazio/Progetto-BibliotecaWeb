@@ -24,13 +24,13 @@ public class PrepareInsertLibroServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-try {		
+		try {		
 			request.setAttribute("listaAutori", MyServiceFactory.getAutoreServiceInstance().setAll());
 			// lista di enum per lo stato dell'utente
 			List<String> generi = Stream.of(Genere.values()).map(Enum::name).collect(Collectors.toList());
 			request.setAttribute("listaGeneri", generi);
+			
 		} catch (Exception e) {
-
 			e.printStackTrace();
 		}
 		

@@ -7,7 +7,8 @@
 <title>Inserisci nuovo Utente</title>
 
 <!-- style per le pagine diverse dalla index -->
-<link href="${pageContext.request.contextPath}/assets/css/global.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/assets/css/global.css"
+	rel="stylesheet">
 
 </head>
 <body>
@@ -23,20 +24,20 @@
 				<span aria-hidden="true">&times;</span>
 			</button>
 		</div>
-		
+
 		<%-- <c:forEach items="${errorMessage}"> --%>
 		<c:forEach items="${requestScope.errorMessage}" var="errore">
-		<div
-			class="alert alert-danger alert-dismissible fade show ${errore==null?'d-none': ''}"
-			role="alert">
-			${errore}
-			<button type="button" class="close" data-dismiss="alert"
-				aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-			</button>
-		</div>
+			<div
+				class="alert alert-danger alert-dismissible fade show ${errore==null?'d-none': ''}"
+				role="alert">
+				${errore}
+				<button type="button" class="close" data-dismiss="alert"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
 		</c:forEach>
-       <%--  </c:forEach> --%>
+		<%--  </c:forEach> --%>
 
 	<div class='card'>
 			<div class='card-header'>
@@ -45,51 +46,52 @@
 					class='btn btn-outline-secondary' style='width: 80px'> <i
 					class='fa fa-chevron-left'></i> Back
 				</a> --%>
-			</div> 
 			</div>
-			<div class='card-body'>
+		</div>
+		<div class='card-body'>
 
-				<h6 class="card-title">
-					I campi con <span class="text-danger">*</span> sono obbligatori
-				</h6>
+			<h6 class="card-title">
+				I campi con <span class="text-danger">*</span> sono obbligatori
+			</h6>
 
-				<form method="post"
-					action="${pageContext.request.contextPath}/utente/ExecuteInsertUtenteServlet" 
-								class="needs-validation" novalidate>
+			<form method="post"
+				action="${pageContext.request.contextPath}/utente/ExecuteInsertUtenteServlet"
+				class="needs-validation" novalidate>
 
 
-					<div class="form-row">
-						<div class="form-group col-md-6">
-							<label>Nome <span class="text-danger">*</span></label> <input
-								type="text" name="nome" id="nomeUtente" class="form-control"
-								placeholder="Inserire nome" value="${utentePerInsertErrore.nome}">
-						</div>
-
-						<div class="form-group col-md-6">
-							<label>Cognome <span class="text-danger">*</span></label> <input
-								type="text" name="cognome" id="cognomeUtente"
-								class="form-control" placeholder="Inserire cognome"
-								value="${utentePerInsertErrore.cognome}">
-								
-						</div>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label>Nome <span class="text-danger">*</span></label> <input
+							type="text" name="nome" id="nomeUtente" class="form-control"
+							placeholder="Inserire nome" value="${utentePerInsertErrore.nome}">
 					</div>
 
-					<div class="form-row">
-						<div class="form-group col-md-6">
-							<label>Username <span class="text-danger">*</span></label> <input
-								type="text" class="form-control" name="username" id="usernameUtente"
-								placeholder="Inserire username" 
-								value="${utentePerInsertErrore.username}">
-						</div>
+					<div class="form-group col-md-6">
+						<label>Cognome <span class="text-danger">*</span></label> <input
+							type="text" name="cognome" id="cognomeUtente"
+							class="form-control" placeholder="Inserire cognome"
+							value="${utentePerInsertErrore.cognome}">
 
-						<div class="form-group col-md-6">
-							<label>Password <span class="text-danger">*</span></label> <input
-								type="text" class="form-control" name="password" id="passwordUtente"
-								placeholder="Inserire password" value="${utentePerInsertErrore.password}">
-						</div>
 					</div>
-					
-					<%-- <div class="form-group col-md-6">
+				</div>
+
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label>Username <span class="text-danger">*</span></label> <input
+							type="text" class="form-control" name="username"
+							id="usernameUtente" placeholder="Inserire username"
+							value="${utentePerInsertErrore.username}">
+					</div>
+
+					<div class="form-group col-md-6">
+						<label>Password <span class="text-danger">*</span></label> <input
+							type="text" class="form-control" name="password"
+							id="passwordUtente" placeholder="Inserire password"
+							value="${utentePerInsertErrore.password}">
+					</div>
+				</div>
+
+				<%-- <div class="form-group col-md-6">
 						<label>Ruoli</label>
 						<div class="form-check">
 								<!-- Default unchecked -->
@@ -102,50 +104,50 @@
 						</div> 
 						</div>
 					</div>  --%>
-					
-					<div class="form-group col md-4">
-							<label for="exampleFormControlSelect1">Ruoli</label>
-							<c:forEach items="${requestScope.listRuoliAttribute}" var="ruolo">
-								<div class="form-check">
-									<input class="form-check-input" type="checkbox" value="${ruolo.id}" id="idRuolo" name="ruolo"
-										<c:forEach items="${utentePerInsertErrore.ruoli}" var="ruoloUtente">
+
+				<div class="form-group col md-4">
+					<label for="exampleFormControlSelect1">Ruoli</label>
+					<c:forEach items="${requestScope.listRuoliAttribute}" var="ruolo">
+						<div class="form-check">
+							<input class="form-check-input" type="checkbox"
+								value="${ruolo.id}" id="idRuolo" name="ruolo"
+								<c:forEach items="${utentePerInsertErrore.ruoli}" var="ruoloUtente">
 											${ruoloUtente.id eq ruolo.id ? 'checked' : ''} 
-										</c:forEach>
-									>
-									<label class="form-check-label" for="defaultCheck1">
-										${ruolo.codice} </label>
-								</div>
-							</c:forEach>
-	 
+										</c:forEach>>
+							<label class="form-check-label" for="defaultCheck1">
+								${ruolo.codice} </label>
 						</div>
+					</c:forEach>
 
-						<Input type="hidden" name="nomeUtentePerRicerca"
-						id="nomeUtenteDaPassare" class="form-control"
-						value="${requestScope.nomePerTornareAllaRicercaEffettuata}">
-						
-						<Input type="hidden" name="cognomeUtentePerRicerca"
-						id="cognomeUtenteDaPassare" class="form-control"
-						value="${requestScope.cognomePerTornareAllaRicercaEffettuata}">
-						
-						<Input type="hidden" name="usernameUtentePerRicerca"
-						id="usernameUtenteDaPassare" class="form-control"
-						value="${requestScope.usernamePerTornareAllaRicercaEffettuata}">
-						
-						<Input type="hidden" name="statoUtentePerRicerca"
-						id="statoUtenteDaPassare" class="form-control"
-						value="${requestScope.statoPerTornareAllaRicercaEffettuata}">
-						
-						<Input type="hidden" name="ruoliUtentePerRicerca"
-						id="ruoliUtenteDaPassare" class="form-control"
-						value="${requestScope.ruoliPerTornareAllaRicercaEffettuata}">
+				</div>
 
-					<button type="submit" name="submit" value="submit" id="submit"
-						class="btn btn-primary">Conferma</button>
-					
-				</form>
+				<Input type="hidden" name="nomeUtentePerRicerca"
+					id="nomeUtenteDaPassare" class="form-control"
+					value="${requestScope.nomePerTornareAllaRicercaEffettuata}">
+
+				<Input type="hidden" name="cognomeUtentePerRicerca"
+					id="cognomeUtenteDaPassare" class="form-control"
+					value="${requestScope.cognomePerTornareAllaRicercaEffettuata}">
+
+				<Input type="hidden" name="usernameUtentePerRicerca"
+					id="usernameUtenteDaPassare" class="form-control"
+					value="${requestScope.usernamePerTornareAllaRicercaEffettuata}">
+
+				<Input type="hidden" name="statoUtentePerRicerca"
+					id="statoUtenteDaPassare" class="form-control"
+					value="${requestScope.statoPerTornareAllaRicercaEffettuata}">
+
+				<Input type="hidden" name="ruoliUtentePerRicerca"
+					id="ruoliUtenteDaPassare" class="form-control"
+					value="${requestScope.ruoliPerTornareAllaRicercaEffettuata}">
+
+				<button type="submit" name="submit" value="submit" id="submit"
+					class="btn btn-primary">Conferma</button>
+
+			</form>
 
 
-				<script>
+			<script>
 				
 				(function() {
 					  'use strict';
@@ -169,8 +171,8 @@
 				</script>
 
 
-				<!-- end card-body -->
-			</div>
+			<!-- end card-body -->
+		</div>
 		<!-- </div> -->
 
 

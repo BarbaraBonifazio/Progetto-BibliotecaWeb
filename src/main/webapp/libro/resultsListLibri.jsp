@@ -10,7 +10,8 @@
 <title>Lista Libri</title>
 
 <!-- style per le pagine diverse dalla index -->
-<link href="${pageContext.request.contextPath}/assets/css/global.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/assets/css/global.css"
+	rel="stylesheet">
 
 </head>
 <body>
@@ -43,7 +44,7 @@
 				<span aria-hidden="true">&times;</span>
 			</button>
 		</div>
-		
+
 		<div class='card'>
 			<div class='card-header'>
 				<h5>Lista dei libri ricercati</h5>
@@ -51,12 +52,12 @@
 			<div class='card-body'>
 				<%-- <c:if
 					test="${sessionScope.utente.ruolo != 'guest'}">  controllo da fare tramite filtro--%>
-					<div>
+				<div>
 					<a class="btn btn-primary "
-						href="${pageContext.request.contextPath}/libro/PrepareInsertLibroServlet">Aggiungi Libro
-						</a>
-					</div>
-					
+						href="${pageContext.request.contextPath}/libro/PrepareInsertLibroServlet">Aggiungi
+						Libro </a>
+				</div>
+
 				<%-- </c:if> --%>
 				<div class='table-responsive'>
 					<table class='table table-striped '>
@@ -73,24 +74,26 @@
 							<c:forEach items="${requestScope.libriPerResultsListLibri}"
 								var="libro">
 								<tr>
-									
+
 									<td>${libro.titolo}</td>
 									<td>${libro.trama}</td>
 									<td>${libro.genere}</td>
-									<td>${libro.autore.nome} ${libro.autore.cognome}</td>
-									
-									
+									<td>${libro.autore.nome}${libro.autore.cognome}</td>
+
+
 									<td><a class="btn  btn-sm btn-outline-secondary"
 										href="${pageContext.request.contextPath}
-												/libro/FindByIdLibroServlet?idParamPerDettaglioLibro=${libro.id}&idAutore=${libro.autore.id}">Visualizza</a>
+												/libro/FindByIdLibroServlet?idParamPerDettaglioLibro=${libro.id}
+												&idAutore=${libro.autore.id}">Visualizza</a>
 										<%-- <c:if
 											test="${sessionScope.utente.ruolo != 'guest'}"> CONTROLLI DI VISIBILITA DA FARE SUI FILTRI!> --%>
-											<a class="btn  btn-sm btn-outline-primary"
-												href="${pageContext.request.contextPath}
-														/libro/PrepareUpdateLibroServlet?idDaInviareAExecuteUpdate=${libro.id}">Modifica</a>
+										<a class="btn  btn-sm btn-outline-primary"
+										href="${pageContext.request.contextPath}
+														/libro/PrepareUpdateLibroServlet?idDaInviareAExecuteUpdate=${libro.id}
+														&idAutore=${libro.autore.id}">Modifica</a>
 										<%-- </c:if> <c:if test="${sessionScope.utente.ruolo == 'admin'}"> --%>
-											<a class="btn btn-outline-danger btn-sm"
-												href="${pageContext.request.contextPath}
+										<a class="btn btn-outline-danger btn-sm"
+										href="${pageContext.request.contextPath}
 														/libro/ConfirmDeleteLibroServlet?idDaInviareAExecuteDelete=${libro.id}">Cancella</a>
 										<%-- </c:if> --%></td>
 								</tr>
@@ -99,11 +102,12 @@
 					</table>
 				</div>
 
-			<div class='card-footer'>
-				<a href="${pageContext.request.contextPath}/libro/PrepareFindLibriServlet"
-					class='btn btn-outline-secondary' style='width: 90px'> <i
-					class='fa fa-chevron-left'></i> Indietro
-				</a>
+				<div class='card-footer'>
+					<a
+						href="${pageContext.request.contextPath}/libro/PrepareFindLibriServlet"
+						class='btn btn-outline-secondary' style='width: 90px'> <i
+						class='fa fa-chevron-left'></i> Indietro
+					</a>
 				</div>
 
 				<!-- end card-body -->

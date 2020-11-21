@@ -36,19 +36,28 @@ public class LibroFilter implements Filter {
 
 		Utente utente = (Utente) httpServletRequest.getSession().getAttribute("utente");
 
-		String percorso = httpServletRequest.getRequestURI(); 
+		String percorso = httpServletRequest.getRequestURI();
 
-		//VERIFICA RUOLO UTENTE PER IMPEDIRE LA VISUALIZZAZIONE DELLE ALTRE SERVLET DI LIBRO
-		if (percorso.contains("PrepareFindLibriServlet") || percorso.contains("ExecuteFindLibroServlet") || percorso.contains("FindByIdLibroServlet")) {
-			//se il tentativo di accesso risponde a queste servlet
-			chain.doFilter(request, response); //accedi
+		// VERIFICA RUOLO UTENTE PER IMPEDIRE LA VISUALIZZAZIONE DELLE ALTRE SERVLET DI
+		// LIBRO
+		if (percorso.contains("PrepareFindLibriServlet") || percorso.contains("ExecuteFindLibroServlet")
+			 || percorso.contains("FindByIdLibroServlet")) {
+			// se il tentativo di accesso risponde a queste servlet
+			chain.doFilter(request, response); // accedi
 		} else {
-
-			for (Ruolo r : utente.getRuoli()) {
-				if (Codice.GUEST_ROLE == r.getCodice()) {
-					httpServletResponse.sendRedirect(contesto); //altrimenti ritorna
+			if (httpServletRequest.getSession().getAttribute("utente") == null // prendi l'attributo di sessione
+					// "utente" e dimmi se è presente
+					|| httpServletRequest.getSession() == null) { // prendi l'attributo "sessione" e dimmi se è presente
+				httpServletResponse.sendRedirect(contesto); // se sono null, rimandalo chi tenta di accedere alla login
+			} else {
+				for (Ruolo r : utente.getRuoli()) {
+					if (Codice.GUEST_ROLE == r.getCodice()) {
+						httpServletResponse.sendRedirect(contesto); // altrimenti ritorna
+					} else {
+						chain.doFilter(request, response); // accedi
+					}
 				}
-			}	
-		}
+			 }
+		 }
 	}
 }

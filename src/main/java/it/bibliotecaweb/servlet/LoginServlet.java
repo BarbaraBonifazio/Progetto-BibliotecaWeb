@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import it.bibliotecaweb.model.ruolo.Codice;
+import it.bibliotecaweb.model.ruolo.Ruolo;
 import it.bibliotecaweb.model.utente.StatoUtente;
 import it.bibliotecaweb.model.utente.Utente;
 import it.bibliotecaweb.service.MyServiceFactory;
@@ -49,11 +51,20 @@ private boolean isGuest;
 			
 			
 			if (utente != null && utente.getStato() == StatoUtente.ATTIVO) {
-				
-				//boolean isAdmin
-				//boolean isUser
-				//boolean isGuest
-				//inserisci valori booleani in base al ruolo dell'utente in sessione
+				for(Ruolo r: utente.getRuoli()) {
+					if(Codice.ADMIN_ROLE == r.getCodice()) {
+						isAdmin = true;
+					}
+					if(Codice.CLASSIC_ROLE == r.getCodice()){
+						isClassicUser = true;
+					}
+					if(Codice.GUEST_ROLE == r.getCodice()){
+						isGuest = true;
+					}
+				}
+				request.setAttribute("isAdmin", isAdmin);
+				request.setAttribute("isClassicUser", isClassicUser);
+				request.setAttribute("isGuest", isGuest);
 				
 				HttpSession session = request.getSession();
 				session.setAttribute("utente", utente);

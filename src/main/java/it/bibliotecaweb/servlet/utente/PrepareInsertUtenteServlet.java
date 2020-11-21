@@ -30,11 +30,6 @@ public class PrepareInsertUtenteServlet extends HttpServlet {
 		String statoPerTornareAllaRicercaEffettuata = request.getParameter("statoPerTornareAllaRicercaEffettuata");
 		String ruoliPerTornareAllaRicercaEffettuata = request.getParameter("ruoliPerTornareAllaRicercaEffettuata");
 		
-		try {
-			request.setAttribute("listRuoliAttribute", MyServiceFactory.getRuoloServiceInstance().setAll());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		
 		//passo i parametri alla jsp successiva 
 		request.setAttribute("nomePerTornareAllaRicercaEffettuata", nomePerTornareAllaRicercaEffettuata);
@@ -43,6 +38,11 @@ public class PrepareInsertUtenteServlet extends HttpServlet {
 		request.setAttribute("statoPerTornareAllaRicercaEffettuata", statoPerTornareAllaRicercaEffettuata);
 		request.setAttribute("ruoliPerTornareAllaRicercaEffettuata", ruoliPerTornareAllaRicercaEffettuata);
 		
+		try {
+			request.setAttribute("listRuoliAttribute", MyServiceFactory.getRuoloServiceInstance().setAll());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		request.getRequestDispatcher("insertUtente.jsp").forward(request, response);
 	}

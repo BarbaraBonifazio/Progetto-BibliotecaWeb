@@ -20,7 +20,7 @@ public class UtenteDAOImpl implements UtenteDAO {
 
 	@Override
 	public Set<Utente> set() throws Exception {
-		return entityManager.createQuery("From Utente u", Utente.class).getResultList().stream()
+		return entityManager.createQuery("SELECT u From Utente u JOIN FETCH u.ruoli r", Utente.class).getResultList().stream()
 				.collect(Collectors.toSet());
 	}
 
@@ -29,7 +29,14 @@ public class UtenteDAOImpl implements UtenteDAO {
 		if (id == null) {
 			throw new Exception("Problema valore in input");
 		}
-		return entityManager.find(Utente.class, id);
+		TypedQuery<Utente> query = entityManager.createQuery(
+				"SELECT DISTINCT u from Utente u JOIN FETCH u.ruoli r where u.id = ?1", Utente.class);
+		query.setParameter(1, id);
+		try {
+			return query.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 
 	@Override

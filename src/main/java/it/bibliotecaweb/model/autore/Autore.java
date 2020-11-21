@@ -86,8 +86,7 @@ public class Autore {
 	@Override
 	public String toString() {
 		return "Ordine [Id =" + id + ", Nome = " + nome + ", Cognome = " + cognome + ", Data di Nascita = "
-				+ dataNascita +  "]"; // se qui inserisci Libri toString() stai invalidando
-																	// il LAZY FETCH
+				+ dataNascita +  "]"; 
 	}
 	
 }

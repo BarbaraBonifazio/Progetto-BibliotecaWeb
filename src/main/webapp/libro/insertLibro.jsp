@@ -24,15 +24,26 @@
 			</button>
 		</div>
 
+		<c:forEach items="${requestScope.errorMessage}" var="errore">
 		<div
-			class="alert alert-danger alert-dismissible fade show ${errorMessage==null?'d-none': ''}"
+			class="alert alert-danger alert-dismissible fade show ${errore==null?'d-none': ''}"
 			role="alert">
-			${errorMessage}
+			${errore}
 			<button type="button" class="close" data-dismiss="alert"
 				aria-label="Close">
 				<span aria-hidden="true">&times;</span>
 			</button>
 		</div>
+		</c:forEach>
+		<div class='card'>
+			<div class='card-header'>
+				<h5>Inserisci nuovo Libro</h5>
+				<%-- <a class="text-right" href="${pageContext.request.contextPath}/ListUtentiServlet"
+					class='btn btn-outline-secondary' style='width: 80px'> <i
+					class='fa fa-chevron-left'></i> Back
+				</a> --%>
+			</div> 
+			</div>
 
 			<div class='card-body'>
 
@@ -41,49 +52,53 @@
 				</h6>
 
 				<form method="post"
-					action="${pageContext.request.contextPath}/utente/ExecuteInsertLibroServlet" 
+					action="${pageContext.request.contextPath}/libro/ExecuteInsertLibroServlet" 
 								class="needs-validation" novalidate>
 
 					<div class="form-row">
 						<div class="form-group col-md-6">
 							<label>Titolo <span class="text-danger">*</span></label> <input
 								type="text" name="titolo" id="titoloLibro" class="form-control"
-								placeholder="Inserire nome" required>
+								placeholder="Inserire nome" value="${libroPerInsertErrato.titolo}">
 						</div>
 
 						<div class="form-group col-md-6">
 							<label>Trama <span class="text-danger">*</span></label> <input
 								type="text" name="trama" id="tramaLibro"
 								class="form-control" placeholder="Inserire cognome"
-								required>
+								value="${libroPerInsertErrato.trama}">
 						</div>
 					</div>
 
-					<div class="form-group col-md-6">
-						<label>Genere</label> <select id="genereLibro" name="genere"
-							class="form-control">
-							<option value="${stato.EMPTY}">- Seleziona Genere -</option>
-							<c:forEach items="${listaGeneri}" var="genere">
-								<c:if test="${genere != 'EMPTY'}">
-									<option value="${genere}">${genere}</option>
-								</c:if>
-							</c:forEach>
-						</select>
-					</div>
-					
-					<div class="form-group col-md-6">
-						<label>Autore</label> <select id="autoreLibro" name="autore"
-							class="form-control">
-							<option value="">- Seleziona Autore -</option>
-							<c:forEach items="${listaAutori}" var="autore">
-							<c:if test="${stato != 'EMPTY'}">
-									<option value="${autore.id}">
-									${autore.nome} ${autore.cognome}</option>
-							</c:if>
-							</c:forEach>
-						</select>
-					</div>
 
+					<div class="form-row">
+						<div class="form-group col-md-6">
+							<label>Genere</label> <select id="genereLibro" name="genere"
+								class="form-control">
+
+							<option value="${genere.EMPTY}">- Selezionare Nuovo Genere -</option>
+								<c:forEach items="${listaGeneri}" var="genere">
+									<c:if test="${genere != 'EMPTY'}">
+										<option value="${genere}">${genere}</option>
+									</c:if>
+								</c:forEach>					
+							</select>
+						</div>
+						
+						
+						<div class="form-group col-md-6">
+							<label>Autore</label> <select id="autoreLibro" name="autore"
+								class="form-control">
+								<option value="">- Seleziona Autore -</option>
+								<c:forEach items="${listaAutori}" var="autore">
+								<c:if test="${stato != 'EMPTY'}">
+										<option value="${autore.id}">
+										${autore.nome} ${autore.cognome}</option>
+								</c:if>
+								</c:forEach>
+							</select>
+						</div>
+					</div>
 					<button type="submit" name="submit" value="submit" id="submit"
 						class="btn btn-primary">Conferma</button>
 				</form>

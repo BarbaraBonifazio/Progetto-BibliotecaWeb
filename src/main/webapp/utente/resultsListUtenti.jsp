@@ -90,7 +90,7 @@
 									<td>${utente.ruoli}</td>
 									
 									
-									
+									<c:forEach items="${utente.ruoli}" var="ruolo"> <!-- ciclo i ruoli dell'utente per poterli passare tramite href -->
 									<td><a class="btn  btn-sm btn-outline-secondary"
 										href="${pageContext.request.contextPath}
 												/utente/FindByIdUtenteServlet?idParamPerDettaglioUtente=${utente.id}&
@@ -122,6 +122,7 @@
 												<%-- &ruoliPerTornareAllaRicercaEffettuata=${requestScope.ruoliPerTornareAllaRicercaEffettuata} --%>
 												">Elimina</a>
 										<%-- </c:if> --%></td>
+										</c:forEach>
 								</tr>
 							</c:forEach>
 						</tbody>

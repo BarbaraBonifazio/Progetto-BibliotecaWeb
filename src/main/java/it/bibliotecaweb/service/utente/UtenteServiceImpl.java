@@ -43,6 +43,7 @@ public class UtenteServiceImpl implements UtenteService {
 		try {
 			// uso l'injection per il dao
 			utenteDAO.setEntityManager(entityManager);
+			
 			// eseguo quello che realmente devo fare
 			return utenteDAO.get(id);
 		} catch (Exception e) {
