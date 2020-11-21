@@ -25,29 +25,40 @@ public class ConfirmDeleteUtenteServlet extends HttpServlet {
 		
 		String parametroIdDellUtenteCheVoglioEliminare = request.getParameter("idDaInviareAExecuteDelete");
 		
-		// Valido eventuale parametro passato da url
-				if (parametroIdDellUtenteCheVoglioEliminare.isEmpty() || parametroIdDellUtenteCheVoglioEliminare == null) {
-					request.setAttribute("errorMessage", "Attenzione il valore inserito non è valido!");
-					request.getRequestDispatcher("home.jsp").forward(request, response);
+		
+		try {
+				// Valido eventuale parametro passato da URL 
+				if (parametroIdDellUtenteCheVoglioEliminare.isEmpty()) {
+					request.setAttribute("errorMessage", "Attenzione non è stato inserito alcun valore!");
+					request.setAttribute("utentiPerResultsList", MyServiceFactory.getUtenteServiceInstance().setAll());
+					request.getRequestDispatcher("resultsListUtenti.jsp").forward(request, response);
 					return;
 				}
 				// --fine validazione parametro da url--
 		
 		UtenteService service = MyServiceFactory.getUtenteServiceInstance();		
 				
-		try {
 			Utente utenteInstance = service.trova(Long.parseLong(parametroIdDellUtenteCheVoglioEliminare));
+			//passo l'utente da DB alla jsp
 			request.setAttribute("utenteDaEliminare", utenteInstance);
+			
+			// Verifico reale esistenza del parametro passato da URL nel DB
+			if (utenteInstance == null) {
+				request.setAttribute("errorMessage", "Attenzione il valore inserito non esiste!");
+				request.getRequestDispatcher("listUtenti.jsp").forward(request, response);
+				return;
+			}
+			// --fine verifica parametro DB
+			
 		
-		
-			//prendo i parametri per tornare alla ricerca effettuata 
+			//palleggio i parametri passati per tornare alla lista dei Risultati della ricerca iniziale
 			String nomePerTornareAllaRicercaEffettuata = request.getParameter("nomePerTornareAllaRicercaEffettuata");
 			String cognomePerTornareAllaRicercaEffettuata = request.getParameter("cognomePerTornareAllaRicercaEffettuata");
 			String usernamePerTornareAllaRicercaEffettuata = request.getParameter("usernamePerTornareAllaRicercaEffettuata");
 			String statoPerTornareAllaRicercaEffettuata = request.getParameter("statoPerTornareAllaRicercaEffettuata");
 			String ruoliPerTornareAllaRicercaEffettuata = request.getParameter("ruoliPerTornareAllaRicercaEffettuata");
 			
-			//passo i parametri per tornare alla ricerca effettuata alla jsp successiva 
+			//passo i parametri alla jsp successiva, per tornare eventualmente alla ricerca effettuata
 			request.setAttribute("nomePerTornareAllaRicercaEffettuata", nomePerTornareAllaRicercaEffettuata);
 			request.setAttribute("cognomePerTornareAllaRicercaEffettuata", cognomePerTornareAllaRicercaEffettuata);
 			request.setAttribute("usernamePerTornareAllaRicercaEffettuata", usernamePerTornareAllaRicercaEffettuata);

@@ -7,7 +7,7 @@
 <html lang="it">
 <head>
 <jsp:include page="../header.jsp" />
-<title>Lista Articoli</title>
+<title>Lista Libri</title>
 
 <!-- style per le pagine diverse dalla index -->
 <link href="${pageContext.request.contextPath}/assets/css/global.css" rel="stylesheet">
@@ -46,7 +46,7 @@
 		
 		<div class='card'>
 			<div class='card-header'>
-				<h5>Lista dei libri</h5>
+				<h5>Lista dei libri ricercati</h5>
 			</div>
 			<div class='card-body'>
 				<%-- <c:if
@@ -80,7 +80,7 @@
 									<td>${libro.autore.nome} ${libro.autore.cognome}</td>
 									<td><a class="btn  btn-sm btn-outline-secondary"
 										href="${pageContext.request.contextPath}
-												/libro/FindByIdLibroServlet?idDaInviareComeParametro=${libro.id}">Visualizza</a>
+												/libro/FindByIdLibroServlet?idParamPerDettaglioLibro=${libro.id}">Visualizza</a>
 										<%-- <c:if
 											test="${sessionScope.utente.ruolo != 'guest'}"> CONTROLLI DI VISIBILITA DA FARE SUI FILTRI!> --%>
 											<a class="btn  btn-sm btn-outline-primary"

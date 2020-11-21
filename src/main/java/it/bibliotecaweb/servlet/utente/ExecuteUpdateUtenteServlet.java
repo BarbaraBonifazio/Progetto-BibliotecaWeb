@@ -47,8 +47,6 @@ public class ExecuteUpdateUtenteServlet extends HttpServlet {
 			ruoliInputParam = new String[0];
 		}
 		
-		
-
 		UtenteService serviceUtente = MyServiceFactory.getUtenteServiceInstance();
 		Set<Ruolo> listaRuoli = new HashSet<Ruolo>();
 		
@@ -86,7 +84,7 @@ public class ExecuteUpdateUtenteServlet extends HttpServlet {
 				if(ruoliInputParam.length == 0) {
 					String errore5 = "Attenzione non risulta selezionato alcun ruolo!";
 					errorMessage.add(errore5);
-				}
+				} 
 				
 				Utente utenteErrato = new Utente(nomeInputParam, cognomeInputParam, usernameInputParam, listaRuoli);
 				request.setAttribute("utentePerInsertErrore", utenteErrato);
@@ -102,9 +100,9 @@ public class ExecuteUpdateUtenteServlet extends HttpServlet {
 				request.getRequestDispatcher("updateUtenteErrato.jsp").forward(request, response);
 				return;
 			}
-			
-			
-			
+				// --- fine controllo back end --- 
+
+			//richiamo l'utente da DB e imposto eventuali parametri passati dalla pagina per l'update 
 			Utente utenteDaDb  =  serviceUtente.trova(Long.parseLong(idInputParam));
 			utenteDaDb.setNome(nomeInputParam);
 			utenteDaDb.setCognome(cognomeInputParam);
@@ -115,6 +113,7 @@ public class ExecuteUpdateUtenteServlet extends HttpServlet {
 			utenteDaDb.setStato(StatoUtente.valueOf(statoInputParam));
 		}
 	
+			//aggiorno l'utente con i nuovi parametri 
 			serviceUtente.aggiorna(utenteDaDb);
 			request.setAttribute("successMessage", "Operazione effettuata con successo");
 		
@@ -142,8 +141,7 @@ public class ExecuteUpdateUtenteServlet extends HttpServlet {
 //			}
 			
 //		Utente utenteNew = new Utente(nomeRicerca, cognomeRicerca, usernameRicerca, listaRuoliRicerca);
-		
-		
+			
 		//passo i parametri per tornare alla ricerca effettuata alla jsp successiva 
 				request.setAttribute("nomePerTornareAllaRicercaEffettuata", nomeInputParamPerRicerca);
 				request.setAttribute("cognomePerTornareAllaRicercaEffettuata", nomeInputParamPerRicerca);
@@ -151,25 +149,17 @@ public class ExecuteUpdateUtenteServlet extends HttpServlet {
 				request.setAttribute("statoPerTornareAllaRicercaEffettuata", nomeInputParamPerRicerca);
 //				request.setAttribute("ruoliPerTornareAllaRicercaEffettuata", ruoliInputParamPerRicerca);
 		
-		//valorizzo l'utente con i parametri passati 
+		//valorizzo l'utente d'appoggio con i parametri passati nella ricerca 
 			Utente utenteNew = new Utente(nomeRicerca, cognomeRicerca, usernameRicerca);
 		
 				if (!statoInputParamPerRicerca.isEmpty() && statoInputParamPerRicerca != null) {
 					utenteNew.setStato(StatoUtente.valueOf(statoInputParamPerRicerca));
 				}
-				
-				
-				
-		//ricerco tutti gli utenti che corrispondono ai parametri passati e li passo alla jsp dei risultati 
+
+		//ricerco tutti gli utenti che corrispondono ai parametri passati e li rimando alla jsp dei risultati 
 		//questo mi permetterà di tornare alla lista filtrata 
 			Set<Utente> listaUtenti = serviceUtente.trovaUtente(utenteNew);
 			request.setAttribute("utentiPerResultsList", listaUtenti);
-		
-		if (nomeInputParam.isEmpty() || cognomeInputParam.isEmpty() || usernameInputParam.isEmpty() || ruoliInputParam == null) {
-			request.setAttribute("errorMessage", "Attenzione sono presenti errori di validazione!");
-			request.getRequestDispatcher("resultsListUtenti.jsp").forward(request, response);
-			return;
-		}
 			
 			
 		} catch (Exception e) {

@@ -29,7 +29,7 @@ public class PrepareFindLibriServlet extends HttpServlet {
 		try {
 			
 			request.setAttribute("listaAutori", MyServiceFactory.getAutoreServiceInstance().setAll());
-			// lista di enum per lo stato dell'utente
+			// lista di enum per i generi del libro
 			List<String> generi = Stream.of(Genere.values()).map(Enum::name).collect(Collectors.toList());
 			request.setAttribute("listaGeneri", generi);
 		} catch (Exception e) {

@@ -37,7 +37,6 @@ public class ExecuteFindUtentiServlet extends HttpServlet {
 		if(ruoliInput == null) {
 			ruoliInput = new String[0];
 		}
-
 		
 		String nome = (nomeInputParam.isEmpty()) ? null : nomeInputParam;
 		String cognome = (cognomeInputParam.isEmpty()) ? null : cognomeInputParam;

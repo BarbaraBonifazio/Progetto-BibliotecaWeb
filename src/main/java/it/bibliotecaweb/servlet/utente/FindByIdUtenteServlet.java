@@ -27,17 +27,12 @@ public class FindByIdUtenteServlet extends HttpServlet {
 		String idDellUtentePerDettaglio = request.getParameter("idParamPerDettaglioUtente");
 		
 		
-		//parametri per tornare alla ricerca effettuata 
-		String nomePerTornareAllaRicercaEffettuata = request.getParameter("nomePerTornareAllaRicercaEffettuata");
-		String cognomePerTornareAllaRicercaEffettuata = request.getParameter("cognomePerTornareAllaRicercaEffettuata");
-		String usernamePerTornareAllaRicercaEffettuata = request.getParameter("usernamePerTornareAllaRicercaEffettuata");
-		String statoPerTornareAllaRicercaEffettuata = request.getParameter("statoPerTornareAllaRicercaEffettuata");
-		String ruoliPerTornareAllaRicercaEffettuata = request.getParameter("ruoliPerTornareAllaRicercaEffettuata");
-		
-		// Valido eventuale parametro passato da url
-		if (idDellUtentePerDettaglio == null) {
-			request.setAttribute("errorMessage", "Attenzione il valore inserito non è valido!");
-			request.getRequestDispatcher("listUtenti.jsp").forward(request, response);
+		try {
+		// Valido eventuale parametro passato da URL 
+		if (idDellUtentePerDettaglio.isEmpty()) {
+			request.setAttribute("errorMessage", "Attenzione non è stato inserito alcun valore!");
+			request.setAttribute("utentiPerResultsList", MyServiceFactory.getUtenteServiceInstance().setAll());
+			request.getRequestDispatcher("resultsListUtenti.jsp").forward(request, response);
 			return;
 		}
 		// --fine validazione parametro da url--
@@ -45,28 +40,41 @@ public class FindByIdUtenteServlet extends HttpServlet {
 		UtenteService service = MyServiceFactory.getUtenteServiceInstance();
 
 		Utente result;
-		try {
+		
 			result = service.trova(Long.parseLong(idDellUtentePerDettaglio));
-			
-			request.setAttribute("nomeUtenteRicercatoInput", nomePerTornareAllaRicercaEffettuata);
-			request.setAttribute("cognomeUtenteRicercatoInput", cognomePerTornareAllaRicercaEffettuata);
-			request.setAttribute("usernameUtenteRicercatoInput", usernamePerTornareAllaRicercaEffettuata);
-			request.setAttribute("statoUtenteRicercatoInput", statoPerTornareAllaRicercaEffettuata);
-			request.setAttribute("ruoliPerTornareAllaRicercaEffettuata", ruoliPerTornareAllaRicercaEffettuata);
-			
+			//passo l'utente da DB alla jsp
 			request.setAttribute("utentePerShow", result);
 
-			// Verifico reale esistenza del parametro nel DB
+			
+			// Verifico reale esistenza del parametro passato da URL nel DB
 			if (result == null) {
 				request.setAttribute("errorMessage", "Attenzione il valore inserito non esiste!");
 				request.getRequestDispatcher("listUtenti.jsp").forward(request, response);
 				return;
 			}
 			// --fine verifica parametro DB
+			
+			
+			//palleggio i parametri passati per tornare alla lista dei Risultati della ricerca iniziale 
+			String nomePerTornareAllaRicercaEffettuata = request.getParameter("nomePerTornareAllaRicercaEffettuata");
+			String cognomePerTornareAllaRicercaEffettuata = request.getParameter("cognomePerTornareAllaRicercaEffettuata");
+			String usernamePerTornareAllaRicercaEffettuata = request.getParameter("usernamePerTornareAllaRicercaEffettuata");
+			String statoPerTornareAllaRicercaEffettuata = request.getParameter("statoPerTornareAllaRicercaEffettuata");
+			String ruoliPerTornareAllaRicercaEffettuata = request.getParameter("ruoliPerTornareAllaRicercaEffettuata");
+			
+			
+			request.setAttribute("nomeUtenteRicercatoInput", nomePerTornareAllaRicercaEffettuata);
+			request.setAttribute("cognomeUtenteRicercatoInput", cognomePerTornareAllaRicercaEffettuata);
+			request.setAttribute("usernameUtenteRicercatoInput", usernamePerTornareAllaRicercaEffettuata);
+			request.setAttribute("statoUtenteRicercatoInput", statoPerTornareAllaRicercaEffettuata);
+			request.setAttribute("ruoliPerTornareAllaRicercaEffettuata", ruoliPerTornareAllaRicercaEffettuata);
 
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		//procedo con la richiesta del dettaglio utente 
 		request.getRequestDispatcher("showUtente.jsp").forward(request, response);
 	}
 

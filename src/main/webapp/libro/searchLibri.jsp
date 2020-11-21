@@ -8,7 +8,7 @@
 <html lang="it">
 <head>
 <jsp:include page="../header.jsp" />
-<title>Search Libri</title>
+<title>Cerca Libri</title>
 
 <!-- style per le pagine diverse dalla index -->
 <link href="${pageContext.request.contextPath}/assets/css/global.css" rel="stylesheet">
@@ -52,7 +52,7 @@
 
 				<form method="post"
 					action="${pageContext.request.contextPath}/libro/ExecuteFindLibroServlet"
-					name="myForm" onsubmit="return validateForm()" novalidate>
+					novalidate>
 
 					<div class="form-group col-md-6">
 						<label>Titolo</label> <input type="text" name="titolo"
@@ -95,28 +95,6 @@
 						class="btn btn-primary">Cerca</button>
 
 				</form>
-
-
-				<script>
-				/* qui farò le verifiche javascript per quanto riguarda tutti i campi di questa jsp */
-				function validateForm() {
-					  var x = document.forms["myForm"]["prezzo"].value;
-
-					  if (x < 0) {
-					    alert("Il prezzo non può essere un numero negativo!");
-					    return false;
-					  }
-					  
-					  else if (isNaN(document.forms["myForm"]["prezzo"].value)) {
-						  
-						    alert("Il campo Prezzo deve essere un numero!");
-						    return false;
-					  }  
-					} 
-	
-				</script>
-
-
 
 				<!-- end card-body -->
 			</div>

@@ -48,7 +48,7 @@
 		
 		<div class='card'>
 			<div class='card-header'>
-				<h5>Lista degli utenti</h5>
+				<h5>Lista degli utenti ricercati</h5>
 			</div>
 			<div class='card-body'>
 				<%-- <c:if
