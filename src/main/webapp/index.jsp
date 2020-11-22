@@ -11,13 +11,13 @@
 	  <title>Accedi</title>
 	  
 	  <!-- Favicons -->
-	<link rel="apple-touch-icon" href="./assets/img/favicons/apple-touch-icon.png" sizes="180x180">
-	<link rel="icon" href="./assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-	<link rel="icon" href="./assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
-	<link rel="manifest" href="./assets/img/favicons/manifest.json">
-	<link rel="mask-icon" href="./assets/img/favicons/safari-pinned-tab.svg" color="#563d7c">
-	<link rel="icon" href="./assets/img/favicons/favicon.ico">
-	<meta name="msapplication-config" content="./assets/img/favicons/browserconfig.xml">
+	<link rel="apple-touch-icon" href="${pageContext.request.contextPath}/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+	<link rel="icon" href="${pageContext.request.contextPath}/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+	<link rel="icon" href="${pageContext.request.contextPath}/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+	<link rel="manifest" href="${pageContext.request.contextPath}/assets/img/favicons/manifest.json">
+	<link rel="mask-icon" href="${pageContext.request.contextPath}/assets/img/favicons/safari-pinned-tab.svg" color="#563d7c">
+	<link rel="icon" href="${pageContext.request.contextPath}/assets/img/favicons/favicon.ico">
+	<meta name="msapplication-config" content="${pageContext.request.contextPath}/assets/img/favicons/browserconfig.xml">
 	<meta name="theme-color" content="#563d7c">
 	
 	
@@ -39,18 +39,15 @@
 	  </style>
 	  
 	  <!-- Custom styles for this template -->
-	  <link href="${pageContext.request.contextPath}/assets/css/signin.css" rel="stylesheet">
+	  <link href="./assets/css/signin.css" rel="stylesheet">
 	</head>
 	<body class="text-center">
-		
-	   	<form class="form-signin" action="LoginServlet" method="post">
-	   	
-		   	<div class="alert alert-danger alert-dismissible fade show ${errorMessage==null?'d-none': ''}" role="alert">
+		<div class="alert alert-danger alert-dismissible fade show ${errorMessage==null?'d-none': ''}" role="alert">
 			  ${errorMessage}
 			</div>
-			
-			
-		  <img class="mb-4" src="./assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+	   	<form class="form-signin" action="LoginServlet" method="post">
+
+		  <img class="mb-4" src="${pageContext.request.contextPath}/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
 		  <h1 class="h3 mb-3 font-weight-normal">Effettua l'accesso</h1>
 		  <h4 class="h4 mb-3 font-weight-normal">Inserisci le tue credenziali qui di seguito:</h4>
 		  <label for="inputUsername" class="sr-only">Username</label>

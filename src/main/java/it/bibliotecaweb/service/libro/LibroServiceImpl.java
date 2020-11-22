@@ -69,12 +69,17 @@ public class LibroServiceImpl implements LibroService {
 
 			// uso l'injection per il dao
 			libroDAO.setEntityManager(entityManager);
-			if (libroInstance.getAutore() != null) { // se il libro ha un autore associato allora posso eseguire
+			if (libroInstance.getAutore().getId() != 0) { // se il libro ha un autore associato allora posso eseguire
 																// l'update
 				// eseguo quello che realmente devo fare
 				result = libroDAO.update(libroInstance);
-				entityManager.getTransaction().commit();
+				result = true;
+			} else {
+				return result;
 			}
+			
+			entityManager.getTransaction().commit();
+			
 		} catch (Exception e) {
 			entityManager.getTransaction().rollback();
 			e.printStackTrace();

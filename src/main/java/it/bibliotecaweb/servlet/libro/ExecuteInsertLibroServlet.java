@@ -47,8 +47,8 @@ public class ExecuteInsertLibroServlet extends HttpServlet {
 			
 			//controllo backend sulla presenza di dati inseriti 
 			if (titoloInputParam.isEmpty() || tramaInputParam.isEmpty() 
-					|| genereInputParam == null 
-					|| idAutoreInputParam == null) {
+					|| genereInputParam.isEmpty() || genereInputParam == null
+					|| idAutoreInputParam.isEmpty() || idAutoreInputParam == null) {
 
 				List<String> errorMessage = new ArrayList<>();
 				if(titoloInputParam.isEmpty()){

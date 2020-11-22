@@ -45,7 +45,8 @@ public class ConfirmDeleteUtenteServlet extends HttpServlet {
 			// Verifico reale esistenza del parametro passato da URL nel DB
 			if (utenteInstance == null) {
 				request.setAttribute("errorMessage", "Attenzione il valore inserito non esiste!");
-				request.getRequestDispatcher("listUtenti.jsp").forward(request, response);
+				request.setAttribute("utentiPerResultsList", MyServiceFactory.getUtenteServiceInstance().setAll());
+				request.getRequestDispatcher("resultsListUtenti.jsp").forward(request, response);
 				return;
 			}
 			// --fine verifica parametro DB

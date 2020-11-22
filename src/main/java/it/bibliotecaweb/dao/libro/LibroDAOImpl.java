@@ -29,7 +29,7 @@ private EntityManager entityManager;
 			throw new Exception("Problema valore in input");
 		}
 		TypedQuery<Libro> query = entityManager.createQuery(
-				"SELECT DISTINCT l from Libro l JOIN FETCH l.autore a where a.id = ?1", Libro.class);
+				"FROM Libro l JOIN FETCH l.autore a where l.id = ?1", Libro.class);
 		query.setParameter(1, id);
 		try {
 			return query.getSingleResult();

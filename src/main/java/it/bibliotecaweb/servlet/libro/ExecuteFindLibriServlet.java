@@ -28,22 +28,19 @@ public class ExecuteFindLibriServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
 		String titoloInputParam = request.getParameter("titolo");
 		String tramaInputParam = request.getParameter("trama");
 		String genereInputParam = request.getParameter("genere");
 		String autoreInputParam = request.getParameter("autore");
 
-		Libro libroNew = new Libro(titoloInputParam, tramaInputParam);
+		String titolo = (titoloInputParam.isEmpty()) ? null : titoloInputParam;
+		String trama = (tramaInputParam.isEmpty()) ? null : tramaInputParam;
+		
+		Libro libroNew = new Libro(titolo, trama);
 		
 		try {
 			
-			if (!autoreInputParam.isEmpty()) {
+			if (!autoreInputParam.isEmpty() && genereInputParam != null) {
 				AutoreService serviceAutore = MyServiceFactory.getAutoreServiceInstance();
 				libroNew.setAutore(serviceAutore.trova(Long.parseLong(autoreInputParam)));
 			}
@@ -56,6 +53,11 @@ public class ExecuteFindLibriServlet extends HttpServlet {
 			LibroService serviceLibro = MyServiceFactory.getLibroServiceInstance();
 			listaLibri = serviceLibro.trovaLibro(libroNew);
 			
+			request.setAttribute("titoloPerTornareAllaRicercaEffettuata", titoloInputParam);
+			request.setAttribute("tramaPerTornareAllaRicercaEffettuata", tramaInputParam);
+			request.setAttribute("generePerTornareAllaRicercaEffettuata", genereInputParam);
+			request.setAttribute("autorePerTornareAllaRicercaEffettuata", autoreInputParam);
+
 			request.setAttribute("libriPerResultsListLibri", listaLibri);
 			
 		} catch (Exception e) {
@@ -64,6 +66,10 @@ public class ExecuteFindLibriServlet extends HttpServlet {
 		
 		// andiamo ai risultati
 		request.getRequestDispatcher("resultsListLibri.jsp").forward(request, response); //(la jsp "showLibro" è per il dettaglio del libro in Visualizza)
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 	}
 
 }

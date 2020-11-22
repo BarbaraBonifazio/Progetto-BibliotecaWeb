@@ -50,7 +50,7 @@
 			<div class='card-body'>
 
 
-				<form method="post"
+				<form method="get"
 					action="${pageContext.request.contextPath}/libro/ExecuteFindLibriServlet"
 					novalidate>
 

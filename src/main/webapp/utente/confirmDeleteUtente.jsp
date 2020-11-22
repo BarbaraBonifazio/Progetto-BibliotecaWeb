@@ -14,7 +14,7 @@
 <title>Conferma</title>
 
 <!-- style per le pagine diverse dalla index -->
-<link href="./assets/css/global.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/assets/css/global.css" rel="stylesheet">
 </head>
 
 
@@ -27,7 +27,7 @@
 
 			<div class="text-center">
 				<div class='card-header'>
-					<h4>Confermi di voler eliminare questo articolo?</h4>
+					<h4>Confermi di voler eliminare questo utente?</h4>
 				</div>
 
 

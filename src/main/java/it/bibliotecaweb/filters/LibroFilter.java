@@ -40,7 +40,7 @@ public class LibroFilter implements Filter {
 
 		// VERIFICA RUOLO UTENTE PER IMPEDIRE LA VISUALIZZAZIONE DELLE ALTRE SERVLET DI
 		// LIBRO
-		if (percorso.contains("PrepareFindLibriServlet") || percorso.contains("ExecuteFindLibroServlet")
+		if (percorso.contains("PrepareFindLibriServlet") || percorso.contains("ExecuteFindLibriServlet")
 			 || percorso.contains("FindByIdLibroServlet")) {
 			// se il tentativo di accesso risponde a queste servlet
 			chain.doFilter(request, response); // accedi
