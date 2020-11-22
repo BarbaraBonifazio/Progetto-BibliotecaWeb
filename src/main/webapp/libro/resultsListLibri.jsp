@@ -1,5 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%-- <c:if test="${sessionScope.utente eq null}"><c:redirect url="LogoutServlet"/></c:if> controllo fatto tramite filtro--%>
 <%@page import="it.bibliotecaweb.model.libro.Libro"%>
 <%@page import="java.util.List"%>
 <%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
@@ -61,13 +60,15 @@
 				<h5>Lista dei libri ricercati</h5>
 			</div>
 			<div class='card-body'>
-				<%-- <c:if
-					test="${sessionScope.utente.ruolo != 'guest'}">  controllo da fare tramite filtro--%>
-				<div>
-					<a class="btn btn-primary "
-						href="${pageContext.request.contextPath}/libro/PrepareInsertLibroServlet">Aggiungi
-						Libro </a>
-				</div>
+			<c:forEach items="${sessionScope.utente.ruoli}" var="ruolo">
+				<c:if test="${ruolo.codice == 'ADMIN_ROLE' || ruolo.codice == 'CLASSIC_ROLE'}">
+					<div>
+						<a class="btn btn-primary "
+							href="${pageContext.request.contextPath}/libro/PrepareInsertLibroServlet">Aggiungi
+							Libro </a>
+					</div>
+				</c:if>
+			</c:forEach>
 
 				<%-- </c:if> --%>
 				<div class='table-responsive'>
@@ -91,18 +92,23 @@
 									<td>${libro.genere}</td>
 									<td>${libro.autore.nome} ${libro.autore.cognome}</td>
 
-
+											
+											<!-- BOTTONE VISUALIZZA -->
 									<td><a class="btn  btn-sm btn-outline-secondary"
 										href="${pageContext.request.contextPath}
 												/libro/FindByIdLibroServlet?idParamPerDettaglioLibro=${libro.id}
 												">Visualizza</a>
-										<%-- <c:if
-											test="${sessionScope.utente.ruolo != 'guest'}"> CONTROLLI DI VISIBILITA DA FARE SUI FILTRI!> --%>
+												
+										<c:forEach items="${sessionScope.utente.ruoli}" var="ruolo">
+											<c:if test="${ruolo.codice == 'ADMIN_ROLE' || ruolo.codice == 'CLASSIC_ROLE'}">	
+											
+											<!-- BOTTONE MODIFICA -->
 										<a class="btn  btn-sm btn-outline-primary"
 										href="${pageContext.request.contextPath}
 														/libro/PrepareUpdateLibroServlet?idDaInviareAExecuteUpdate=${libro.id}
 														">Modifica</a>
-										<%-- </c:if> <c:if test="${sessionScope.utente.ruolo == 'admin'}"> --%>
+														
+											<!-- BOTTONE ELIMINA -->
 										<a class="btn btn-outline-danger btn-sm"
 										href="${pageContext.request.contextPath}
 														/libro/ConfirmDeleteLibroServlet?idDaInviareAExecuteDelete=${libro.id}&
@@ -111,9 +117,11 @@
 												generePerTornareAllaRicercaEffettuata=${requestScope.generePerTornareAllaRicercaEffettuata}&
 												autorePerTornareAllaRicercaEffettuata=${requestScope.autorePerTornareAllaRicercaEffettuata}
 														">Cancella</a>
-										<%-- </c:if> --%></td>
-								</tr>
-							</c:forEach>
+											</c:if>
+										</c:forEach> <!-- END forEach ruoli sessione per nascondere i bottoni -->
+									</td>
+								</tr> <!-- END tabella  -->
+							</c:forEach> <!-- END forEach lista Libri per passare i parametri anche tramite href -->
 						</tbody>
 					</table>
 				</div>

@@ -34,30 +34,49 @@ public class LibroFilter implements Filter {
 		HttpServletRequest httpServletRequest = (HttpServletRequest) request;
 		HttpServletResponse httpServletResponse = (HttpServletResponse) response;
 
-		Utente utente = (Utente) httpServletRequest.getSession().getAttribute("utente");
+		
 
 		String percorso = httpServletRequest.getRequestURI();
-
-		// VERIFICA RUOLO UTENTE PER IMPEDIRE LA VISUALIZZAZIONE DELLE ALTRE SERVLET DI
-		// LIBRO
-		if (percorso.contains("PrepareFindLibriServlet") || percorso.contains("ExecuteFindLibriServlet")
-			 || percorso.contains("FindByIdLibroServlet")) {
-			// se il tentativo di accesso risponde a queste servlet
-			chain.doFilter(request, response); // accedi
-		} else {
-			if (httpServletRequest.getSession().getAttribute("utente") == null // prendi l'attributo di sessione
-					// "utente" e dimmi se è presente
-					|| httpServletRequest.getSession() == null) { // prendi l'attributo "sessione" e dimmi se è presente
-				httpServletResponse.sendRedirect(contesto); // se sono null, rimandalo chi tenta di accedere alla login
-			} else {
-				for (Ruolo r : utente.getRuoli()) {
-					if (Codice.GUEST_ROLE == r.getCodice()) {
-						httpServletResponse.sendRedirect(contesto); // altrimenti ritorna
-					} else {
-						chain.doFilter(request, response); // accedi
+		
+		
+			Utente utente = (Utente) httpServletRequest.getSession().getAttribute("utente");
+			// VERIFICA RUOLO UTENTE PER IMPEDIRE LA VISUALIZZAZIONE DELLE ALTRE SERVLET DI LIBRO
+			if (percorso.contains("PrepareFindLibriServlet") || percorso.contains("ExecuteFindLibriServlet")
+				 || percorso.contains("FindByIdLibroServlet")) {
+				// se il tentativo di accesso risponde a queste servlet
+				chain.doFilter(request, response); // accedi
+			} else //VERIFICA SESSIONE ATTIVA E LOGIN UTENTE
+				if (httpServletRequest.getSession() == null || httpServletRequest.getSession().getAttribute("utente") == null) { 
+					httpServletResponse.sendRedirect(contesto); // se sessione e utente sono null, rimanda chi tenta di accedere alla login
+				} else {
+			
+//			{
+//				Boolean isAdmin = (Boolean) httpServletRequest.getSession().getAttribute("isAdmin");
+//				Boolean isClassicUser = (Boolean) httpServletRequest.getSession().getAttribute("isClassicUser");
+//				
+//				if(isAdmin || isClassicUser) {
+//					chain.doFilter(request, response); // accedi
+//				} else {
+//					httpServletResponse.sendRedirect(contesto); // altrimenti ritorna
+//				}
+//			}
+			
+			
+			{
+				
+					boolean isAdminOrClassicUser = false;
+					
+					for (Ruolo r : utente.getRuoli()) {
+						if(Codice.ADMIN_ROLE == r.getCodice() || Codice.GUEST_ROLE == r.getCodice()) {
+							isAdminOrClassicUser = true;
+						}
+							if(isAdminOrClassicUser) {
+								chain.doFilter(request, response); // accedi
+							}else {
+								httpServletResponse.sendRedirect(contesto); // altrimenti ritorna
+							}
 					}
-				}
-			 }
-		 }
+			   }
+		 	}
 	}
 }

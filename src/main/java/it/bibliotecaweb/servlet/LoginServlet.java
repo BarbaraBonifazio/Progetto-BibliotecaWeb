@@ -62,12 +62,12 @@ private boolean isGuest;
 						isGuest = true;
 					}
 				}
-				request.setAttribute("isAdmin", isAdmin);
-				request.setAttribute("isClassicUser", isClassicUser);
-				request.setAttribute("isGuest", isGuest);
 				
 				HttpSession session = request.getSession();
 				session.setAttribute("utente", utente);
+				session.setAttribute("isAdmin", isAdmin);
+				session.setAttribute("isClassicUser", isClassicUser);
+				session.setAttribute("isGuest", isGuest);
 				request.getRequestDispatcher("home.jsp").forward(request, response);
 				return;
 				

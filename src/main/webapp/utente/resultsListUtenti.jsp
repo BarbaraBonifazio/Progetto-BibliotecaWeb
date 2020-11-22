@@ -1,5 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%-- <c:if test="${sessionScope.utente eq null}"><c:redirect url="LogoutServlet"/></c:if> controllo fatto tramite filtro--%>
 <%@page import="it.bibliotecaweb.model.libro.Libro"%>
 <%@page import="java.util.List"%>
 <%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
@@ -51,8 +50,9 @@
 				<h5>Lista degli utenti ricercati</h5>
 			</div>
 			<div class='card-body'>
-				<%-- <c:if
-					test="${sessionScope.utente.ruolo != 'guest'}">  controllo da fare tramite filtro--%>
+				
+			<c:forEach items="${sessionScope.utente.ruoli}" var="ruolo">
+				<c:if test="${ruolo.codice == 'ADMIN_ROLE'}">
 					<div>
 					<a class="btn btn-primary "
 						href="${pageContext.request.contextPath}/utente/PrepareInsertUtenteServlet?nomePerTornareAllaRicercaEffettuata=
@@ -64,6 +64,8 @@
 						<%-- &ruoliPerTornareAllaRicercaEffettuata=${requestScope.ruoliPerTornareAllaRicercaEffettuata} --%>
 						">Aggiungi Utente </a>
 					</div>
+				</c:if>
+			</c:forEach>
 					
 				<%-- </c:if> --%>
 				<div class='table-responsive'>
@@ -90,7 +92,11 @@
 									<td>${utente.ruoli}</td>
 									
 									
+									
+						<c:forEach items="${sessionScope.utente.ruoli}" var="ruolo">
+							<c:if test="${ruolo.codice == 'ADMIN_ROLE'}">				
 									<c:forEach items="${utente.ruoli}" var="ruolo"> <!-- ciclo i ruoli dell'utente per poterli passare tramite href -->
+												<!-- BOTTONE VISUALIZZA -->
 									<td><a class="btn  btn-sm btn-outline-secondary"
 										href="${pageContext.request.contextPath}
 												/utente/FindByIdUtenteServlet?idParamPerDettaglioUtente=${utente.id}&
@@ -100,8 +106,8 @@
 												statoPerTornareAllaRicercaEffettuata=${requestScope.statoPerTornareAllaRicercaEffettuata}
 												<%-- &ruoliPerTornareAllaRicercaEffettuata=${requestScope.ruoliPerTornareAllaRicercaEffettuata} --%>
 												">Visualizza</a>
-										<%-- <c:if
-											test="${sessionScope.utente.ruolo != 'guest'}"> CONTROLLI DI VISIBILITA DA FARE SUI FILTRI!> --%>
+												
+											<!-- BOTTONE MODIFICA -->
 										<a class="btn  btn-sm btn-outline-primary"
 											href="${pageContext.request.contextPath}
 												/utente/PrepareUpdateUtenteServlet?idDaInviareAExecuteUpdate=${utente.id}&
@@ -111,7 +117,8 @@
 												statoPerTornareAllaRicercaEffettuata=${requestScope.statoPerTornareAllaRicercaEffettuata}
 												<%-- &ruoliPerTornareAllaRicercaEffettuata=${requestScope.ruoliPerTornareAllaRicercaEffettuata} --%>
 												">Modifica</a>
-										<%-- </c:if> <c:if test="${sessionScope.utente.ruolo == 'admin'}"> --%>
+											
+											<!-- BOTTONE ELIMINA -->
 										<a class="btn btn-outline-danger btn-sm"
 											href="${pageContext.request.contextPath}
 												/utente/ConfirmDeleteUtenteServlet?idDaInviareAExecuteDelete=${utente.id}&
@@ -121,10 +128,13 @@
 												statoPerTornareAllaRicercaEffettuata=${requestScope.statoPerTornareAllaRicercaEffettuata}
 												<%-- &ruoliPerTornareAllaRicercaEffettuata=${requestScope.ruoliPerTornareAllaRicercaEffettuata} --%>
 												">Elimina</a>
-										<%-- </c:if> --%></td>
-										</c:forEach>
-								</tr>
-							</c:forEach>
+									
+									</td>
+									</c:forEach> <!-- END forEach ruoli utente da ciclare per passare tramite href  -->
+							</c:if>
+						</c:forEach> <!-- END  forEach ruoli utente da SESSIONE per nascondere i bottoni -->					
+							</tr> <!-- END TABELLA -->
+							</c:forEach> <!-- END forEach listaUtenti per passare parametri tramite href -->	
 						</tbody>
 					</table>
 				</div>

@@ -1,6 +1,7 @@
 package it.bibliotecaweb.filters;
 
 import java.io.IOException;
+
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -11,8 +12,6 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import it.bibliotecaweb.model.ruolo.Codice;
-import it.bibliotecaweb.model.ruolo.Ruolo;
 import it.bibliotecaweb.model.utente.Utente;
 
 @WebFilter("/autore/*")
@@ -38,27 +37,46 @@ public class AutoreFilter implements Filter {
 
 		String percorso = httpServletRequest.getRequestURI();
 
-		// VERIFICA RUOLO UTENTE PER IMPEDIRE LA VISUALIZZAZIONE DELLE ALTRE SERVLET DI
-		// AUTORE
-		if (percorso.contains("PrepareFindAutoriServlet") || percorso.contains("ExecuteFindAutoriServlet")
-				|| percorso.contains("FindByIdAutoreServlet")) {
-			// se il tentativo di accesso risponde a queste servlet
-			chain.doFilter(request, response); // accedi
-		} else {
-			if (httpServletRequest.getSession().getAttribute("utente") == null // prendi l'attributo di sessione
-																				// "utente" e dimmi se è presente
-					|| httpServletRequest.getSession() == null) { // prendi l'attributo "sessione" e dimmi se è presente
-				httpServletResponse.sendRedirect(contesto); // se sono null, rimandalo chi tenta di accedere alla login
-			} else {
-				for (Ruolo r : utente.getRuoli()) {
-					if (Codice.GUEST_ROLE == r.getCodice()) {
-						httpServletResponse.sendRedirect(contesto); // altrimenti ritorna
-					} else {
-						chain.doFilter(request, response); // accedi
-					}
+		
+			// VERIFICA RUOLO UTENTE PER IMPEDIRE LA VISUALIZZAZIONE DELLE ALTRE SERVLET DI AUTORE
+			if (percorso.contains("PrepareFindAutoriServlet") || percorso.contains("ExecuteFindAutoriServlet")
+					|| percorso.contains("FindByIdAutoreServlet")) {
+				// se il tentativo di accesso risponde a queste servlet
+				chain.doFilter(request, response); // accedi
+			} else //VERIFICA SESSIONE ATTIVA E LOGIN UTENTE
+				if (httpServletRequest.getSession() == null || httpServletRequest.getSession().getAttribute("utente") == null) { 
+					httpServletResponse.sendRedirect(contesto); // se sessione e utente sono null, rimanda chi tenta di accedere alla login
+				} else {
+			
+//			{
+				Boolean isAdmin = (Boolean) httpServletRequest.getSession().getAttribute("isAdmin");
+				Boolean isClassicUser = (Boolean) httpServletRequest.getSession().getAttribute("isClassicUser");
+				
+				if(isAdmin || isClassicUser) {
+					chain.doFilter(request, response); // accedi
+				} else {
+					httpServletResponse.sendRedirect(contesto); // altrimenti ritorna
 				}
 			}
-		}
+			
+			
+//			{
+//
+//				boolean isAdmin = false;
+//				boolean isClassicUser = false;
+//				for (Ruolo r : utente.getRuoli()) {
+//					if(Codice.ADMIN_ROLE == r.getCodice() || Codice.GUEST_ROLE == r.getCodice()) {
+//						isAdmin = true;
+//						isClassicUser = true;
+//					}
+//						if(isAdmin || isClassicUser) {
+//							chain.doFilter(request, response); // accedi
+//						} else {
+//							httpServletResponse.sendRedirect(contesto); // altrimenti ritorna
+//						}
+//				}
+//			  }
+//		}
 	}
 
 	public void destroy() {

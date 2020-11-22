@@ -18,27 +18,18 @@ public class ValidateSessionFilter implements Filter {
 	private String contesto;
 
 	public ValidateSessionFilter() {
-		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @see Filter#destroy()
-	 */
+	
 	public void destroy() {
-		// TODO Auto-generated method stub
 	}
 
-	/**
-	 * @see Filter#init(FilterConfig)
-	 */
+
 	public void init(FilterConfig fConfig) throws ServletException {
 		contesto = fConfig.getServletContext().getContextPath(); // configuro il path che dovrà seguire la catena di
 																	// filtri
 	}
 
-	/**
-	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
-	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		HttpServletRequest httpServletRequest = (HttpServletRequest) request; // cast della ServletRequest a HttpServletRequest
@@ -58,9 +49,8 @@ public class ValidateSessionFilter implements Filter {
 					|| httpServletRequest.getSession() == null) { //prendi l'attributo "sessione" e dimmi se è presente
 				httpServletResponse.sendRedirect(contesto); // se sono null, rimandalo chi tenta di accedere alla login
 			} else {
-				chain.doFilter(request, response);
-			}
+					httpServletResponse.sendRedirect(contesto);
+			  }
+		  }
 		}
-	}
-
 }

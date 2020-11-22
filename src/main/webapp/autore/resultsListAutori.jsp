@@ -1,5 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%-- <c:if test="${sessionScope.utente eq null}"><c:redirect url="LogoutServlet"/></c:if> controllo fatto tramite filtro--%>
 <%@page import="it.bibliotecaweb.model.libro.Libro"%>
 <%@page import="java.util.List"%>
 <%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
@@ -60,15 +59,15 @@
 				<h5>Lista degli autori ricercati</h5>
 			</div>
 			<div class='card-body'>
-				<%-- <c:if
-					test="${sessionScope.utente.ruolo != 'guest'}">  controllo da fare tramite filtro--%>
+			<c:forEach items="${sessionScope.utente.ruoli}" var="ruolo">
+				<c:if test="${ruolo.codice == 'ADMIN_ROLE' || ruolo.codice == 'CLASSIC_ROLE'}">
 					<div>
 					<a class="btn btn-primary "
 						href="${pageContext.request.contextPath}/autore/PrepareInsertAutoreServlet
 						">Aggiungi Autore </a>
 					</div>
-					
-				<%-- </c:if> --%>
+				</c:if>	
+			</c:forEach>
 				<div class='table-responsive'>
 					<table class='table table-striped '>
 						<thead>
@@ -89,18 +88,20 @@
 									<td>${autore.cognome}</td>
 									<td>${autore.dataNascita}</td>
 					
-
+										<!-- BOTTONE VISUALIZZA -->
 									<td><a class="btn  btn-sm btn-outline-secondary"
 										href="${pageContext.request.contextPath}
 												/autore/FindByIdAutoreServlet?idParamPerDettaglioAutore=${autore.id}
 												">Visualizza</a>
-										<%-- <c:if
-											test="${sessionScope.utente.ruolo != 'guest'}"> CONTROLLI DI VISIBILITA DA FARE SUI FILTRI!> --%>
+												
+									<c:forEach items="${sessionScope.utente.ruoli}" var="ruolo">
+										<c:if test="${ruolo.codice == 'ADMIN_ROLE' || ruolo.codice == 'CLASSIC_ROLE'}">	
+										<!-- BOTTONE MODIFICA -->
 										<a class="btn  btn-sm btn-outline-primary"
 											href="${pageContext.request.contextPath}
 												/autore/PrepareUpdateAutoreServlet?idDaInviareAExecuteUpdate=${autore.id}
 												">Modifica</a>
-										<%-- </c:if> <c:if test="${sessionScope.utente.ruolo == 'admin'}"> --%>
+										<!-- BOTTONE ELIMINA -->
 										<a class="btn btn-outline-danger btn-sm"
 											href="${pageContext.request.contextPath}
 												/autore/ConfirmDeleteAutoreServlet?idDaInviareAExecuteDelete=${autore.id}&
@@ -108,9 +109,11 @@
 												cognomePerTornareAllaRicercaEffettuata=${requestScope.cognomePerTornareAllaRicercaEffettuata}&
 												dataNascitaPerTornareAllaRicercaEffettuata=${requestScope.dataNascitaPerTornareAllaRicercaEffettuata}&
 												">Elimina</a>
-										<%-- </c:if> --%></td>
-								</tr>
-							</c:forEach>
+										</c:if>
+									</c:forEach> <!-- END forEach ruoli sessione per nascondere i bottoni -->			
+									</td>
+								</tr> <!-- END tabella  -->
+							</c:forEach> <!-- END forEach lista Autori per passare i parametri anche tramite href -->
 						</tbody>
 					</table>
 				</div>

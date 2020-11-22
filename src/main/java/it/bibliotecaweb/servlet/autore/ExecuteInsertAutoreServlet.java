@@ -44,7 +44,7 @@ public class ExecuteInsertAutoreServlet extends HttpServlet {
 			
 			//controllo backend sulla presenza di dati inseriti 
 			if (nomeInputParam.isEmpty() || cognomeInputParam.isEmpty() 
-					|| dataInputParam == null)  {
+					|| dataInputParam.isEmpty() && dataInputParam != null)  {
 
 				List<String> errorMessage = new ArrayList<>();
 				if(nomeInputParam.isEmpty()){

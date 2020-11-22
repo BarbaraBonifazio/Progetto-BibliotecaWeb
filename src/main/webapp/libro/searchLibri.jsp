@@ -1,6 +1,5 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%-- <c:if test="${sessionScope.utente eq null}"><c:redirect url="LogoutServlet"/></c:if>  questa verifica si potrà fare direttamente tramite filtro--%>
 <%@page import="it.bibliotecaweb.model.utente.Utente"%>
 <%@page import="it.bibliotecaweb.model.utente.StatoUtente"%>
 <%@page import="it.bibliotecaweb.model.ruolo.Ruolo"%>
