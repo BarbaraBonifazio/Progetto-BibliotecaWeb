@@ -7,7 +7,7 @@
 <html lang="it">
 <head>
 <jsp:include page="../header.jsp" />
-<title>Visualizza Libri</title>
+<title>Visualizza Libro</title>
 
 <!-- style per le pagine diverse dalla index -->
 <link href="${pageContext.request.contextPath}/assets/css/global.css" rel="stylesheet">
@@ -24,9 +24,6 @@
 		<div class='card'>
 			<div class='card-header'>Visualizza Dettaglio Libro</div>
 
-			<Input type="hidden" name="utentiPerShow" id="articoloPerShow"
-				class="form-control" value="${requestScope.libroPerShow}">
-				
 			
 			<div class='card-body'>
 				<dl class="row">

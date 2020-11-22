@@ -83,7 +83,7 @@
 
 									<td><a class="btn  btn-sm btn-outline-secondary"
 										href="${pageContext.request.contextPath}
-												/autore/FindByIdAutoreServlet?idParamPerDettaglioUtente=${autore.id}
+												/autore/FindByIdAutoreServlet?idParamPerDettaglioAutore=${autore.id}
 												">Visualizza</a>
 										<%-- <c:if
 											test="${sessionScope.utente.ruolo != 'guest'}"> CONTROLLI DI VISIBILITA DA FARE SUI FILTRI!> --%>

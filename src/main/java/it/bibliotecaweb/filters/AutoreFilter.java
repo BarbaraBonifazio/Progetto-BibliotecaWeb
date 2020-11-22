@@ -41,7 +41,7 @@ public class AutoreFilter implements Filter {
 		// VERIFICA RUOLO UTENTE PER IMPEDIRE LA VISUALIZZAZIONE DELLE ALTRE SERVLET DI
 		// AUTORE
 		if (percorso.contains("PrepareFindAutoriServlet") || percorso.contains("ExecuteFindAutoriServlet")
-				|| percorso.contains("FindByIdAutoriServlet")) {
+				|| percorso.contains("FindByIdAutoreServlet")) {
 			// se il tentativo di accesso risponde a queste servlet
 			chain.doFilter(request, response); // accedi
 		} else {
