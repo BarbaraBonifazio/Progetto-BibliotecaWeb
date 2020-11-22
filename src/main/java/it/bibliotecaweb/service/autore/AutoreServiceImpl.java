@@ -126,7 +126,7 @@ public class AutoreServiceImpl implements AutoreService {
 	}
 	
 	@Override
-	public Autore trovaAutore(Autore autoreInstance) throws Exception{
+	public Set<Autore> trovaAutori(Autore autoreInstance) throws Exception{
 		// questo è come una connection
 		EntityManager entityManager = EntityManagerUtil.getEntityManager();
 
@@ -135,7 +135,7 @@ public class AutoreServiceImpl implements AutoreService {
 			autoreDAO.setEntityManager(entityManager);
 
 			// eseguo quello che realmente devo fare
-			return autoreDAO.findAutore(autoreInstance);
+			return autoreDAO.findAutori(autoreInstance);
 
 		} catch (Exception e) {
 			e.printStackTrace();

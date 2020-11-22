@@ -20,6 +20,6 @@ public interface AutoreService {
 
 	public boolean rimuovi(Autore autoreInstance) throws Exception;
 
-	public Autore trovaAutore(Autore autoreInstance) throws Exception;
+	public Set<Autore> trovaAutori(Autore autoreInstance) throws Exception;
 
 }

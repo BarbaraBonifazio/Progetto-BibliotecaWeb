@@ -15,9 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import it.bibliotecaweb.model.autore.Autore;
 import it.bibliotecaweb.model.libro.Genere;
 import it.bibliotecaweb.model.libro.Libro;
-import it.bibliotecaweb.model.utente.Utente;
 import it.bibliotecaweb.service.MyServiceFactory;
-import it.bibliotecaweb.service.autore.AutoreService;
 import it.bibliotecaweb.service.libro.LibroService;
 
 
@@ -70,8 +68,7 @@ public class ExecuteInsertLibroServlet extends HttpServlet {
 					errorMessage.add(errore4);
 				}
 				
-				
-				
+
 				Libro libroPerInsertErrato = new Libro(titoloInputParam, tramaInputParam);
 				if(idAutoreInputParam != null) {
 					Long idAutore = Long.parseLong(idAutoreInputParam);
@@ -93,7 +90,7 @@ public class ExecuteInsertLibroServlet extends HttpServlet {
 			//---fine controllo backend 
 			
 			LibroService serviceLibro = MyServiceFactory.getLibroServiceInstance();
-			Libro libroNew = new Libro();
+			Libro libroNew = new Libro(titoloInputParam, tramaInputParam);
 			
 			if (!genereInputParam.isEmpty() && genereInputParam != null) {
 				libroNew.setGenere(Genere.valueOf(genereInputParam));

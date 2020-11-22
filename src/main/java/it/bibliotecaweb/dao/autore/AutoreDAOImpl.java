@@ -67,7 +67,7 @@ private EntityManager entityManager;
 	}
 
 	@Override
-	public Autore findAutore(Autore autore) throws Exception{
+	public Set<Autore> findAutori(Autore autore) throws Exception{
 		String query1 = "FROM Autore a WHERE 1=1 ";
 		if(autore.getNome() != null) {
 			query1 = query1 + " AND a.nome like :nome ";
@@ -92,6 +92,6 @@ private EntityManager entityManager;
 		if(autore.equals(null)) {
 			this.set();
 		}
-		return query2.getSingleResult();
+		return query2.getResultList().stream().collect(Collectors.toSet());
 	}
 }

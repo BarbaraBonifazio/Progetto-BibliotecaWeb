@@ -53,6 +53,8 @@ public class AutoreFilter implements Filter {
 				for (Ruolo r : utente.getRuoli()) {
 					if (Codice.GUEST_ROLE == r.getCodice()) {
 						httpServletResponse.sendRedirect(contesto); // altrimenti ritorna
+					} else {
+						chain.doFilter(request, response); // accedi
 					}
 				}
 			}

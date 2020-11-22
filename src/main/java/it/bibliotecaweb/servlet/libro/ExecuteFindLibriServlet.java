@@ -16,11 +16,11 @@ import it.bibliotecaweb.service.MyServiceFactory;
 import it.bibliotecaweb.service.autore.AutoreService;
 import it.bibliotecaweb.service.libro.LibroService;
 
-@WebServlet("/libro/ExecuteFindLibroServlet")
-public class ExecuteFindLibroServlet extends HttpServlet {
+@WebServlet("/libro/ExecuteFindLibriServlet")
+public class ExecuteFindLibriServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public ExecuteFindLibroServlet() {
+	public ExecuteFindLibriServlet() {
 		super();
 
 	}

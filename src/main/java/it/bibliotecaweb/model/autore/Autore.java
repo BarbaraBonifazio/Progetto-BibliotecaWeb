@@ -42,6 +42,12 @@ public class Autore {
 		this.cognome = cognome;
 		this.dataNascita = dataNascita;
 	}
+	
+	public Autore(String nome, String cognome) {
+		super();
+		this.nome = nome;
+		this.cognome = cognome;
+	}
 
 	public Long getId() {
 		return id;

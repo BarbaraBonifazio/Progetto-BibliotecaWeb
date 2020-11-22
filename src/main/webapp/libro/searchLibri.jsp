@@ -51,7 +51,7 @@
 
 
 				<form method="post"
-					action="${pageContext.request.contextPath}/libro/ExecuteFindLibroServlet"
+					action="${pageContext.request.contextPath}/libro/ExecuteFindLibriServlet"
 					novalidate>
 
 					<div class="form-group col-md-6">

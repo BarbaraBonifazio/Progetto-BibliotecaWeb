@@ -1,9 +1,8 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%-- <c:if test="${sessionScope.utente eq null}"><c:redirect url="LogoutServlet"/></c:if>  questa verifica si potrà fare direttamente tramite filtro--%>
-<%@page import="it.bibliotecaweb.model.utente.Utente"%>
-<%@page import="it.bibliotecaweb.model.utente.StatoUtente"%>
-<%@page import="it.bibliotecaweb.model.ruolo.Ruolo"%>
+<%@page import="it.bibliotecaweb.model.autore.Autore"%>
+
 <!doctype html>
 <html lang="it">
 <head>
@@ -51,8 +50,7 @@
 
 
 				<form method="post"
-					action="${pageContext.request.contextPath}/autore/ExecuteFindAutoreServlet"
-					name="myForm" onsubmit="return validateForm()" novalidate>
+					action="${pageContext.request.contextPath}/autore/ExecuteFindAutoriServlet">
 
 					<div class="form-group col-md-6">
 						<label>Nome</label> <input type="text" name="nome"
@@ -69,11 +67,10 @@
 					<div class="it-datepicker-wrapper">
 					  <div class="form-group col-md-6">
 					  <label for="date1">Data di nascita</label>
-					    <input class="form-control it-date-datepicker" name="data" id="dataNascitaAutore" 
-					    type="text" placeholder="inserisci la data in formato aaaa/mm/gg">
-					    
+					    <input class="form-control it-date-datepicker" type="date" name="dataNascita" id="dataNascitaAutore">
 					  </div>
 					</div>
+					                 
 
 					<button type="submit" name="submit" value="submit" id="submit"
 						class="btn btn-primary">Cerca</button>

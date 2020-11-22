@@ -4,7 +4,7 @@
 <html lang="it">
 <head>
 <jsp:include page="../header.jsp" />
-<title>Inserisci nuovo Utente</title>
+<title>Inserisci nuovo Autore</title>
 
 <!-- style per le pagine diverse dalla index -->
 <link href="${pageContext.request.contextPath}/assets/css/global.css"
@@ -41,7 +41,7 @@
 
 	<div class='card'>
 			<div class='card-header'>
-				<h5>Inserisci nuovo Utente</h5>
+				<h5>Inserisci nuovo Autore</h5>
 				<%-- <a class="text-right" href="${pageContext.request.contextPath}/ListUtentiServlet"
 					class='btn btn-outline-secondary' style='width: 80px'> <i
 					class='fa fa-chevron-left'></i> Back
@@ -55,7 +55,7 @@
 			</h6>
 
 			<form method="post"
-				action="${pageContext.request.contextPath}/utente/ExecuteInsertUtenteServlet"
+				action="${pageContext.request.contextPath}/autore/ExecuteInsertAutoreServlet"
 				class="needs-validation" novalidate>
 
 
@@ -63,69 +63,25 @@
 					<div class="form-group col-md-6">
 						<label>Nome <span class="text-danger">*</span></label> <input
 							type="text" name="nome" id="nomeUtente" class="form-control"
-							placeholder="Inserire nome" value="${utentePerInsertErrore.nome}">
+							placeholder="Inserire nome" value="${autorePerInsertErrato.nome}">
 					</div>
 
 					<div class="form-group col-md-6">
 						<label>Cognome <span class="text-danger">*</span></label> <input
 							type="text" name="cognome" id="cognomeUtente"
 							class="form-control" placeholder="Inserire cognome"
-							value="${utentePerInsertErrore.cognome}">
+							value="${autorePerInsertErrato.cognome}">
 
 					</div>
 				</div>
 
-				<div class="form-row">
-					<div class="form-group col-md-6">
-						<label>Username <span class="text-danger">*</span></label> <input
-							type="text" class="form-control" name="username"
-							id="usernameUtente" placeholder="Inserire username"
-							value="${utentePerInsertErrore.username}">
+				<div class="it-datepicker-wrapper">
+					  <div class="form-group col-md-6">
+					  <label for="date1">Data di nascita</label>
+					    <input class="form-control" type="date" name="dataNascita" id="dataNascitaAutore" 
+					    value="${autorePerInsertErrato.dataNascita}">
+					  </div>
 					</div>
-
-					<div class="form-group col-md-6">
-						<label>Password <span class="text-danger">*</span></label> <input
-							type="text" class="form-control" name="password"
-							id="passwordUtente" placeholder="Inserire password"
-							value="${utentePerInsertErrore.password}">
-					</div>
-				</div>
-
-				<div class="form-group col md-4">
-					<label for="exampleFormControlSelect1">Ruoli</label>
-					<c:forEach items="${requestScope.listRuoliAttribute}" var="ruolo">
-						<div class="form-check">
-							<input class="form-check-input" type="checkbox"
-								value="${ruolo.id}" id="idRuolo" name="ruolo"
-								<c:forEach items="${utentePerInsertErrore.ruoli}" var="ruoloUtente">
-											${ruoloUtente.id eq ruolo.id ? 'checked' : ''} 
-										</c:forEach>>
-							<label class="form-check-label" for="defaultCheck1">
-								${ruolo.codice} </label>
-						</div>
-					</c:forEach>
-
-				</div>
-
-				<Input type="hidden" name="nomeUtentePerRicerca"
-					id="nomeUtenteDaPassare" class="form-control"
-					value="${requestScope.nomePerTornareAllaRicercaEffettuata}">
-
-				<Input type="hidden" name="cognomeUtentePerRicerca"
-					id="cognomeUtenteDaPassare" class="form-control"
-					value="${requestScope.cognomePerTornareAllaRicercaEffettuata}">
-
-				<Input type="hidden" name="usernameUtentePerRicerca"
-					id="usernameUtenteDaPassare" class="form-control"
-					value="${requestScope.usernamePerTornareAllaRicercaEffettuata}">
-
-				<Input type="hidden" name="statoUtentePerRicerca"
-					id="statoUtenteDaPassare" class="form-control"
-					value="${requestScope.statoPerTornareAllaRicercaEffettuata}">
-
-				<Input type="hidden" name="ruoliUtentePerRicerca"
-					id="ruoliUtenteDaPassare" class="form-control"
-					value="${requestScope.ruoliPerTornareAllaRicercaEffettuata}">
 
 				<button type="submit" name="submit" value="submit" id="submit"
 					class="btn btn-primary">Conferma</button>
