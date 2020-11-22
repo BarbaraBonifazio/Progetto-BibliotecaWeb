@@ -72,21 +72,23 @@ public class ExecuteUpdateLibroServlet extends HttpServlet {
 				}
 				
 
-				Libro libroPerInsertErrato = new Libro(titoloInputParam, tramaInputParam);
+				Libro libroPerUpdateErrato = new Libro(titoloInputParam, tramaInputParam);
 				if(!idAutoreInputParam.isEmpty() && idAutoreInputParam != null) {
 					Long idAutore = Long.parseLong(idAutoreInputParam);
 					Autore autoreLibro = MyServiceFactory.getAutoreServiceInstance().trova(idAutore);
-					libroPerInsertErrato.setAutore(autoreLibro);
+					libroPerUpdateErrato.setAutore(autoreLibro);
 					}
 				if (!genereInputParam.isEmpty() && genereInputParam != null) {
-					libroPerInsertErrato.setGenere(Genere.valueOf(genereInputParam));
+					libroPerUpdateErrato.setGenere(Genere.valueOf(genereInputParam));
 				}
-				request.setAttribute("libroPerInsertErrato", libroPerInsertErrato);
+				request.setAttribute("libroPerUpdate", libroPerUpdateErrato);
+				//parametri da passare alla jsp updateLibro per effettuare l'update dello stesso libro 
+				libroPerUpdateErrato.setId(Long.parseLong(idInputParam)); //assegno al libro temporaneo l'id del libro che volevo inizialmente modificare
 				request.setAttribute("errorMessage", errorMessage);
-				request.setAttribute("listaAutori", MyServiceFactory.getAutoreServiceInstance().setAll());
+				request.setAttribute("listAutoriAttribute", MyServiceFactory.getAutoreServiceInstance().setAll());
 				List<String> generi = Stream.of(Genere.values()).map(Enum::name).collect(Collectors.toList());
 				request.setAttribute("listaGeneri", generi);
-				request.getRequestDispatcher("insertLibro.jsp").forward(request, response);
+				request.getRequestDispatcher("updateLibro.jsp").forward(request, response);
 				return;
 			}
 			//---fine controllo backend 

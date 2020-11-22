@@ -39,7 +39,7 @@
 	  </style>
 	  
 	  <!-- Custom styles for this template -->
-	  <link href="./assets/css/signin.css" rel="stylesheet">
+	  <link href="${pageContext.request.contextPath}/assets/css/signin.css" rel="stylesheet">
 	</head>
 	<body class="text-center">
 		<div class="alert alert-danger alert-dismissible fade show ${errorMessage==null?'d-none': ''}" role="alert">
