@@ -78,7 +78,7 @@
 									<td>${libro.titolo}</td>
 									<td>${libro.trama}</td>
 									<td>${libro.genere}</td>
-									<td>${libro.autore.nome}${libro.autore.cognome}</td>
+									<td>${libro.autore.nome} ${libro.autore.cognome}</td>
 
 
 									<td><a class="btn  btn-sm btn-outline-secondary"

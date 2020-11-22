@@ -83,18 +83,18 @@
 
 									<td><a class="btn  btn-sm btn-outline-secondary"
 										href="${pageContext.request.contextPath}
-												/utente/FindByIdUtenteServlet?idParamPerDettaglioUtente=${autore.id}
+												/autore/FindByIdAutoreServlet?idParamPerDettaglioUtente=${autore.id}
 												">Visualizza</a>
 										<%-- <c:if
 											test="${sessionScope.utente.ruolo != 'guest'}"> CONTROLLI DI VISIBILITA DA FARE SUI FILTRI!> --%>
 										<a class="btn  btn-sm btn-outline-primary"
 											href="${pageContext.request.contextPath}
-												/utente/PrepareUpdateUtenteServlet?idDaInviareAExecuteUpdate=${autore.id}
+												/autore/PrepareUpdateAutoreServlet?idDaInviareAExecuteUpdate=${autore.id}
 												">Modifica</a>
 										<%-- </c:if> <c:if test="${sessionScope.utente.ruolo == 'admin'}"> --%>
 										<a class="btn btn-outline-danger btn-sm"
 											href="${pageContext.request.contextPath}
-												/utente/ConfirmDeleteUtenteServlet?idDaInviareAExecuteDelete=${autore.id}
+												/autore/ConfirmDeleteAutoreServlet?idDaInviareAExecuteDelete=${autore.id}
 												">Elimina</a>
 										<%-- </c:if> --%></td>
 								</tr>

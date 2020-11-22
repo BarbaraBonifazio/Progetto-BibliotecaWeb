@@ -47,7 +47,7 @@ public class ExecuteInsertLibroServlet extends HttpServlet {
 			
 			//controllo backend sulla presenza di dati inseriti 
 			if (titoloInputParam.isEmpty() || tramaInputParam.isEmpty() 
-					|| genereInputParam.isEmpty() 
+					|| genereInputParam == null 
 					|| idAutoreInputParam == null) {
 
 				List<String> errorMessage = new ArrayList<>();
@@ -59,21 +59,20 @@ public class ExecuteInsertLibroServlet extends HttpServlet {
 					String errore2 = "Attenzione il campo trama è vuoto!";
 					errorMessage.add(errore2);
 				}
-				if(genereInputParam.isEmpty()) {
+				if(genereInputParam.isEmpty() || genereInputParam == null) {
 					String errore3 = "Attenzione non risulta selezionato alcun genere!";
 					errorMessage.add(errore3);
 				}
-				if( idAutoreInputParam == null) {
+				if(idAutoreInputParam.isEmpty() || idAutoreInputParam == null) {
 					String errore4 = "Attenzione non risulta selezionato alcun autore!";
 					errorMessage.add(errore4);
 				}
 				
 
 				Libro libroPerInsertErrato = new Libro(titoloInputParam, tramaInputParam);
-				if(idAutoreInputParam != null) {
+				if(!idAutoreInputParam.isEmpty() && idAutoreInputParam != null) {
 					Long idAutore = Long.parseLong(idAutoreInputParam);
-					Autore autoreLibro = new Autore();
-					autoreLibro.setId(idAutore);
+					Autore autoreLibro = MyServiceFactory.getAutoreServiceInstance().trova(idAutore);
 					libroPerInsertErrato.setAutore(autoreLibro);
 					}
 				if (!genereInputParam.isEmpty() && genereInputParam != null) {
@@ -90,19 +89,12 @@ public class ExecuteInsertLibroServlet extends HttpServlet {
 			//---fine controllo backend 
 			
 			LibroService serviceLibro = MyServiceFactory.getLibroServiceInstance();
-			Libro libroNew = new Libro(titoloInputParam, tramaInputParam);
 			
-			if (!genereInputParam.isEmpty() && genereInputParam != null) {
-				libroNew.setGenere(Genere.valueOf(genereInputParam));
-			}
-			
-			if(idAutoreInputParam != null) {
-				Long idAutore = Long.parseLong(idAutoreInputParam);
-				Autore autoreLibro = new Autore();
-				autoreLibro.setId(idAutore);
-				}
+			Autore autoreLibro = MyServiceFactory.getAutoreServiceInstance().trova(Long.parseLong(idAutoreInputParam));			
+			Libro libroNew = new Libro(titoloInputParam, tramaInputParam, Genere.valueOf(genereInputParam), autoreLibro);
 			
 			serviceLibro.inserisciNuovo(libroNew);
+			request.setAttribute("libriPerResultsListLibri", MyServiceFactory.getLibroServiceInstance().setAll());
 			
 		} catch (Exception e) {
 			e.printStackTrace();

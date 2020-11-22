@@ -52,8 +52,7 @@
 				</h6>
 
 				<form method="post"
-					action="${pageContext.request.contextPath}/libro/ExecuteInsertLibroServlet" 
-								class="needs-validation" novalidate>
+					action="${pageContext.request.contextPath}/libro/ExecuteInsertLibroServlet" >
 
 					<div class="form-row">
 						<div class="form-group col-md-6">
@@ -73,10 +72,8 @@
 
 					<div class="form-row">
 						<div class="form-group col-md-6">
-							<label>Genere</label> <select id="genereLibro" name="genere"
-								class="form-control">
-
-							<option value="${genere.EMPTY}">- Selezionare Nuovo Genere -</option>
+							<label>Selezionare Genere</label> <select id="genereLibro" name="genere" class="form-control">			
+							<option value="${libroPerInsertErrato.genere}" selected="selected">${libroPerInsertErrato.genere}</option>
 								<c:forEach items="${listaGeneri}" var="genere">
 									<c:if test="${genere != 'EMPTY'}">
 										<option value="${genere}">${genere}</option>
@@ -87,9 +84,9 @@
 						
 						
 						<div class="form-group col-md-6">
-							<label>Autore</label> <select id="autoreLibro" name="autore"
-								class="form-control">
-								<option value="">- Seleziona Autore -</option>
+							<label>Selezionare Autore</label> <select id="autoreLibro" name="idAutore" class="form-control">	
+							<option value="${libroPerInsertErrato.autore.id}" selected="selected" >
+							${libroPerInsertErrato.autore.nome} ${libroPerInsertErrato.autore.cognome}</option>	
 								<c:forEach items="${listaAutori}" var="autore">
 								<c:if test="${stato != 'EMPTY'}">
 										<option value="${autore.id}">
