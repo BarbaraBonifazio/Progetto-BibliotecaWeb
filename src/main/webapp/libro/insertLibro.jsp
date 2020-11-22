@@ -72,27 +72,31 @@
 
 					<div class="form-row">
 						<div class="form-group col-md-6">
-							<label>Selezionare Genere</label> <select id="genereLibro" name="genere" class="form-control">			
-							<option value="${libroPerInsertErrato.genere}" selected="selected">${libroPerInsertErrato.genere}</option>
-								<c:forEach items="${listaGeneri}" var="genere">
-									<c:if test="${genere != 'EMPTY'}">
-										<option value="${genere}">${genere}</option>
-									</c:if>
-								</c:forEach>					
+							<label>Selezionare Genere</label> 
+							<select id="genereLibro" name="genere" class="form-control">			
+								<option value="${libroPerInsertErrato.genere}" selected="selected">
+									${libroPerInsertErrato.genere}</option>
+									<c:forEach items="${listaGeneri}" var="genere">
+										<c:if test="${genere != 'EMPTY'}">
+											<option value="${genere}">${genere}</option>
+										</c:if>
+									</c:forEach>					
 							</select>
 						</div>
 						
 						
 						<div class="form-group col-md-6">
-							<label>Selezionare Autore</label> <select id="autoreLibro" name="idAutore" class="form-control">	
-							<option value="${libroPerInsertErrato.autore.id}" selected="selected" >
-							${libroPerInsertErrato.autore.nome} ${libroPerInsertErrato.autore.cognome}</option>	
-								<c:forEach items="${listaAutori}" var="autore">
-								<c:if test="${stato != 'EMPTY'}">
-										<option value="${autore.id}">
-										${autore.nome} ${autore.cognome}</option>
-								</c:if>
-								</c:forEach>
+							<label>Selezionare Autore</label> 
+							<select id="autoreLibro" name="idAutore" class="form-control">	
+								<option value="${libroPerInsertErrato.autore.id}" selected="selected" >
+									${libroPerInsertErrato.autore.nome} 
+										${libroPerInsertErrato.autore.cognome}</option>	
+									<c:forEach items="${listaAutori}" var="autore">
+									<c:if test="${stato != 'EMPTY'}">
+											<option value="${autore.id}">
+											${autore.nome} ${autore.cognome}</option>
+									</c:if>
+									</c:forEach>
 							</select>
 						</div>
 					</div>

@@ -67,7 +67,8 @@
 					</div>
 
 					<div class="form-group col-md-6">
-						<label>Genere</label> <select id="genereLibro" name="genere"
+						<label>Genere</label> 
+						<select id="genereLibro" name="genere"
 							class="form-control">
 							<option value="${stato.EMPTY}">- Seleziona Genere -</option>
 							<c:forEach items="${listaGeneri}" var="genere">
@@ -79,16 +80,17 @@
 					</div>
 
 					<div class="form-group col-md-6">
-						<label>Autore</label> <select id="autoreLibro" name="autore"
-							class="form-control">
-							<option value="">- Seleziona Autore -</option>
-							<c:forEach items="${listaAutori}" var="autore">
-							<c:if test="${stato != 'EMPTY'}">
-									<option value="${autore.id}">
-									${autore.nome} ${autore.cognome}</option>
-							</c:if>
-							</c:forEach>
-						</select>
+						<label>Autore</label> 
+							<select id="autoreLibro" name="autore"
+								class="form-control">
+								<option value="">- Seleziona Autore -</option>
+								<c:forEach items="${listaAutori}" var="autore">
+								<c:if test="${stato != 'EMPTY'}">
+										<option value="${autore.id}">
+										${autore.nome} ${autore.cognome}</option>
+								</c:if>
+								</c:forEach>
+							</select>
 					</div>
 
 					<button type="submit" name="submit" value="submit" id="submit"

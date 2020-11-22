@@ -84,17 +84,18 @@
 									<td><a class="btn  btn-sm btn-outline-secondary"
 										href="${pageContext.request.contextPath}
 												/libro/FindByIdLibroServlet?idParamPerDettaglioLibro=${libro.id}
-												&idAutore=${libro.autore.id}">Visualizza</a>
+												">Visualizza</a>
 										<%-- <c:if
 											test="${sessionScope.utente.ruolo != 'guest'}"> CONTROLLI DI VISIBILITA DA FARE SUI FILTRI!> --%>
 										<a class="btn  btn-sm btn-outline-primary"
 										href="${pageContext.request.contextPath}
 														/libro/PrepareUpdateLibroServlet?idDaInviareAExecuteUpdate=${libro.id}
-														&idAutore=${libro.autore.id}">Modifica</a>
+														">Modifica</a>
 										<%-- </c:if> <c:if test="${sessionScope.utente.ruolo == 'admin'}"> --%>
 										<a class="btn btn-outline-danger btn-sm"
 										href="${pageContext.request.contextPath}
-														/libro/ConfirmDeleteLibroServlet?idDaInviareAExecuteDelete=${libro.id}">Cancella</a>
+														/libro/ConfirmDeleteLibroServlet?idDaInviareAExecuteDelete=${libro.id}
+														">Cancella</a>
 										<%-- </c:if> --%></td>
 								</tr>
 							</c:forEach>

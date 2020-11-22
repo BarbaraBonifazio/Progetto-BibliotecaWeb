@@ -26,17 +26,17 @@
 			</button>
 		</div>
 
-
+	<c:forEach items="${requestScope.errorMessage}" var="errore">
 		<div
-			class="alert alert-danger alert-dismissible fade show ${errorMessage==null?'d-none': ''}"
+			class="alert alert-danger alert-dismissible fade show ${errore==null?'d-none': ''}"
 			role="alert">
-			${errorMessage}
+			${errore}
 			<button type="button" class="close" data-dismiss="alert"
 				aria-label="Close">
 				<span aria-hidden="true">&times;</span>
 			</button>
 		</div>
-
+	</c:forEach>
 <div class='card'>
 			<div class='card-header'>
 				<h5>Modifica Utente</h5>

@@ -45,12 +45,9 @@ public class PrepareUpdateUtenteServlet extends HttpServlet {
 			List<String> listaStati = Stream.of(StatoUtente.values()).map(Enum::name).collect(Collectors.toList());
 			request.setAttribute("listaStati", listaStati);
 			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		
-		UtenteService serviceUtente = MyServiceFactory.getUtenteServiceInstance();
-		try {
+			UtenteService serviceUtente = MyServiceFactory.getUtenteServiceInstance();
+
 			//parametri da passare alla jsp per effettuare l'update dell'utente 
 			Utente utenteInstance = serviceUtente.trova(Long.parseLong(idUtenteDaModificareInput));
 			

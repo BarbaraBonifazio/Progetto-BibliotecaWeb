@@ -94,6 +94,7 @@ public class ExecuteInsertLibroServlet extends HttpServlet {
 			Libro libroNew = new Libro(titoloInputParam, tramaInputParam, Genere.valueOf(genereInputParam), autoreLibro);
 			
 			serviceLibro.inserisciNuovo(libroNew);
+			request.setAttribute("successMessage", "Operazione effettuata con successo");
 			request.setAttribute("libriPerResultsListLibri", MyServiceFactory.getLibroServiceInstance().setAll());
 			
 		} catch (Exception e) {

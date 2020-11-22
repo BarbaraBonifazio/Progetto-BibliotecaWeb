@@ -4,6 +4,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
 import it.bibliotecaweb.model.libro.Libro;
@@ -27,7 +28,14 @@ private EntityManager entityManager;
 		if (id == null) {
 			throw new Exception("Problema valore in input");
 		}
-		return entityManager.find(Libro.class, id);
+		TypedQuery<Libro> query = entityManager.createQuery(
+				"SELECT DISTINCT l from Libro l JOIN FETCH l.autore a where a.id = ?1", Libro.class);
+		query.setParameter(1, id);
+		try {
+			return query.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 
 	@Override

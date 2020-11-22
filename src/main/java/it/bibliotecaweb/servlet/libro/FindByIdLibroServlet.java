@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import it.bibliotecaweb.model.libro.Libro;
 import it.bibliotecaweb.service.MyServiceFactory;
-import it.bibliotecaweb.service.autore.AutoreService;
 import it.bibliotecaweb.service.libro.LibroService;
 
 
@@ -26,7 +25,6 @@ public class FindByIdLibroServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String idDelLibroPerDettaglio = request.getParameter("idParamPerDettaglioLibro");
-		String idAutorePerDettaglio = request.getParameter("idAutore");
 		
 		try {
 		// Valido eventuale parametro passato da url
@@ -49,9 +47,6 @@ public class FindByIdLibroServlet extends HttpServlet {
 			return;
 		}
 		// --fine verifica parametro DB
-
-		AutoreService serviceAutore = MyServiceFactory.getAutoreServiceInstance();
-		libroDaDB.setAutore(serviceAutore.trova(Long.parseLong(idAutorePerDettaglio)));
 		
 		//passo il libro da DB popolato con l'autore alla jsp
 		request.setAttribute("libroPerShow", libroDaDB);
