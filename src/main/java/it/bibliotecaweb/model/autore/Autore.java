@@ -91,7 +91,7 @@ public class Autore {
 
 	@Override
 	public String toString() {
-		return "Ordine [Id =" + id + ", Nome = " + nome + ", Cognome = " + cognome + ", Data di Nascita = "
+		return "Autore [Id =" + id + ", Nome = " + nome + ", Cognome = " + cognome + ", Data di Nascita = "
 				+ dataNascita +  "]"; 
 	}
 	

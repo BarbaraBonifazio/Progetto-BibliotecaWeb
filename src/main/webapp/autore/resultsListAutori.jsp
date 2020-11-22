@@ -27,6 +27,15 @@
 				<span aria-hidden="true">&times;</span>
 			</button>
 		</div>
+		<div
+			class="alert alert-danger alert-dismissible fade show ${errorMessage==null?'d-none': ''}"
+			role="alert">
+			${errorMessage}
+			<button type="button" class="close" data-dismiss="alert"
+				aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
 		<div class="alert alert-danger alert-dismissible fade show d-none"
 			role="alert">
 			Esempio di operazione fallita!
@@ -94,7 +103,10 @@
 										<%-- </c:if> <c:if test="${sessionScope.utente.ruolo == 'admin'}"> --%>
 										<a class="btn btn-outline-danger btn-sm"
 											href="${pageContext.request.contextPath}
-												/autore/ConfirmDeleteAutoreServlet?idDaInviareAExecuteDelete=${autore.id}
+												/autore/ConfirmDeleteAutoreServlet?idDaInviareAExecuteDelete=${autore.id}&
+												nomePerTornareAllaRicercaEffettuata=${requestScope.nomePerTornareAllaRicercaEffettuata}&
+												cognomePerTornareAllaRicercaEffettuata=${requestScope.cognomePerTornareAllaRicercaEffettuata}&
+												dataNascitaPerTornareAllaRicercaEffettuata=${requestScope.dataNascitaPerTornareAllaRicercaEffettuata}&
 												">Elimina</a>
 										<%-- </c:if> --%></td>
 								</tr>

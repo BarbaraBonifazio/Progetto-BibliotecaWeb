@@ -111,11 +111,11 @@ public class AutoreServiceImpl implements AutoreService {
 
 			// uso l'injection per il dao
 			autoreDAO.setEntityManager(entityManager);
-			if (autoreInstance.getLibri().size() == 0) {
+			Autore autore = autoreDAO.get(autoreInstance.getId());
+			if (autore.getLibri().size() == 0) {
 				// eseguo quello che realmente devo fare
-				autoreDAO.delete(autoreInstance);
+				result = autoreDAO.delete(autore);
 				entityManager.getTransaction().commit();
-				result = true;
 			}
 		} catch (Exception e) {
 			entityManager.getTransaction().rollback();
