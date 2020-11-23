@@ -6,7 +6,7 @@
 	  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	
 	  <!-- Bootstrap CSS -->
-	  <link href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css" rel="stylesheet">
+	  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css" >
 	
 	  <title>Accedi</title>
 	  
@@ -19,7 +19,6 @@
 	<link rel="icon" href="${pageContext.request.contextPath}/assets/img/favicons/favicon.ico">
 	<meta name="msapplication-config" content="${pageContext.request.contextPath}/assets/img/favicons/browserconfig.xml">
 	<meta name="theme-color" content="#563d7c">
-	
 	
 	   <style>
 	    .bd-placeholder-img {
@@ -39,7 +38,7 @@
 	  </style>
 	  
 	  <!-- Custom styles for this template -->
-	  <link href="${pageContext.request.contextPath}/assets/css/signin.css" rel="stylesheet">
+	  <link href="./assets/css/signin.css" rel="stylesheet">
 	</head>
 	<body class="text-center">
 		<div class="alert alert-danger alert-dismissible fade show ${errorMessage==null?'d-none': ''}" role="alert">
@@ -47,7 +46,7 @@
 			</div>
 	   	<form class="form-signin" action="LoginServlet" method="post">
 
-		  <img class="mb-4" src="${pageContext.request.contextPath}/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+		  <img class="mb-4" src="./assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
 		  <h1 class="h3 mb-3 font-weight-normal">Effettua l'accesso</h1>
 		  <h4 class="h4 mb-3 font-weight-normal">Inserisci le tue credenziali qui di seguito:</h4>
 		  <label for="inputUsername" class="sr-only">Username</label>

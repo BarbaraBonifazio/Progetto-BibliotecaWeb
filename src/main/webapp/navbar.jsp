@@ -27,9 +27,11 @@
 				<div class="dropdown-menu" aria-labelledby="dropdown01">
 					 <a	class="dropdown-item" href="${pageContext.request.contextPath}/libro/PrepareFindLibriServlet">Ricerca Libro</a> 
 						<a class="dropdown-item" href="${pageContext.request.contextPath}/autore/PrepareFindAutoriServlet">Ricerca Autore</a>
-					<c:if test="${sessionScope.ruoli.codice == ADMIN_ROLE}">
+				<c:forEach items="${sessionScope.utente.ruoli}" var="ruolo"> 
+					<c:if test="${ruolo.codice == 'ADMIN_ROLE'}">
 						<a class="dropdown-item" href="${pageContext.request.contextPath}/utente/PrepareFindUtentiServlet">Gestione Utenti</a>
 					</c:if>
+				</c:forEach>
 				</div></li>
 
 			<li class="nav-item active"><a class="nav-link" href="#">
@@ -38,12 +40,10 @@
 			</a></li>
 
 		</ul>
-		<%-- <c:if test="${sessionScope.ruoli.codice == ADMIN_ROLE && sessionScope.ruoli.codice == CLASSIC_ROLE && sessionScope.ruoli.codice == GUEST_ROLE}"> --%>
 			<ul class="navbar-nav mr-1">
 				<li class="nav-item active"><a class="nav-link active"
-					href="LogoutServlet"> Logout </a></li>
+					href="${pageContext.request.contextPath}/LogoutServlet"> Logout </a></li>
 			</ul>
-		<%-- </c:if> --%>
 		
 		<!-- <form class="form-inline my-2 my-lg-0">
 			 <input

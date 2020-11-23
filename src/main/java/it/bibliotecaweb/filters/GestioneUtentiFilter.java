@@ -48,12 +48,12 @@ public class GestioneUtentiFilter implements Filter {
 			boolean isAdmin = false;
 			for(Ruolo r:utente.getRuoli()) {
 				if(Codice.ADMIN_ROLE == r.getCodice()) { //se è un admin, entra e continua
-					chain.doFilter(request, response);
 					isAdmin = true;
 				}
 			}
 				if(isAdmin) {
 					chain.doFilter(request, response);
+					return;
 					} else {
 						httpServletResponse.sendRedirect(contesto);
 					}

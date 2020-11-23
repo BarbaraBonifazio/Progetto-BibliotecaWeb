@@ -1,4 +1,3 @@
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import="it.bibliotecaweb.model.utente.Utente"%>
 <%@page import="it.bibliotecaweb.model.utente.StatoUtente"%>

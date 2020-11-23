@@ -41,7 +41,8 @@ public class ValidateSessionFilter implements Filter {
 		// Mi ritorna una stringa contenente la parte dell'URL dal procollo fino alla stringa
 		
 		if (percorso.equals("/bibliotecaweb/") || percorso.equals("/bibliotecaweb/LoginServlet")
-				|| percorso.equals("/bibliotecaweb/LogoutServlet")) { // entra qui se il filtro atterra su queste due servlet
+				|| percorso.equals("/bibliotecaweb/LogoutServlet")
+				|| percorso.contains("assets")) { // entra qui se il filtro atterra su queste servlet
 																		
 			chain.doFilter(request, response); // ignora queste servlet e non filtrarle
 		} else {
@@ -49,7 +50,7 @@ public class ValidateSessionFilter implements Filter {
 					|| httpServletRequest.getSession() == null) { //prendi l'attributo "sessione" e dimmi se è presente
 				httpServletResponse.sendRedirect(contesto); // se sono null, rimandalo chi tenta di accedere alla login
 			} else {
-					httpServletResponse.sendRedirect(contesto);
+				chain.doFilter(request, response);
 			  }
 		  }
 		}
