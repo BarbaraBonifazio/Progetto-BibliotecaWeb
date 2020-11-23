@@ -61,7 +61,7 @@ public class ExecuteUpdateUtenteServlet extends HttpServlet {
 			
 			//controllo backend sulla presenza di dati inseriti 
 			if (nomeInputParam.isEmpty() || cognomeInputParam.isEmpty() 
-					|| usernameInputParam.isEmpty() || statoInputParam.isEmpty() && statoInputParam != null
+					|| usernameInputParam.isEmpty() || statoInputParam == "EMPTY"
 					|| ruoliInputParam.length == 0) {
 
 				List<String> errorMessage = new ArrayList<>();
@@ -74,7 +74,7 @@ public class ExecuteUpdateUtenteServlet extends HttpServlet {
 				if(usernameInputParam.isEmpty()) {
 					errorMessage.add("Attenzione il campo username è vuoto!");
 				}
-				if(statoInputParam.isEmpty() && statoInputParam != null) {
+				if(statoInputParam.isEmpty() || statoInputParam == null) {
 					String errore4 = "Attenzione non risulta selezionato alcuno stato!";
 					errorMessage.add(errore4);
 				}
@@ -84,6 +84,9 @@ public class ExecuteUpdateUtenteServlet extends HttpServlet {
 				} 
 				
 				Utente utenteErrato = new Utente(nomeInputParam, cognomeInputParam, usernameInputParam, listaRuoli);
+				if (!statoInputParam.isEmpty() && statoInputParam != null) {
+					utenteErrato.setStato(StatoUtente.valueOf(statoInputParam));
+				}
 				request.setAttribute("utentePerUpdate", utenteErrato);
 				request.setAttribute("errorMessage", errorMessage);
 				//parametri da passare alla jsp updateUtenteErrato per effettuare l'update dello stesso utente 

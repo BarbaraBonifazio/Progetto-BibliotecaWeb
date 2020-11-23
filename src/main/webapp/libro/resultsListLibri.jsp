@@ -99,8 +99,7 @@
 												/libro/FindByIdLibroServlet?idParamPerDettaglioLibro=${libro.id}
 												">Visualizza</a>
 												
-										<c:forEach items="${sessionScope.utente.ruoli}" var="ruolo">
-											<c:if test="${ruolo.codice == 'ADMIN_ROLE' || ruolo.codice == 'CLASSIC_ROLE'}">	
+										<c:if test="${sessionScope.isAdmin eq 'true' || sessionScope.isClassicUser eq 'true'}">	
 											
 											<!-- BOTTONE MODIFICA -->
 										<a class="btn  btn-sm btn-outline-primary"
@@ -117,8 +116,8 @@
 												generePerTornareAllaRicercaEffettuata=${requestScope.generePerTornareAllaRicercaEffettuata}&
 												autorePerTornareAllaRicercaEffettuata=${requestScope.autorePerTornareAllaRicercaEffettuata}
 														">Cancella</a>
-											</c:if>
-										</c:forEach> <!-- END forEach ruoli sessione per nascondere i bottoni -->
+										</c:if>
+										
 									</td>
 								</tr> <!-- END tabella  -->
 							</c:forEach> <!-- END forEach lista Libri per passare i parametri anche tramite href -->

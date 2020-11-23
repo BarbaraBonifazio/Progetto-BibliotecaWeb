@@ -11,6 +11,39 @@
 <link href="${pageContext.request.contextPath}/assets/css/global.css"
 	rel="stylesheet">
 
+<script type ="text/javascript">
+
+			function validateForm() {
+				
+			var ErrMess = "" ;
+			  var nome = document.forms["myForm"]["titolo"].value;
+			  var cognome = document.forms["myForm"]["trama"].value;
+			  var username = document.forms["myForm"]["genere"].value;
+				
+			 if(titolo == 0) {
+				ErrMess = ErrMess+"Il campo titolo risulta vuoto!\n";
+			  }
+			  
+			 if(trama == 0) {
+				ErrMess = ErrMess+"Il campo trama risulta vuoto!\n";
+			  }  
+			  
+			if(genere == 0) {
+				ErrMess = ErrMess+"Non risulta selezionato alcun genere!\n";
+			  }  
+
+			if(!$("input[type='checkbox']").is(":checked")) { 
+				ErrMess = ErrMess+"Non risulta selezionato alcun autore!\n";
+			 }  
+			  
+			  if(ErrMess != "") {
+				  alert(ErrMess)
+				  event.preventDefault();
+				  return;
+			  }
+			}
+</script>
+
 </head>
 <body>
 	<jsp:include page="../navbar.jsp" />
@@ -53,31 +86,31 @@
 
 		<form method="post"
 			action="${pageContext.request.contextPath}/libro/ExecuteUpdateLibroServlet"
-			class="needs-validation" novalidate>
+			class="needs-validation" name="myForm" onsubmit="return validateForm()" novalidate>
 
 			<div class="form-row">
 				<Input type="hidden" name="idLibroPerUpdate" id="idLibro"
-					class="form-control" value="${requestScope.libroPerUpdate.id}">
+					class="form-control" value="${requestScope.libroPerUpdate.id}" required>
 
 				<div class="form-group col-md-6">
 					<label>Titolo <span class="text-danger">*</span></label> <input
 						type="text" name="titolo" id="titoloLibro" class="form-control"
 						placeholder="${requestScope.libroPerUpdate.titolo}"
-						value="${requestScope.libroPerUpdate.titolo}">
+						value="${requestScope.libroPerUpdate.titolo}" required>
 				</div>
 
 				<div class="form-group col-md-6">
 					<label>Trama <span class="text-danger">*</span></label> <input
 						type="text" name="trama" id="tramaLibro" class="form-control"
 						placeholder="${requestScope.libroPerUpdate.trama}"
-						value="${requestScope.libroPerUpdate.trama}">
+						value="${requestScope.libroPerUpdate.trama}" required>
 				</div>
 			</div>
 
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<label>Selezionare Genere</label> 
-					<select id="genereLibro" name="genere" class="form-control">			
+					<select id="genereLibro" name="genere" class="form-control" required>			
 					<option value="${libroPerUpdate.genere}" selected="selected">${libroPerUpdate.genere}</option>
 						<c:forEach items="${listaGeneri}" var="genere">
 							<c:if test="${genere != 'EMPTY'}">
@@ -89,7 +122,7 @@
 
 				<div class="form-group col-md-6">
 					<label>Selezionare Autore</label> 
-						<select id="autoreLibro" name="idAutore" class="form-control">	
+						<select id="autoreLibro" name="idAutore" class="form-control" required>	
 						<option value="${libroPerUpdate.autore.id}" selected="selected" >
 							${libroPerUpdate.autore.nome} 
 								${libroPerUpdate.autore.cognome}</option>	

@@ -11,6 +11,49 @@
 <link href="${pageContext.request.contextPath}/assets/css/global.css"
 	rel="stylesheet">
 
+	<script type ="text/javascript">
+
+			function validateForm() {
+				
+			var ErrMess = "" ;
+			  var nome = document.forms["myForm"]["nome"].value;
+			  var cognome = document.forms["myForm"]["cognome"].value;
+			  var username = document.forms["myForm"]["username"].value;
+			  var password = document.forms["myForm"]["password"].value;
+			  var stato = document.forms["myForm"]["stato"].value;
+				
+			 if(nome == 0) {
+				ErrMess = ErrMess+"Il campo nome risulta vuoto!\n";
+			  }
+			  
+			 if(cognome == 0) {
+				ErrMess = ErrMess+"Il campo cognome risulta vuoto!\n";
+			  }  
+			  
+			if(username == 0) {
+				ErrMess = ErrMess+"Il campo username risulta vuoto!\n";
+			  }  
+				
+			if(password == 0) {
+				ErrMess = ErrMess+"Il campo password risulta vuoto!\n";
+				  }  
+			
+			if(stato == 0) {
+				ErrMess = ErrMess+"Non risulta selezionato alcuno stato!\n";
+				  }  
+				
+			if(!$("input[type='checkbox']").is(":checked")) { 
+				ErrMess = ErrMess+"Non risulta selezionato alcun ruolo!\n";
+			 }  
+			  
+			  if(ErrMess != "") {
+				  alert(ErrMess)
+				  event.preventDefault();
+				  return;
+			  }
+			}
+	</script>
+
 </head>
 <body>
 	<jsp:include page="../navbar.jsp" />
@@ -53,24 +96,24 @@
 
 		<form method="post"
 			action="${pageContext.request.contextPath}/utente/ExecuteUpdateUtenteServlet"
-			class="needs-validation" novalidate>
+			class="needs-validation" name="myForm" onsubmit="return validateForm()" novalidate>
 
 			<div class="form-row">
 				<Input type="hidden" name="idUtentePerUpdate" id="idUtente"
-					class="form-control" value="${requestScope.utentePerUpdate.id}">
+					class="form-control" value="${requestScope.utentePerUpdate.id}" required>
 
 				<div class="form-group col-md-6">
 					<label>Nome <span class="text-danger">*</span></label> <input
 						type="text" name="nome" id="nomeUtente" class="form-control"
 						placeholder="${requestScope.utentePerUpdate.nome}"
-						value="${requestScope.utentePerUpdate.nome}">
+						value="${requestScope.utentePerUpdate.nome}" required>
 				</div>
 
 				<div class="form-group col-md-6">
 					<label>Cognome <span class="text-danger">*</span></label> <input
 						type="text" name="cognome" id="cognomeUtente" class="form-control"
 						placeholder="${requestScope.utentePerUpdate.cognome}"
-						value="${requestScope.utentePerUpdate.cognome}">
+						value="${requestScope.utentePerUpdate.cognome}" required>
 				</div>
 			</div>
 
@@ -80,24 +123,16 @@
 						type="text" class="form-control" name="username"
 						id="usernameUtente"
 						placeholder="${requestScope.utentePerUpdate.username}"
-						value="${requestScope.utentePerUpdate.username}">
+						value="${requestScope.utentePerUpdate.username}" required>
 				</div>
 
-				<%-- <div class="form-group col-md-6">
-							<label>Password <span class="text-danger">*</span></label> <input
-								type="text" class="form-control" name="password" id="passwordUtente"
-								placeholder="${requestScope.utentePerUpdate.password}" required
-								value="${requestScope.utentePerUpdate.password}">
-						</div> --%>
-
 				<div class="form-group col-md-6">
-					<label>Stato</label> <select id="statoUtente" name="stato"
-						class="form-control">
-						<option value="${stato.EMPTY}">- Selezionare Nuovo Stato
-							-</option>
+					<label>Stato</label> 
+					<select id="statoUtente" name="stato" class="form-control" required>
+						<option value="${stato.EMPTY}" selected="selected">-Selezionare Stato-</option>
 						<c:forEach items="${listaStati}" var="stato">
 							<c:if test="${stato != 'EMPTY'}">
-								<option value="${stato}">${stato}</option>
+								<option value="${stato}" ${stato == utente.stato ? 'selected="selected"' : ''}>${stato}</option>
 							</c:if>
 						</c:forEach>
 					</select>
@@ -107,7 +142,7 @@
 					<label for="exampleFormControlSelect1">Ruoli</label>
 					<c:forEach items="${requestScope.listRuoliAttribute}" var="ruolo">
 						<div class="form-check">
-							<input class="form-check-input" type="checkbox"
+							<input class="form-check-input" type="checkbox" required
 								value="${ruolo.id}" id="idRuolo" name="ruolo"
 								<c:forEach items="${requestScope.utentePerUpdate.ruoli}" var="ruoloSelezionato">
 											${ruoloSelezionato.id eq ruolo.id ? 'checked' : ''} 
@@ -147,28 +182,6 @@
 			</div>
 		</form>
 
-		<script>
-				
-				(function() {
-					  'use strict';
-					  window.addEventListener('load', function() {
-					   
-					    var forms = document.getElementsByClassName('needs-validation');
-					    
-					    var validation = Array.prototype.filter.call(forms, function(form) {
-					      form.addEventListener('submit', function(event) {
-						        if (form.checkValidity() === false) {
-						          event.preventDefault();
-						          event.stopPropagation();
-						        }
-					        form.classList.add('was-validated');
-					        
-					      }, false);
-					    });
-					  }, false);
-					})();
-	
-				</script>
 <!-- end card-body -->
 </div>
 		</div>

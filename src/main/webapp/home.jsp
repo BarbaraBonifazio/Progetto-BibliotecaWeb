@@ -54,13 +54,13 @@ body {
 				
 				
 					<p>
-				<c:forEach items="${sessionScope.utente.ruoli}" var="ruolo"> 
-					<c:if test="${ruolo.codice == 'ADMIN_ROLE'}">
+				
+					<c:if test="${sessionScope.isAdmin eq 'true'}">
 						<a class="btn btn-primary btn-lg"
 							href="${pageContext.request.contextPath}/utente/PrepareFindUtentiServlet"
 							role="button">Gestione Utenti  &raquo;</a>
 					</c:if>
-				  </c:forEach>
+				  
 					</p>
 				
 			</div>

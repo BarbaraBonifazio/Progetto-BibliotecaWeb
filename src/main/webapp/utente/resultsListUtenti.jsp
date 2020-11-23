@@ -93,9 +93,9 @@
 									
 									
 									
-						<c:forEach items="${sessionScope.utente.ruoli}" var="ruolo">
-							<c:if test="${ruolo.codice == 'ADMIN_ROLE'}">				
-									<c:forEach items="${utente.ruoli}" var="ruolo"> <!-- ciclo i ruoli dell'utente per poterli passare tramite href -->
+						
+											
+									
 												<!-- BOTTONE VISUALIZZA -->
 									<td><a class="btn  btn-sm btn-outline-secondary"
 										href="${pageContext.request.contextPath}
@@ -106,7 +106,7 @@
 												statoPerTornareAllaRicercaEffettuata=${requestScope.statoPerTornareAllaRicercaEffettuata}
 												<%-- &ruoliPerTornareAllaRicercaEffettuata=${requestScope.ruoliPerTornareAllaRicercaEffettuata} --%>
 												">Visualizza</a>
-												
+									<c:if test="${sessionScope.isAdmin eq 'true' || sessionScope.isClassicUser eq 'true'}">		
 											<!-- BOTTONE MODIFICA -->
 										<a class="btn  btn-sm btn-outline-primary"
 											href="${pageContext.request.contextPath}
@@ -128,11 +128,11 @@
 												statoPerTornareAllaRicercaEffettuata=${requestScope.statoPerTornareAllaRicercaEffettuata}
 												<%-- &ruoliPerTornareAllaRicercaEffettuata=${requestScope.ruoliPerTornareAllaRicercaEffettuata} --%>
 												">Elimina</a>
-									
+									</c:if>
 									</td>
-									</c:forEach> <!-- END forEach ruoli utente da ciclare per passare tramite href  -->
-							</c:if>
-						</c:forEach> <!-- END  forEach ruoli utente da SESSIONE per nascondere i bottoni -->					
+									
+							
+									
 							</tr> <!-- END TABELLA -->
 							</c:forEach> <!-- END forEach listaUtenti per passare parametri tramite href -->	
 						</tbody>
