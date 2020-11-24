@@ -10,6 +10,38 @@
 <link href="${pageContext.request.contextPath}/assets/css/global.css"
 	rel="stylesheet">
 
+	<script type="text/javascript">
+	
+		 $(document).ready(function() { 
+		  	$("form").submit(function( event ) {
+		  			
+			  	$("#errorName").hide(); 
+			  	$("#errorSurname").hide(); 
+			  	$("#errorDate").hide(); 
+			  	
+			  	var validate = true;
+			  	
+				  	if(!$("#nomeAutore")[0].value) { 
+					  	$("#errorName").show();
+					  	valida = false;
+				  	}	
+					  	if(!$("#cognomeAutore")[0].value){ 
+						  	$("#errorSurname").show();
+						  	valida = false;
+						} 	
+						  	if(!$("#dataNascitaAutore")[0].value){ 
+							  	$("#errorDate").show();
+							  	valida = false;
+							} 	
+							  	if(!valida){ 
+							  		event.preventDefault(); 
+							  		return;
+							  	}
+			 });
+		})  
+		
+	  </script>  
+
 </head>
 <body>
 	<jsp:include page="../navbar.jsp" />
@@ -25,7 +57,6 @@
 			</button>
 		</div>
 
-		<%-- <c:forEach items="${errorMessage}"> --%>
 		<c:forEach items="${requestScope.errorMessage}" var="errore">
 			<div
 				class="alert alert-danger alert-dismissible fade show ${errore==null?'d-none': ''}"
@@ -37,7 +68,6 @@
 				</button>
 			</div>
 		</c:forEach>
-		<%--  </c:forEach> --%>
 
 	<div class='card'>
 			<div class='card-header'>
@@ -56,23 +86,26 @@
 
 			<form method="post"
 				action="${pageContext.request.contextPath}/autore/ExecuteInsertAutoreServlet"
-				class="needs-validation" novalidate>
+				id="form" class="needs-validation" novalidate>
 
 
 				<div class="form-row">
 					<div class="form-group col-md-6">
 						<label>Nome <span class="text-danger">*</span></label> <input
-							type="text" name="nome" id="nomeUtente" class="form-control"
+							type="text" name="nome" id="nomeAutore" class="form-control"
 							placeholder="Inserire nome" value="${autorePerInsertErrato.nome}">
+							<div class="invalid-feedback" id="errorName"> Il campo nome risulta vuoto!</div>
 					</div>
+					
 
 					<div class="form-group col-md-6">
 						<label>Cognome <span class="text-danger">*</span></label> <input
-							type="text" name="cognome" id="cognomeUtente"
+							type="text" name="cognome" id="cognomeAutore"
 							class="form-control" placeholder="Inserire cognome"
 							value="${autorePerInsertErrato.cognome}">
-
+							<div class="invalid-feedback" id="errorSurname"> Il campo cognome risulta vuoto!</div>
 					</div>
+					
 				</div>
 
 				<div class="it-datepicker-wrapper">
@@ -80,6 +113,7 @@
 					  <label for="date1">Data di nascita</label>
 					    <input class="form-control" type="date" name="dataNascita" id="dataNascitaAutore" 
 					    value="${autorePerInsertErrato.dataNascita}">
+					    <div class="invalid-feedback" id="errorDate"> Non risulta selezionata alcuna data!</div>
 					  </div>
 					</div>
 
@@ -87,31 +121,6 @@
 					class="btn btn-primary">Conferma</button>
 
 			</form>
-
-
-			<script>
-				
-				(function() {
-					  'use strict';
-					  window.addEventListener('load', function() {
-					   
-					    var forms = document.getElementsByClassName('needs-validation');
-					    
-					    var validation = Array.prototype.filter.call(forms, function(form) {
-					      form.addEventListener('submit', function(event) {
-						        if (form.checkValidity() === false) {
-						          event.preventDefault();
-						          event.stopPropagation();
-						        }
-					        form.classList.add('was-validated');
-					        
-					      }, false);
-					    });
-					  }, false);
-					})();
-	
-				</script>
-
 
 			<!-- end card-body -->
 		</div>
