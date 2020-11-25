@@ -11,6 +11,38 @@
 <link href="${pageContext.request.contextPath}/assets/css/global.css"
 	rel="stylesheet">
 
+<script type="text/javascript">
+	
+		 $(document).ready(function() { 
+		  	$("form").submit(function( event ) {
+		  			
+			  	$("#errorName").hide(); 
+			  	$("#errorSurname").hide(); 
+			  	$("#errorDate").hide(); 
+			  	
+			  	var validate = true;
+			  	
+				  	if(!$("#nomeAutore")[0].value) { 
+					  	$("#errorName").show();
+					  	valida = false;
+				  	}	
+					  	if(!$("#cognomeAutore")[0].value){ 
+						  	$("#errorSurname").show();
+						  	valida = false;
+						} 	
+						  	if(!$("#dataNascitaAutore")[0].value){ 
+							  	$("#errorDate").show();
+							  	valida = false;
+							} 	
+							  	if(!valida){ 
+							  		event.preventDefault(); 
+							  		return;
+							  	}
+			 });
+		})  
+		
+	  </script>  
+
 </head>
 <body>
 	<jsp:include page="../navbar.jsp" />
@@ -49,7 +81,7 @@
 
 		<form method="post"
 			action="${pageContext.request.contextPath}/autore/ExecuteUpdateAutoreServlet"
-			class="needs-validation" novalidate>
+			id="form" class="needs-validation" novalidate>
 
 			<div class="form-row">
 				<Input type="hidden" name="idAutorePerUpdate" id="idAutore"
@@ -60,6 +92,7 @@
 						type="text" name="nome" id="nomeAutore" class="form-control"
 						placeholder="${requestScope.autorePerUpdate.nome}"
 						value="${requestScope.autorePerUpdate.nome}">
+						<div class="invalid-feedback" id="errorName"> Il campo nome risulta vuoto!</div>
 				</div>
 
 				<div class="form-group col-md-6">
@@ -67,6 +100,7 @@
 						type="text" name="cognome" id="cognomeAutore" class="form-control"
 						placeholder="${requestScope.autorePerUpdate.cognome}"
 						value="${requestScope.autorePerUpdate.cognome}">
+						<div class="invalid-feedback" id="errorSurname"> Il campo cognome risulta vuoto!</div>
 				</div>
 			</div>
 
@@ -75,6 +109,7 @@
 				  <label for="date1">Data di nascita</label>
 				    <input class="form-control" type="date" name="dataNascita" id="dataNascitaAutore" 
 				    value="${autorePerUpdate.dataNascita}">
+				    <div class="invalid-feedback" id="errorDate"> Non risulta selezionata alcuna data!</div>
 				  </div>
 			</div>
 
@@ -85,31 +120,9 @@
 	<!-- end card-body -->
 	</div>
 
-		<script>
-				
-				(function() {
-					  'use strict';
-					  window.addEventListener('load', function() {
-					   
-					    var forms = document.getElementsByClassName('needs-validation');
-					    
-					    var validation = Array.prototype.filter.call(forms, function(form) {
-					      form.addEventListener('submit', function(event) {
-						        if (form.checkValidity() === false) {
-						          event.preventDefault();
-						          event.stopPropagation();
-						        }
-					        form.classList.add('was-validated');
-					        
-					      }, false);
-					    });
-					  }, false);
-					})();
-	
-				</script>
 <!-- end card-body -->
 </div>
-		</div>
+		
 
 		<!-- end container -->
 	</main>

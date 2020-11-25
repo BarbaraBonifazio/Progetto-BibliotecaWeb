@@ -9,39 +9,42 @@
 <!-- style per le pagine diverse dalla index -->
 <link href="${pageContext.request.contextPath}/assets/css/global.css" rel="stylesheet">
 
-<script type ="text/javascript">
-
-			function validateForm() {
-				
-			var ErrMess = "" ;
-			  var titolo = document.forms["myForm"]["titolo"].value;
-			  var trama = document.forms["myForm"]["trama"].value;
-			  var genere = document.forms["myForm"]["genere"].value;
-			  var idAutore = document.forms["myForm"]["idAutore"].value;
-				
-			 if(titolo == 0) {
-				ErrMess = ErrMess+"Il campo titolo risulta vuoto!\n";
-			  }
-			  
-			 if(trama == 0) {
-				ErrMess = ErrMess+"Il campo trama risulta vuoto!\n";
-			  }  
-			  
-			if(genere != ':listaGeneri') {
-				ErrMess = ErrMess+"Non risulta selezionato alcun genere!\n";
-			  }  
-
-			if(idAutore == ':selected') { 
-				ErrMess = ErrMess+"Non risulta selezionato alcun autore!\n";
-			 }  
-			  
-			  if(ErrMess != "") {
-				  alert(ErrMess)
-				  event.preventDefault();
-				  return;
-			  }
-			}
-	</script>
+<script type="text/javascript">
+	
+		 $(document).ready(function() { 
+		  	$("form").submit(function( event ) {
+		  			
+			  	$("#errorTitle").hide(); 
+			  	$("#errorPlot").hide(); 
+			  	$("#errorGenre").hide();
+			  	$("#errorAuthor").hide(); 
+			  	
+			  	var validate = true;
+			  	
+				  	if(!$("#titoloLibro")[0].value) { 
+					  	$("#errorTitle").show();
+					  	valida = false;
+				  	}	
+					  	if(!$("#tramaLibro")[0].value){ 
+						  	$("#errorPlot").show();
+						  	valida = false;
+						} 	
+							if(!$("#genereLibro")[0].value){ 
+							  	$("#errorGenre").show();
+							  	valida = false;
+							} 						  	
+							  	if(!$("#autoreLibro")[0].value){ 
+								  	$("#errorAuthor").show();
+								  	valida = false;
+								} 	
+								  	if(!valida){ 
+								  		event.preventDefault(); 
+								  		return;
+								  	}
+			 });
+		})  
+		
+	  </script>  
 
 </head>
 <body>
@@ -87,13 +90,14 @@
 
 				<form method="post"
 					action="${pageContext.request.contextPath}/libro/ExecuteInsertLibroServlet" 
-					name="myForm" onsubmit="return validateForm()" novalidate>
+					id="form" class="needs-validation" novalidate>
 
 					<div class="form-row">
 						<div class="form-group col-md-6">
 							<label>Titolo <span class="text-danger">*</span></label> <input
 								type="text" name="titolo" id="titoloLibro" class="form-control"
 								placeholder="Inserire nome" value="${libroPerInsertErrato.titolo}" required>
+								<div class="invalid-feedback" id="errorTitle"> Il campo titolo risulta vuoto!</div>
 						</div>
 
 						<div class="form-group col-md-6">
@@ -101,6 +105,7 @@
 								type="text" name="trama" id="tramaLibro"
 								class="form-control" placeholder="Inserire cognome"
 								value="${libroPerInsertErrato.trama}" required>
+								<div class="invalid-feedback" id="errorPlot"> Il campo trama risulta vuoto!</div>
 						</div>
 					</div>
 
@@ -117,6 +122,7 @@
 										</c:if>
 									</c:forEach>					
 							</select>
+							<div class="invalid-feedback" id="errorGenre"> Non risulta selezionato alcun genere!</div>
 						</div>
 						
 						
@@ -133,6 +139,7 @@
 									</c:if>
 									</c:forEach>
 							</select>
+							<div class="invalid-feedback" id="errorAuthor"> Non risulta selezionato alcun autore!</div>
 						</div>
 					</div>
 					<button type="submit" name="submit" value="submit" id="submit"

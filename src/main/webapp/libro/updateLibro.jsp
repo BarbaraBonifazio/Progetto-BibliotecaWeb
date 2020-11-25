@@ -11,38 +11,42 @@
 <link href="${pageContext.request.contextPath}/assets/css/global.css"
 	rel="stylesheet">
 
-<script type ="text/javascript">
-
-			function validateForm() {
-				
-			var ErrMess = "" ;
-			  var nome = document.forms["myForm"]["titolo"].value;
-			  var cognome = document.forms["myForm"]["trama"].value;
-			  var username = document.forms["myForm"]["genere"].value;
-				
-			 if(titolo == 0) {
-				ErrMess = ErrMess+"Il campo titolo risulta vuoto!\n";
-			  }
-			  
-			 if(trama == 0) {
-				ErrMess = ErrMess+"Il campo trama risulta vuoto!\n";
-			  }  
-			  
-			if(genere == 0) {
-				ErrMess = ErrMess+"Non risulta selezionato alcun genere!\n";
-			  }  
-
-			if(!$("input[type='checkbox']").is(":checked")) { 
-				ErrMess = ErrMess+"Non risulta selezionato alcun autore!\n";
-			 }  
-			  
-			  if(ErrMess != "") {
-				  alert(ErrMess)
-				  event.preventDefault();
-				  return;
-			  }
-			}
-</script>
+<script type="text/javascript">
+	
+		 $(document).ready(function() { 
+		  	$("form").submit(function( event ) {
+		  			
+			  	$("#errorTitle").hide(); 
+			  	$("#errorPlot").hide(); 
+			  	$("#errorGenre").hide();
+			  	$("#errorAuthor").hide(); 
+			  	
+			  	var validate = true;
+			  	
+				  	if(!$("#titoloLibro")[0].value) { 
+					  	$("#errorTitle").show();
+					  	valida = false;
+				  	}	
+					  	if(!$("#tramaLibro")[0].value){ 
+						  	$("#errorPlot").show();
+						  	valida = false;
+						} 	
+							if(!$("#genereLibro")[0].value){ 
+							  	$("#errorGenre").show();
+							  	valida = false;
+							} 						  	
+							  	if(!$("#autoreLibro")[0].value){ 
+								  	$("#errorAuthor").show();
+								  	valida = false;
+								} 	
+								  	if(!valida){ 
+								  		event.preventDefault(); 
+								  		return;
+								  	}
+			 });
+		})  
+		
+	  </script>  
 
 </head>
 <body>
@@ -86,7 +90,7 @@
 
 		<form method="post"
 			action="${pageContext.request.contextPath}/libro/ExecuteUpdateLibroServlet"
-			class="needs-validation" name="myForm" onsubmit="return validateForm()" novalidate>
+			id="form" class="needs-validation" novalidate>
 
 			<div class="form-row">
 				<Input type="hidden" name="idLibroPerUpdate" id="idLibro"
@@ -97,6 +101,7 @@
 						type="text" name="titolo" id="titoloLibro" class="form-control"
 						placeholder="${requestScope.libroPerUpdate.titolo}"
 						value="${requestScope.libroPerUpdate.titolo}" required>
+						<div class="invalid-feedback" id="errorTitle"> Il campo titolo risulta vuoto!</div>
 				</div>
 
 				<div class="form-group col-md-6">
@@ -104,6 +109,7 @@
 						type="text" name="trama" id="tramaLibro" class="form-control"
 						placeholder="${requestScope.libroPerUpdate.trama}"
 						value="${requestScope.libroPerUpdate.trama}" required>
+						<div class="invalid-feedback" id="errorPlot"> Il campo trama risulta vuoto!</div>
 				</div>
 			</div>
 
@@ -118,6 +124,7 @@
 							</c:if>
 						</c:forEach>					
 					</select>
+					<div class="invalid-feedback" id="errorGenre"> Non risulta selezionato alcun genere!</div>
 				</div>
 
 				<div class="form-group col-md-6">
@@ -133,8 +140,9 @@
 							</c:if>
 							</c:forEach>
 						</select>
-				</div>
-			</div>	
+						<div class="invalid-feedback" id="errorAuthor"> Non risulta selezionato alcun autore!</div>
+					</div>
+				</div>	
 
 				<button type="submit" name="submit" value="submit" id="submit"
 					class="btn btn-primary">Conferma</button>
@@ -142,29 +150,6 @@
 		</form>
 		<!-- end card-body -->
 	</div>
-
-		<script>
-				
-				(function() {
-					  'use strict';
-					  window.addEventListener('load', function() {
-					   
-					    var forms = document.getElementsByClassName('needs-validation');
-					    
-					    var validation = Array.prototype.filter.call(forms, function(form) {
-					      form.addEventListener('submit', function(event) {
-						        if (form.checkValidity() === false) {
-						          event.preventDefault();
-						          event.stopPropagation();
-						        }
-					        form.classList.add('was-validated');
-					        
-					      }, false);
-					    });
-					  }, false);
-					})();
-	
-				</script>
 <!-- end card-body -->
 </div>
 		

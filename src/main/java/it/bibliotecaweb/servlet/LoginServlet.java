@@ -65,7 +65,7 @@ public class LoginServlet extends HttpServlet {
 							}
 						}
 					} else {
-						request.setAttribute("errorMessage", "Attenzione! Le tue credenziali non sono valide!");
+						request.setAttribute("errorMessage", "Attenzione! Credenziali non valide!");
 						request.getRequestDispatcher("index.jsp").forward(request, response);
 					}
 					

@@ -10,43 +10,47 @@
 <link href="${pageContext.request.contextPath}/assets/css/global.css"
 	rel="stylesheet">
 
-	<script type ="text/javascript">
-
-			function validateForm() {
-				
-			var ErrMess = "" ;
-			  var nome = document.forms["myForm"]["nome"].value;
-			  var cognome = document.forms["myForm"]["cognome"].value;
-			  var username = document.forms["myForm"]["username"].value;
-			  var password = document.forms["myForm"]["password"].value;
-				
-			 if(nome == 0) {
-				ErrMess = ErrMess+"Il campo nome risulta vuoto!\n";
-			  }
-			  
-			 if(cognome == 0) {
-				ErrMess = ErrMess+"Il campo cognome risulta vuoto!\n";
-			  }  
-			  
-			if(username == 0) {
-				ErrMess = ErrMess+"Il campo username risulta vuoto!\n";
-			  }  
-				
-			if(password == 0) {
-				ErrMess = ErrMess+"Il campo password risulta vuoto!\n";
-				  }  
-				
-			if(!$("input[type='checkbox']").is(":checked")) { 
-				ErrMess = ErrMess+"Non risulta selezionato alcun ruolo!\n";
-			 }  
-			  
-			  if(ErrMess != "") {
-				  alert(ErrMess)
-				  event.preventDefault();
-				  return;
-			  }
-			}
-	</script>
+	<script type="text/javascript">
+	
+		 $(document).ready(function() { 
+		  	$("form").submit(function( event ) {
+		  			
+		  		$("#errorName").hide(); 
+			  	$("#errorSurname").hide(); 
+			  	$("#errorUsername").hide();
+			  	$("#errorPassword").hide();
+			  	$("#errorRoles").hide(); 
+			  	
+			  	var validate = true;
+			  	
+			  	if(!$("#nomeUtente")[0].value) { 
+				  	$("#errorName").show();
+				  	valida = false;
+			  	}	
+				  	if(!$("#cognomeUtente")[0].value){ 
+					  	$("#errorSurname").show();
+					  	valida = false;
+					} 	
+						if(!$("#usernameUtente")[0].value){ 
+						  	$("#errorUsername").show();
+						  	valida = false;
+						} 						  	
+						  	if(!$("#passwordUtente")[0].value){ 
+							  	$("#errorPassword").show();
+							  	valida = false;
+							} 	
+							  	if(!$("input[type='checkbox']").is(":checked")){ 
+								  	$("#errorRoles").show();
+								  	valida = false;
+								} 	
+								  	if(!valida){ 
+								  		event.preventDefault(); 
+								  		return;
+								  	}
+			 });
+		})  
+		
+	  </script>  
 </head>
 <body>
 	<jsp:include page="../navbar.jsp" />
@@ -93,7 +97,7 @@
 
 			<form method="post"
 				action="${pageContext.request.contextPath}/utente/ExecuteInsertUtenteServlet"
-				 name="myForm" onsubmit="return validateForm()" novalidate>
+				 id="form" class="needs-validation" novalidate>
 
 
 				<div class="form-row">
@@ -101,7 +105,7 @@
 						<label>Nome <span class="text-danger">*</span></label> <input
 							type="text" name="nome" id="nomeUtente" class="form-control"
 							placeholder="Inserire nome" value="${utentePerInsertErrore.nome}" required>
-							
+							<div class="invalid-feedback" id="errorName"> Il campo nome risulta vuoto!</div>
 					</div>
 
 					<div class="form-group col-md-6">
@@ -109,7 +113,7 @@
 							type="text" name="cognome" id="cognomeUtente"
 							class="form-control" placeholder="Inserire cognome"
 							value="${utentePerInsertErrore.cognome}" required>
-						
+						<div class="invalid-feedback" id="errorSurname"> Il campo cognome risulta vuoto!</div>
 					</div>
 				</div>
 
@@ -119,7 +123,7 @@
 							type="text" class="form-control" name="username"
 							id="usernameUtente" placeholder="Inserire username"
 							value="${utentePerInsertErrore.username}" required>
-						
+						<div class="invalid-feedback" id="errorUsername"> Il campo username risulta vuoto!</div>
 					</div>
 
 					<div class="form-group col-md-6">
@@ -127,6 +131,7 @@
 							type="text" class="form-control" name="password"
 							id="passwordUtente" placeholder="Inserire password"
 							value="${utentePerInsertErrore.password}" required>
+						<div class="invalid-feedback" id="errorPassword"> Il campo password risulta vuoto!</div>
 					</div>
 				</div>
 
@@ -138,12 +143,12 @@
 								value="${ruolo.id}" id="idRuolo" name="ruolo"
 								<c:forEach items="${utentePerInsertErrore.ruoli}" var="ruoloUtente">
 											${ruoloUtente.id eq ruolo.id ? 'checked' : ''} 
-										</c:forEach> >
+										</c:forEach> />	
 							<label class="form-check-label" for="defaultCheck1">
 								${ruolo.codice} </label>
 						</div>
 					</c:forEach>
-
+					<div class="invalid-feedback" id="errorRoles"> Non risulta selezionato alcun ruolo!</div>
 				</div>
 
 				<Input type="hidden" name="nomeUtentePerRicerca"
